@@ -4,11 +4,16 @@ import './index.css';
 import Home from './pages/Home';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import EstimationModel from './pages/EstimationModel';
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Home/>
+	},
+	{
+		path: "/estimation/model",
+		element: <EstimationModel/>
 	}
 ])
 
