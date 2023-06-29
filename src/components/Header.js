@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { Api } from "../api/Api";
+import { carsApi } from "../api/Api";
 import CarMenuBox from "./CarMenuBox";
 import Head from "./styled/Head";
 import Logo from "./styled/Logo";
@@ -52,7 +52,7 @@ function Menu(props) {
 	const [carName, setCarName] = useState('');
 	const [data, setData] = useState([]);
 	async function fetchData() {
-		setData((await Api.get("/cars")).data);
+		setData((await carsApi.carList).data);
 		console.log(data);
 		for(let i = 0; i < data.length; i++) {
 			if (data[i].carId === Number(props.carId)) {

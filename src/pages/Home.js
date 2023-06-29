@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { Api } from "../api/Api";
+import { carsApi } from "../api/Api";
 import CarMenuBox from "../components/CarMenuBox";
 import SimpleHeader from "../components/SimpleHeader";
 
@@ -15,7 +15,7 @@ function Home() {
 	const [menuList, setMenuList] = useState([]);
 	useEffect(() => {
 		async function fetchData() {
-			const data = (await Api.get("/cars")).data;
+			const data = (await carsApi.carList).data;
 			const list = [];
 			let i = 0;
 			for (i = 0; i < data.length; i++) {
