@@ -1,20 +1,23 @@
-import './App.css';
-import { Component } from 'react';
-import Header from './components/Header'
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import EstimationModel from "./pages/EstimationModel";
+import Home from "./pages/Home";
 
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <Home/>
+	},
+	{
+		path: "/estimation/model",
+		element: <EstimationModel/>
+	}
+])
 
-
-class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  render() {
-    return (
-      <div>
-      </div>
-    )
-  }
+function App() {
+	return (
+	<>
+		<RouterProvider router={router}/>
+	</>
+	)
 }
-
 export default App;
