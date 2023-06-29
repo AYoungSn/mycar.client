@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../api/Api";
-import CarBox from "./CarBox";
+import CarMenuBox from "./CarMenuBox";
 import Head from "./styled/Head";
 import Logo from "./styled/Logo";
 
@@ -41,7 +41,7 @@ const Section = styled.section`
 function DropDown(props) {
 	const list = []
 	for(var i = 0; i < props.data.length; i++) {
-		list.push(<CarBox key={i} data={props.data[i]}/>)
+		list.push(<CarMenuBox key={i} data={props.data[i]}/>)
 	}
 	return <Section>
 		{list}

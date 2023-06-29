@@ -17,7 +17,7 @@ const Button = styled.button`
 	padding: 30px;
 	cursor: pointer;
 `
-function CarBox(props) {
+function CarMenuBox(props) {
 	const data = props.data;
 	return (
 		<a href={"/estimation/model?carId=" + data.carId}>
@@ -30,4 +30,4 @@ function CarBox(props) {
 	)
 }
 
-export default CarBox;
+export default CarMenuBox;

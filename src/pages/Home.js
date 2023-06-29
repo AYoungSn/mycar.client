@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Api } from "../api/Api";
-import CarBox from "../components/CarBox";
+import CarMenuBox from "../components/CarMenuBox";
 import SimpleHeader from "../components/SimpleHeader";
 
 const Nav = styled.nav`
@@ -19,7 +19,7 @@ function Home() {
 			const list = [];
 			let i = 0;
 			for (i = 0; i < data.length; i++) {
-				list.push(<CarBox data={data[i]}/>);
+				list.push(<CarMenuBox data={data[i]}/>);
 			}
 			setMenuList(list);
 		}
