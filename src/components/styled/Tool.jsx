@@ -51,7 +51,7 @@ const RadioInner = styled.span`
 	text-align: center;
 `
 function Tool(props) {
-	const listItems = props.tool?.map((tool, i) => {
+	const listItems = props.tools?.map((tool, i) => {
 		if (props.toolId === 0 && i === 0 && tool.isSelect === true)
 			props.onChange(tool.id);
 		if (props.toolId === tool.id && tool.isSelect === false) {

@@ -14,7 +14,7 @@ function ToolTips(props) {
 	<section>
 		<FilterList>
 			{engines?.length > 0 && 
-				<Tool tool={engines} name='엔진' 
+				<Tool tools={engines} name='엔진' 
 					onChange={(id) => {
 						props.setEngineId(id);
 					}}
@@ -22,7 +22,7 @@ function ToolTips(props) {
 				/>
 			}
 			{gearbox?.length > 0 && 
-				<Tool tool={gearbox} name='변속기'
+				<Tool tools={gearbox} name='변속기'
 					onChange={(id) => {
 						props.setGearboxId(id);
 					}}
@@ -30,7 +30,7 @@ function ToolTips(props) {
 				/>
 			}
 			{driving?.length > 0 && 
-				<Tool tool={driving} name='구동방식'
+				<Tool tools={driving} name='구동방식'
 					onChange={(id) => {
 						props.setDrivingId(id);
 					}}

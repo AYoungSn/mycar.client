@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import { carsApi } from "../api/Api";
 import styled from "styled-components";
 
-const ContentWrap = styled.div`
+const FilterWrap = styled.div`
 	padding: 0 50px;
+	margin-top: 30px;
+`
+const ContentWrap = styled.div`
 	margin-top: 30px;
 `
 
@@ -22,7 +25,6 @@ function EstimationModel() {
 		let baseQuery = `carId=${carId}`;
 		console.log("carId", carId);
 		const makePath = () => {
-			// let basePath = `carId=${carId}`;
 			if (engineId !== 0) {
 				baseQuery += `&engineId=${engineId}`;
 			}
@@ -43,12 +45,12 @@ function EstimationModel() {
 	return (
 		<div>
 			<Header carId={searchParams.get('carId')}></Header>
-			<ContentWrap>
+			<FilterWrap>
 				<ToolTips tooltips={tooltips} 
 				setEngineId={setEngineId} engineId={engineId}
 				setDrivingId={setDrivingId} drivingId={drivingId}
 				setGearboxId={setGearboxId} gearboxId={gearboxId}/>
-			</ContentWrap>
+			</FilterWrap>
 		</div>
 	);
 }

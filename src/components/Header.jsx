@@ -53,7 +53,6 @@ function Menu(props) {
 	const [data, setData] = useState([]);
 	async function fetchData() {
 		setData((await carsApi.carList).data);
-		console.log(data);
 		for(let i = 0; i < data.length; i++) {
 			if (data[i].carId === Number(props.carId)) {
 				setCarName(data[i].carName);
@@ -67,7 +66,6 @@ function Menu(props) {
 		<>
 			<MenuBtn onClick={(e) => {
 				setIsOpen(!isOpen);
-				// e.preventDefault();
 			}}>
 				<span>{carName}</span>
 				<Triangle isOpen={isOpen}></Triangle>

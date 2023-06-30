@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 function useModelFilter(carId, engineId, gearboxId, drivingId) {
 	const [path, setPath] = useState('');
-	console.log(carId, engineId, gearboxId, drivingId);
 	useEffect(() => {
 		const makePath = () => {
 			let basePath = `carId=${carId}`;
@@ -18,7 +17,6 @@ function useModelFilter(carId, engineId, gearboxId, drivingId) {
 			setPath(basePath);
 		}
 		makePath();
-		console.log('path', path);
 	}, []);
 	return path;
 }
