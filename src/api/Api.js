@@ -7,4 +7,5 @@ export const Api = axios.create({
 export const carsApi = {
 	carList: Api.get("/cars"),
 	tooltips: (query) => Api.get(`/cars/model-filter?${query}`),
+	trims: (query) => Api.get(`/cars/trims?${query}`),
 };
