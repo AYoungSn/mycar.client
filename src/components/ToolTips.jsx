@@ -7,16 +7,35 @@ const FilterList = styled.ul`
 `
 
 function ToolTips(props) {
-	console.log('ToolTips: ', props.tooltips);
 	const engines = props.tooltips.engines;
 	const gearbox = props.tooltips.gearbox;
 	const driving = props.tooltips.driving;
 	return (
 	<section>
 		<FilterList>
-			{engines?.length > 0 && <Tool tool={engines} name='엔진'/>}
-			{gearbox?.length > 0 && <Tool tool={gearbox} name='변속기'/>}
-			{driving?.length > 0 && <Tool tool={driving} name='구동방식'/>}
+			{engines?.length > 0 && 
+				<Tool tool={engines} name='엔진' 
+					onChange={(id) => {
+						props.setEngineId(id);
+					}}
+					toolId={props.engineId}
+				/>
+			}
+			{gearbox?.length > 0 && 
+				<Tool tool={gearbox} name='변속기'
+					onChange={(id) => {
+						props.setGearboxId(id);
+					}}
+					toolId={props.gearboxId}
+				/>
+			}
+			{driving?.length > 0 && 
+				<Tool tool={driving} name='구동방식'
+					onChange={(id) => {
+						props.setDrivingId(id);
+					}}
+					toolId={props.drivingId}
+			/>}
 		</FilterList>
 	</section>);
 }

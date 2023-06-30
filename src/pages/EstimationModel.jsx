@@ -8,16 +8,15 @@ import styled from "styled-components";
 
 const ContentWrap = styled.div`
 	padding: 0 50px;
+	margin-top: 30px;
 `
 
 function EstimationModel() {
 	const [searchParams, setSearchParmas] = useSearchParams();
-	const [engineId, setEngineId] = useState('');
-	const [gearboxId, setGearboxId] = useState('');
-	const [drivingId, setDrivingId] = useState('');
+	const [engineId, setEngineId] = useState(0);
+	const [gearboxId, setGearboxId] = useState(0);
+	const [drivingId, setDrivingId] = useState(0);
 	const [tooltips, setToolTips] = useState('');
-	// const [query, setQuery] = useState('');
-	// const path = useModelFilter(searchParams.get('carId'), engineId, gearboxId, drivingId);
 	
 	useEffect(() => {
 		const carId = searchParams.get('carId');
@@ -25,34 +24,31 @@ function EstimationModel() {
 		console.log("carId", carId);
 		const makePath = () => {
 			// let basePath = `carId=${carId}`;
-			if (engineId !== undefined && engineId !== '') {
+			if (engineId !== 0) {
 				baseQuery += `&engineId=${engineId}`;
 			}
-			if (gearboxId !== undefined && gearboxId !== '') {
+			if (gearboxId !== 0) {
 				baseQuery += `&gearboxId=${gearboxId}`;
 			}
-			if (drivingId !== undefined && drivingId !== '') {
+			if (drivingId !== 0) {
 				baseQuery += `&drivingId=${drivingId}`;
 			}
-			// setQuery(baseQuery)
-			// setPath(basePath);
-			console.log('query', baseQuery)
 		}
 		makePath();
 		async function fetchData() {
-			console.log('fetchData');
-			// const data = (await Api.get(`/cars/model-filter?${path}`))
 			const data = (await carsApi.tooltips(baseQuery)).data;
 			setToolTips(data);
 		}
 		fetchData();
-		// console.log('useEffect');
 	}, [engineId, gearboxId, drivingId]);
 	return (
 		<div>
 			<Header carId={searchParams.get('carId')}></Header>
 			<ContentWrap>
-				<ToolTips tooltips={tooltips} />
+				<ToolTips tooltips={tooltips} 
+				setEngineId={setEngineId} engineId={engineId}
+				setDrivingId={setDrivingId} drivingId={drivingId}
+				setGearboxId={setGearboxId} gearboxId={gearboxId}/>
 			</ContentWrap>
 		</div>
 	);
