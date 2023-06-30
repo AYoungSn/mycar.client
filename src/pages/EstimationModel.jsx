@@ -2,8 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import ToolTips from "../components/ToolTips";
 import { useState, useEffect } from "react";
-import useModelFilter from "../hooks/useModelFilter";
-import { Api, carsApi } from "../api/Api";
+import { carsApi } from "../api/Api";
 import styled from "styled-components";
 
 const ContentWrap = styled.div`
