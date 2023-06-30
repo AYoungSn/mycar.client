@@ -26,19 +26,18 @@ function EstimationModel() {
 	const [gearboxId, setGearboxId] = useState(0);
 	const [drivingId, setDrivingId] = useState(0);
 	const tooltips = useFetchToolTips(searchParams.get('carId'), engineId, gearboxId, drivingId);
-
 	return (
 		<div>
 			<Header carId={searchParams.get('carId')}></Header>
 			<ContentWrap>
 				<FilterWrap>
 					<ToolTips tooltips={tooltips} 
-					setEngineId={setEngineId} engineId={engineId}
-					setDrivingId={setDrivingId} drivingId={drivingId}
-					setGearboxId={setGearboxId} gearboxId={gearboxId}/>
+					onChangeEngineId={(id) => {setEngineId(id)}} engineId={engineId}
+					onChangeDrivingId={(id) => {setDrivingId(id)}} drivingId={drivingId}
+					onChangeGearboxId={(id) => {setGearboxId(id)}} gearboxId={gearboxId}/>
 				</FilterWrap>
 				<TrimWrap>
-					{}
+					{/* {} */}
 				</TrimWrap>
 			</ContentWrap>
 		</div>

@@ -16,7 +16,7 @@ function ToolTips(props) {
 			{engines?.length > 0 && 
 				<Tool tools={engines} name='엔진' 
 					onChange={(id) => {
-						props.setEngineId(id);
+						props.onChangeEngineId(id);
 					}}
 					toolId={props.engineId}
 				/>
@@ -24,7 +24,7 @@ function ToolTips(props) {
 			{gearbox?.length > 0 && 
 				<Tool tools={gearbox} name='변속기'
 					onChange={(id) => {
-						props.setGearboxId(id);
+						props.onChangeGearboxId(id);
 					}}
 					toolId={props.gearboxId}
 				/>
@@ -32,7 +32,7 @@ function ToolTips(props) {
 			{driving?.length > 0 && 
 				<Tool tools={driving} name='구동방식'
 					onChange={(id) => {
-						props.setDrivingId(id);
+						props.onChangeDrivingId(id);
 					}}
 					toolId={props.drivingId}
 			/>}

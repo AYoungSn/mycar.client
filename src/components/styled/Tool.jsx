@@ -55,9 +55,9 @@ function Tool(props) {
 		if (props.toolId === 0 && i === 0 && tool.isSelect === true)
 			props.onChange(tool.id);
 		if (props.toolId === tool.id && tool.isSelect === false) {
-			for (let i = 0; i < props.tool?.length; i++) {
-				if (props.tool[i].isSelect === true) {
-					props.onChange(Number(props.tool[i].id));
+			for (let i = 0; i < props.tools?.length; i++) {
+				if (props.tools[i].isSelect === true) {
+					props.onChange(Number(props.tools[i].id));
 					break;
 				}
 			}
@@ -80,7 +80,7 @@ function Tool(props) {
 			<RadioInner isSelect={tool.isSelect} choice={Number(tool.id) === Number(props.toolId)}>{tool.name}</RadioInner>
 		</ToolLabel>
 		)
-	})
+	});
 	return (
 		<Item>
 			<div><b>{props.name}</b></div>
