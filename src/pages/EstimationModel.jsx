@@ -8,7 +8,6 @@ import { useFetchTrims } from "../hooks/useFetchTrims";
 import { TrimBox } from "../components/TrimBox";
 import { FlexDiv } from "../components/styled/FlexDiv";
 
-const FilterWrap = styled.div``;
 const ContentWrap = styled.div`
 	padding: 0 50px;
 	margin-top: 30px;
@@ -30,7 +29,6 @@ function EstimationModel() {
 	const [drivingId, setDrivingId] = useState(0);
 	const tooltips = useFetchToolTips(searchParams.get('carId'), engineId, gearboxId, drivingId);
 	const trims = useFetchTrims(searchParams.get('carId'), engineId, gearboxId, drivingId);
-	console.log(trims)
 	const trimList = trims && trims?.map((trim) => {
 		return (<TrimBox trim={trim}/>)
 	});
@@ -38,12 +36,12 @@ function EstimationModel() {
 		<div>
 			<Header carId={searchParams.get('carId')}></Header>
 			<ContentWrap>
-				<FilterWrap>
+				<div>
 					<ToolTips tooltips={tooltips} 
 					onChangeEngineId={(id) => {setEngineId(id)}} engineId={engineId}
 					onChangeDrivingId={(id) => {setDrivingId(id)}} drivingId={drivingId}
 					onChangeGearboxId={(id) => {setGearboxId(id)}} gearboxId={gearboxId}/>
-				</FilterWrap>
+				</div>
 				<TrimWrap>
 					{trimList}
 				</TrimWrap>
