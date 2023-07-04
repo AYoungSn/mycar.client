@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
 
+const PreviewWrap = styled.div`
+	position: relative;
+`
 const Preview = styled(FlexItem)`
 	width: 400px;
 	position: fixed;
@@ -33,13 +36,15 @@ const Price = styled.b`
 export function ModelPreview(props) {
 	const [price, setPrice] = useRecoilState(priceState);
 	return (
-	<Preview>
-		<h2>{props.model.carName} - {props.model.trimName}</h2>
-		<ModelName>{props.model.modelName}</ModelName>
-		<PriceDiv>
-			<PLabel>총 차량 가격</PLabel>
-			<Price>{price}</Price>
-		</PriceDiv>
-	</Preview>
+		<PreviewWrap>
+			<Preview>
+				<h2>{props.model.carName} - {props.model.trimName}</h2>
+				<ModelName>{props.model.modelName}</ModelName>
+				<PriceDiv>
+					<PLabel>총 차량 가격</PLabel>
+					<Price>{price}</Price>
+				</PriceDiv>
+			</Preview>
+		</PreviewWrap>
 	);
 }
