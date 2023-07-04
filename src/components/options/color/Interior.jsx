@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { FlexUl } from "../styled/Flex"
-import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../styled/Option"
+import { FlexUl } from "../../styled/Flex"
+import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option"
 import { useRecoilState } from "recoil";
-import { interiorState } from "../../utils/recoil/color";
+import { interiorState } from "../../../utils/recoil/color";
 import { useEffect, useState } from "react";
 
 const InteriorItem = styled.li`

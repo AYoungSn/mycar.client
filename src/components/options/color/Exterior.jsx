@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ColorBtn, OptionColor, OptionName, OptionTitle } from "../styled/Option";
-import { FlexUl } from "../styled/Flex";
-import { exteriorState } from "../../utils/recoil/color";
+import { ColorBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option";
+import { FlexUl } from "../../styled/Flex";
+import { exteriorState } from "../../../utils/recoil/color";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 

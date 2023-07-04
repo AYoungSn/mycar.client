@@ -1,4 +1,4 @@
-import { OptionHead } from "../styled/Option";
+import { OptionHead } from "../../styled/Option";
 import { Exterior } from "./Exterior";
 import { Interior } from "./Interior";
 
