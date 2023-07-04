@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { carsApi } from "../api/Api";
 import { useRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
 
-export function useFetchModelInit(modelId) {
-	const [model, setModel] = useState('');
-	const [exterior, setExterior] = useState([]);
-	const [interior, setInterior] = useState([]);
-	const [options, setOptions] = useState('');
+export function useFetchModelInit(modelId, setModel, setExterior, setInterior, setOptions) {
 	const [price, setPrice] = useRecoilState(priceState);
 	useEffect(() => {
 		async function fetchData() {
@@ -20,5 +16,4 @@ export function useFetchModelInit(modelId) {
 		}
 		fetchData();
 	}, []);
-	return ({model, exterior, interior, options});
 }

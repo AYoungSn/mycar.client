@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 export function useMakePath(carId, engineId, gearboxId, drivingId) {
 	// const [path, setPath] = useState(`carId=${carId}`);
 	let baseQuery = `carId=${carId}`;
