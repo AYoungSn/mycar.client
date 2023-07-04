@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { FlexItem } from "./styled/FlexItem";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
+import { FlexItem } from "./styled/Flex";
 
 const PreviewWrap = styled.div`
 	position: relative;

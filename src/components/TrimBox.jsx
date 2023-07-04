@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { FlexItem } from "./styled/FlexItem";
 import { Link } from "react-router-dom";
+import { FlexItem } from "./styled/Flex";
 
 const Item = styled(FlexItem)`
 	background: #f6f3f2;

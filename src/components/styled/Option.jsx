@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { FlexDiv } from "./Flex";
-import { FlexItem } from "./FlexItem";
+import { FlexDiv, FlexItem } from "./Flex";
 
 export const OptionHead = styled.h2`
 	font-family: "HyundaiSansHeadKR";
@@ -15,6 +14,7 @@ export const OptionTitle = styled(FlexDiv)`
 export const OptionName = styled(FlexItem)`
 	font-size: 20px;
 	padding: 0px;
+	margin-top: ${props => props.marginTop};
 `;
 export const OptionColor = styled(FlexItem)`
 	font-size: 14px;
