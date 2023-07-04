@@ -20,3 +20,10 @@ export const OptionColor = styled(FlexItem)`
 	font-size: 14px;
 	float: right;
 `;
+
+export const ColorBtn = styled.button`
+	width: ${props => props.width};
+	height: ${props => props.height};
+	background-size: cover;
+	border: 0;
+`;
