@@ -10,7 +10,6 @@ const ExteriorItem = styled.li`
 `;
 
 export function Exterior(props) {
-	const [curExterior, setCurExterior] = useState('');
 	const [exterior, setExterior] = useRecoilState(exteriorState);
 	useEffect(() => {
 		async function initExterior() {
