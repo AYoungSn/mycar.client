@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { carsApi } from "../api/Api";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
 
 export function useFetchModelInit(modelId, setModel, setExterior, setInterior, setOptions) {
-	const [price, setPrice] = useRecoilState(priceState);
+	const setPrice = useSetRecoilState(priceState);
 	useEffect(() => {
 		async function fetchData() {
 			const data = (await carsApi.init(modelId)).data;
