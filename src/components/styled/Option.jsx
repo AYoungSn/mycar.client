@@ -25,6 +25,7 @@ export const ColorBtn = styled.button`
 	width: ${props => props.width};
 	height: ${props => props.height};
 	border: ${props => props.active === true ? "4px solid #007fa8;": 0};
+	cursor: pointer;
 `;
 
 export const DisabledBtn = styled.button`

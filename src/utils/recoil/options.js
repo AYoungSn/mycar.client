@@ -2,10 +2,18 @@ import { atom } from "recoil";
 
 export const exteriorState = atom({
 	key: 'exterior',
-	default: 0
+	default: {
+		id: 0,
+		name: '',
+		price: 0
+	}
 })
 
 export const interiorState = atom({
 	key: 'interior',
-	default: 0
+	default: {
+		id: 0,
+		name: '',
+		price: 0
+	}
 })

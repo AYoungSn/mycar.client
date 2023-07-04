@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ColorBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option";
 import { FlexUl } from "../../styled/Flex";
-import { exteriorState } from "../../../utils/recoil/color";
+import { exteriorState } from "../../../utils/recoil/options";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 
@@ -11,12 +11,15 @@ const ExteriorItem = styled.li`
 
 export function Exterior(props) {
 	const [curExterior, setCurExterior] = useState('');
-	const [exteriorId, setExteriorId] = useRecoilState(exteriorState);
+	const [exterior, setExterior] = useRecoilState(exteriorState);
 	useEffect(() => {
 		async function initExterior() {
-			if (exteriorId === undefined || exteriorId === 0) {
-				setExteriorId(props.data[0]?.id);
-				setCurExterior(props.data[0]?.name);
+			if (exterior.id === undefined || exterior.id === 0) {
+				setExterior({
+					id: props.data[0]?.id,
+					name: props.data[0]?.name,
+					price: props.data[0]?.price
+				});
 			}
 		}
 		initExterior();
@@ -25,7 +28,7 @@ export function Exterior(props) {
 		<section>
 			<OptionTitle>
 				<OptionName>외장색상</OptionName>
-				<OptionColor>{curExterior}</OptionColor>
+				<OptionColor>{exterior.name}</OptionColor>
 			</OptionTitle>
 			<FlexUl>
 				{
@@ -33,11 +36,13 @@ export function Exterior(props) {
 						return (
 							<ExteriorItem key={ext.id}>
 								<ColorBtn width={"85px"} height={"85px"} style={{backgroundImage:`url(${ext.imgUri})`}}
-									active={ext.id === exteriorId}
+									active={ext.id === exterior.id}
 									onClick={() => {
-										console.log("ext", ext);
-										setExteriorId(ext.id);
-										setCurExterior(ext.name);
+										setExterior({
+											id: props.data[id]?.id,
+											name: props.data[id]?.name,
+											price: props.data[id]?.price
+										});
 									}}/>
 							</ExteriorItem>
 						)

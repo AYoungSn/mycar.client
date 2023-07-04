@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { FlexUl } from "../../styled/Flex"
 import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option"
 import { useRecoilState } from "recoil";
-import { interiorState } from "../../../utils/recoil/color";
+import { interiorState } from "../../../utils/recoil/options";
 import { useEffect, useState } from "react";
 
 const InteriorItem = styled.li`
@@ -11,13 +11,15 @@ const InteriorItem = styled.li`
 `;
 
 export function Interior(props) {
-	const [interiorId, setInteriorId] = useRecoilState(interiorState);
-	const [curInterior, setCurInterior] = useState('');
+	const [interior, setInterior] = useRecoilState(interiorState);
 	useEffect(() => {
 		async function initInterior() {
-			if (interiorId === undefined || interiorId === 0) {
-				setInteriorId(props.data[0]?.id);
-				setCurInterior(props.data[0]?.name);
+			if (interior.id === undefined || interior.id === 0) {
+				setInterior({
+					id: props.data[0]?.id,
+					name: props.data[0]?.name,
+					price: props.data[0]?.price
+				});
 			}
 		}
 		initInterior();
@@ -26,33 +28,38 @@ export function Interior(props) {
 		<section>
 			<OptionTitle>
 				<OptionName>내장색상</OptionName>
-				<OptionColor>{curInterior}</OptionColor>
+				<OptionColor>{interior.name}</OptionColor>
 			</OptionTitle>
 			<FlexUl>
 				{
-					props.data?.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1)).map((interior, id) => {
+					props.data?.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1))
+						.map((item, id) => {
 						return (
-							
-							interior.choiceYN === true ?
-							<InteriorItem key={interior.id}>
-								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${interior.imgUri})`}}
-									active={interior.id === interiorId}
+							item.choiceYN === true ?
+							<InteriorItem key={item.id}>
+								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${item.imgUri})`}}
+									active={item.id === interior.id}
 									onClick={() => {
-										setInteriorId(interior.id);
-										setCurInterior(interior.name);
+										setInterior({
+											id: props.data[id]?.id,
+											name: props.data[id]?.name,
+											price: props.data[id]?.price
+										});
 									}}/>
 							</InteriorItem>
 							:
-							<InteriorItem key={interior.id}>
-								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${interior.imgUri})`}}
-									active={interior.id === interiorId}
+							<InteriorItem key={item.id}>
+								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${item.imgUri})`}}
+									active={item.id === interior.id}
 									onClick={() => {
-										setInteriorId(interior.id);
-										setCurInterior(interior.name);
+										setInterior({
+											id: props.data[id]?.id,
+											name: props.data[id]?.name,
+											price: props.data[id]?.price
+										});
 									}}/>
 								<DisabledBtn/>
 							</InteriorItem>
-							
 						)
 					})
 				}
