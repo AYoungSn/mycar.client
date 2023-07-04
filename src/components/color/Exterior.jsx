@@ -33,6 +33,7 @@ export function Exterior(props) {
 						return (
 							<ExteriorItem key={ext.id}>
 								<ColorBtn width={"85px"} height={"85px"} style={{backgroundImage:`url(${ext.imgUri})`}}
+									active={ext.id === exteriorId}
 									onClick={() => {
 										console.log("ext", ext);
 										setExteriorId(ext.id);

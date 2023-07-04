@@ -24,6 +24,6 @@ export const OptionColor = styled(FlexItem)`
 export const ColorBtn = styled.button`
 	width: ${props => props.width};
 	height: ${props => props.height};
-	background-size: cover;
-	border: 0;
+	// background-size: cover;
+	border: ${props => props.active === true ? "4px solid #007fa8;": 0};
 `;

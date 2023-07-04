@@ -33,6 +33,7 @@ export function Interior(props) {
 						return (
 							<InteriorItem key={interior.id}>
 								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${interior.imgUri})`}}
+									active={interior.id === interiorId}
 									onClick={() => {
 										setInteriorId(interior.id);
 										setCurInterior(interior.name);
