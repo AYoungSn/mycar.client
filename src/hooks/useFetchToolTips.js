@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { carsApi } from "../api/Api";
+import { carsApi } from "../utils/Api";
 import { useMakePath } from "./useMakePath";
 
 function useFetchToolTips(carId, engineId, gearboxId, drivingId) {

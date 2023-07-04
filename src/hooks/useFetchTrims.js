@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMakePath } from "./useMakePath";
-import { carsApi } from "../api/Api";
+import { carsApi } from "../utils/Api";
 
 export function useFetchTrims(carId, engineId, gearboxId, drivingId) {
 	const [trims, setTrims] = useState('');

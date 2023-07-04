@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { carsApi } from "../../api/Api";
+import { carsApi } from "../../utils/Api";
 import CarMenuBox from "../CarMenuBox";
 import { Head, HeaderWrap } from "../styled/Head";
 import Logo from "../styled/Logo";

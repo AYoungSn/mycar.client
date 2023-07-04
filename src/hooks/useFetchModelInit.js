@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { carsApi } from "../api/Api";
+import { carsApi } from "../utils/Api";
 import { useSetRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
 
