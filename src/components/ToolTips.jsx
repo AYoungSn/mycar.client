@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import Tool from "./styled/Tool";
-
-const FilterList = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-`
+import { FlexUl } from "./styled/Flex";
 
 function ToolTips(props) {
 	const engines = props.tooltips.engines;
@@ -12,7 +8,7 @@ function ToolTips(props) {
 	const driving = props.tooltips.driving;
 	return (
 	<section>
-		<FilterList>
+		<FlexUl>
 			{engines?.length > 0 && 
 				<Tool tools={engines} name='엔진' 
 					onChange={(id) => {
@@ -36,7 +32,7 @@ function ToolTips(props) {
 					}}
 					toolId={props.drivingId}
 			/>}
-		</FilterList>
+		</FlexUl>
 	</section>);
 }
 

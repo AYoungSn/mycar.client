@@ -6,6 +6,10 @@ import { priceState } from "../utils/recoil/price";
 
 const Preview = styled(FlexItem)`
 	width: 400px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	margin-top: 100px;
 `;
 const PriceDiv = styled.div`
 	margin-top: 50px;
@@ -29,14 +33,13 @@ const Price = styled.b`
 export function ModelPreview(props) {
 	const [price, setPrice] = useRecoilState(priceState);
 	return (
-	<>
-		<Preview>
-			<h2>{props.model.carName} - {props.model.trimName}</h2>
-			<ModelName>{props.model.modelName}</ModelName>
-			<PriceDiv>
-				<PLabel>총 차량 가격</PLabel>
-				<Price>{price}</Price>
-			</PriceDiv>
-		</Preview>
-	</>);
+	<Preview>
+		<h2>{props.model.carName} - {props.model.trimName}</h2>
+		<ModelName>{props.model.modelName}</ModelName>
+		<PriceDiv>
+			<PLabel>총 차량 가격</PLabel>
+			<Price>{price}</Price>
+		</PriceDiv>
+	</Preview>
+	);
 }

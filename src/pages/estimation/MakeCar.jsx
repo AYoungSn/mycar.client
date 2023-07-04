@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { FlexDiv } from "../../components/styled/FlexDiv";
-import { FlexItem } from "../../components/styled/FlexItem";
+import { FlexDiv } from "../../components/styled/Flex";
 import Header from "../../components/header/Header";
 import { useSearchParams } from "react-router-dom";
 import { ModelPreview } from "../../components/ModelPreview";
 import { useFetchModelInit } from "../../hooks/useFetchModelInit";
+import { OptionArea } from "../../components/OptionArea";
 
 const ContentWrap = styled(FlexDiv)`
 	position: relative;
@@ -12,15 +12,10 @@ const ContentWrap = styled(FlexDiv)`
 	width: auto;
 	margin: 0 auto;
 	overflow-x: hidden;
+	justify-content: space-between;
 `;
-const MakingWrap = styled(FlexDiv)`
 
-`
 
-const OptionArea = styled(FlexItem)`
-	width:660px;
-	padding: 120px 72px 120px 80px;
-`
 export function MakeCar() {
 	const [searchParams, setSearchParmas] = useSearchParams();
 	const {model, exterior, interior, options} = useFetchModelInit(searchParams.get('modelId'));
@@ -30,7 +25,8 @@ export function MakeCar() {
 			<Header carId={searchParams.get('carId')}></Header>
 			<ContentWrap>
 				<ModelPreview model={model}></ModelPreview>
-				<OptionArea></OptionArea>
+				<hr/>
+				<OptionArea exterior={exterior} interior={interior}></OptionArea>
 			</ContentWrap>
 		</div>
 	);
