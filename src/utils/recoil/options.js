@@ -17,3 +17,18 @@ export const interiorState = atom({
 		price: 0
 	}
 })
+
+export const optionState = atom({
+	key: 'options',
+	default: {
+		select: [
+			{
+				id: 0,
+				name: '',
+				price: 0
+			}
+		],
+		hga: [],
+		npf: []
+	}
+})
