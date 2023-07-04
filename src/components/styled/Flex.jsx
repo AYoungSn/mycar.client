@@ -20,3 +20,8 @@ export const FlexUl = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
 `;
+
+export const FlexLi = styled.li`
+	display: flex;
+	flex-wrap: wrap;
+`;

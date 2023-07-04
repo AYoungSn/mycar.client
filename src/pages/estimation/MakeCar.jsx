@@ -4,7 +4,7 @@ import Header from "../../components/header/Header";
 import { useSearchParams } from "react-router-dom";
 import { ModelPreview } from "../../components/ModelPreview";
 import { useFetchModelInit } from "../../hooks/useFetchModelInit";
-import { OptionArea } from "../../components/OptionArea";
+import { OptionArea } from "../../components/options/OptionArea";
 import { useState } from "react";
 
 const ContentWrap = styled(FlexDiv)`

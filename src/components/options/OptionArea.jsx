@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { Color } from "./options/color/Color"
-import { Options } from "./options/Options"
-import { FlexItem } from "./styled/Flex"
+import { Color } from "./color/Color"
+import { Options } from "./Options"
+import { FlexItem } from "../styled/Flex"
 
 const OptionAreaWrap = styled(FlexItem)`
 	width:660px;

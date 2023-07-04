@@ -1,9 +1,10 @@
 import { OptionHead } from "../styled/Option";
-import { DetailOptions } from "./DetailOptions";
+import { DetailOptionList } from "./DetailOptionList";
 
-export function Options() {
+export function Options(props) {
+	console.log("Options", props.options);
 	return <div>
 		<OptionHead>옵션</OptionHead>
-		<DetailOptions></DetailOptions>
+		<DetailOptionList options={props.options.select}/>
 	</div>
 }
