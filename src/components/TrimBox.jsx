@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FlexItem } from "./styled/FlexItem";
+import { Link } from "react-router-dom";
 
 const Item = styled(FlexItem)`
 	background: #f6f3f2;
@@ -51,9 +52,11 @@ export function TrimBox(props) {
 			<div style={{marginTop: "30px"}}>
 				<Info>{props.trim.basicInfo}</Info>
 			</div>
-			<MakeCarBtn>
-				<span>내 차 만들기</span>
-			</MakeCarBtn>
+			<Link to={`/cars/estimation/models/making?modelId=${props.trim.modelId}&carId=${props.carId}`}>
+				<MakeCarBtn>
+					<span>내 차 만들기</span>
+				</MakeCarBtn>
+			</Link>
 		</Item>
 	)
 }

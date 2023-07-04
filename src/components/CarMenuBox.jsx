@@ -20,7 +20,7 @@ const Button = styled.button`
 function CarMenuBox(props) {
 	const data = props.data;
 	return (
-		<a href={"/estimation/model?carId=" + data.carId}>
+		<a href={"/cars/estimation/model?carId=" + data.carId}>
 			<Button>
 				<input hidden={true} value={data.carId}/>
 				<TrimName isHome={window.location.pathname === '/' ? true : false}>{data.carName}</TrimName>

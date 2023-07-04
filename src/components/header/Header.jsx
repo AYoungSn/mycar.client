@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { carsApi } from "../api/Api";
-import CarMenuBox from "./CarMenuBox";
-import Head from "./styled/Head";
-import Logo from "./styled/Logo";
+import { carsApi } from "../../api/Api";
+import CarMenuBox from "../CarMenuBox";
+import Head from "../styled/Head";
+import Logo from "../styled/Logo";
 
 const MenuBtn = styled.button`
 	position: relative;

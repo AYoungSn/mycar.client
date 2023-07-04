@@ -1,6 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import EstimationModel from "./pages/EstimationModel";
+import { RecoilRoot } from 'recoil';
+import EstimationModel from "./pages/estimation/EstimationModel";
 import Home from "./pages/Home";
+import { MakeCar } from "./pages/estimation/MakeCar";
 
 const router = createBrowserRouter([
 	{
@@ -8,16 +10,20 @@ const router = createBrowserRouter([
 		element: <Home/>
 	},
 	{
-		path: "/estimation/model",
+		path: "/cars/estimation/model",
 		element: <EstimationModel/>
+	},
+	{
+		path: "/cars/estimation/models/making",
+		element: <MakeCar/>
 	}
 ])
 
 function App() {
 	return (
-	<>
+	<RecoilRoot>
 		<RouterProvider router={router}/>
-	</>
+	</RecoilRoot>
 	)
 }
 export default App;

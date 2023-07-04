@@ -21,3 +21,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+a, article, button, div, input, li, nav, p, section, textarea, ul {
+    box-sizing: border-box;
+}

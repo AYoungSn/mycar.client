@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { carsApi } from "../api/Api";
 import CarMenuBox from "../components/CarMenuBox";
-import SimpleHeader from "../components/SimpleHeader";
+import SimpleHeader from "../components/header/SimpleHeader";
 
 const Nav = styled.nav`
 	display:flex;

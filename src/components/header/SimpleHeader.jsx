@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Head from "./styled/Head";
-import Logo from "./styled/Logo";
+import Head from "../styled/Head";
+import Logo from "../styled/Logo";
 
 function SimpleHeader(props) {
 	return (

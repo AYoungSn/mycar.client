@@ -1,12 +1,12 @@
 import { useSearchParams } from "react-router-dom";
-import Header from "../components/Header";
-import ToolTips from "../components/ToolTips";
+import Header from "../../components/header/Header";
+import ToolTips from "../../components/ToolTips";
 import { useState } from "react";
 import styled from "styled-components";
-import useFetchToolTips from "../hooks/useFetchToolTips";
-import { useFetchTrims } from "../hooks/useFetchTrims";
-import { TrimBox } from "../components/TrimBox";
-import { FlexDiv } from "../components/styled/FlexDiv";
+import useFetchToolTips from "../../hooks/useFetchToolTips";
+import { useFetchTrims } from "../../hooks/useFetchTrims";
+import { TrimBox } from "../../components/TrimBox";
+import { FlexDiv } from "../../components/styled/FlexDiv";
 
 const ContentWrap = styled.div`
 	padding: 0 50px;
@@ -30,7 +30,7 @@ function EstimationModel() {
 	const tooltips = useFetchToolTips(searchParams.get('carId'), engineId, gearboxId, drivingId);
 	const trims = useFetchTrims(searchParams.get('carId'), engineId, gearboxId, drivingId);
 	const trimList = trims && trims?.map((trim) => {
-		return (<TrimBox trim={trim}/>)
+		return (<TrimBox trim={trim} carId={searchParams.get('carId')}/>)
 	});
 	return (
 		<div>
