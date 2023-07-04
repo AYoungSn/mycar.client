@@ -10,6 +10,12 @@ const Preview = styled(FlexItem)`
 const PriceDiv = styled.div`
 	margin-top: 50px;
 `;
+const ModelName = styled.span`
+	margin-top: 15px;
+	margin-right: 40px;
+	display: inline-block;
+	color: #666;
+`;
 const PLabel = styled.span`
 	display: inline-block;
 	font-size: 19px;
@@ -26,7 +32,7 @@ export function ModelPreview(props) {
 	<>
 		<Preview>
 			<h2>{props.model.carName} - {props.model.trimName}</h2>
-			<span>{props.model.modelName}</span>
+			<ModelName>{props.model.modelName}</ModelName>
 			<PriceDiv>
 				<PLabel>총 차량 가격</PLabel>
 				<Price>{price}</Price>
