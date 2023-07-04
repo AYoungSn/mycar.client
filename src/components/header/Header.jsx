@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { carsApi } from "../../api/Api";
 import CarMenuBox from "../CarMenuBox";
-import Head from "../styled/Head";
+import { Head, HeaderWrap } from "../styled/Head";
 import Logo from "../styled/Logo";
 
 const MenuBtn = styled.button`
@@ -77,14 +77,16 @@ function Menu(props) {
 
 function Header(props) {
 	return (
-		<Head>
-			<div>
-				<Link to='/'>
-					<Logo type="button" name="hyundai"/>
-				</Link>
-				<Menu carId={props.carId}/>
-			</div>
-		</Head>
+		<HeaderWrap>
+			<Head>
+				<div>
+					<Link to='/'>
+						<Logo type="button" name="hyundai"/>
+					</Link>
+					<Menu carId={props.carId}/>
+				</div>
+			</Head>
+		</HeaderWrap>
 	)
 }
 
