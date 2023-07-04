@@ -1,12 +1,13 @@
 import styled from "styled-components"
 import { FlexUl } from "../styled/Flex"
-import { ColorBtn, OptionColor, OptionName, OptionTitle } from "../styled/Option"
+import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../styled/Option"
 import { useRecoilState } from "recoil";
 import { interiorState } from "../../utils/recoil/color";
 import { useEffect, useState } from "react";
 
 const InteriorItem = styled.li`
 	margin-bottom: 25px;
+	position: relative;
 `;
 
 export function Interior(props) {
@@ -29,8 +30,10 @@ export function Interior(props) {
 			</OptionTitle>
 			<FlexUl>
 				{
-					props.data?.map((interior, id) => {
+					props.data?.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1)).map((interior, id) => {
 						return (
+							
+							interior.choiceYN === true ?
 							<InteriorItem key={interior.id}>
 								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${interior.imgUri})`}}
 									active={interior.id === interiorId}
@@ -39,6 +42,17 @@ export function Interior(props) {
 										setCurInterior(interior.name);
 									}}/>
 							</InteriorItem>
+							:
+							<InteriorItem key={interior.id}>
+								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${interior.imgUri})`}}
+									active={interior.id === interiorId}
+									onClick={() => {
+										setInteriorId(interior.id);
+										setCurInterior(interior.name);
+									}}/>
+								<DisabledBtn/>
+							</InteriorItem>
+							
 						)
 					})
 				}

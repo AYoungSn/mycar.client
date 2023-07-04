@@ -24,6 +24,18 @@ export const OptionColor = styled(FlexItem)`
 export const ColorBtn = styled.button`
 	width: ${props => props.width};
 	height: ${props => props.height};
-	// background-size: cover;
 	border: ${props => props.active === true ? "4px solid #007fa8;": 0};
 `;
+
+export const DisabledBtn = styled.button`
+	display: block;
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -13px;
+	margin-left: -13px;
+	background: transparent url(https://www.hyundai.com/static/images/color_alert.png) no-repeat;
+	border: 0;
+`
