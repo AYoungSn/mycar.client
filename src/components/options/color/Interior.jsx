@@ -10,20 +10,18 @@ const InteriorItem = styled.li`
 	position: relative;
 `;
 
-export function Interior(props) {
+export function Interior({ data }) {
 	const [interior, setInterior] = useRecoilState(interiorState);
 	useEffect(() => {
 		async function initInterior() {
 			if (interior.id === undefined || interior.id === 0) {
 				setInterior({
-					id: props.data[0]?.id,
-					name: props.data[0]?.name,
-					price: props.data[0]?.price
+					...data[0]
 				});
 			}
 		}
 		initInterior();
-	}, [props.data.length]);
+	}, [data.length]);
 	return (
 		<section>
 			<OptionTitle>
@@ -32,7 +30,7 @@ export function Interior(props) {
 			</OptionTitle>
 			<FlexUl>
 				{
-					props.data?.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1))
+					data?.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1))
 						.map((item, id) => {
 						return (
 							item.choiceYN === true ?
@@ -42,9 +40,7 @@ export function Interior(props) {
 									onClick={() => {
 										// 현재 선택된 외장색상 기반으로 선택 가능한 내장색인지 조회
 										setInterior({
-											id: props.data[id]?.id,
-											name: props.data[id]?.name,
-											price: props.data[id]?.price
+											...data[id]
 										});
 										// price 변경
 										// 외장색상 목록 재요청
@@ -57,9 +53,7 @@ export function Interior(props) {
 									active={item.id === interior.id}
 									onClick={() => {
 										setInterior({
-											id: props.data[id]?.id,
-											name: props.data[id]?.name,
-											price: props.data[id]?.price
+											...data[id]
 										});
 									}}/>
 								<DisabledBtn/>
