@@ -8,7 +8,6 @@ const OptionAreaWrap = styled(FlexItem)`
 	padding: 100px 72px 120px 80px;
 `
 export function OptionArea(props) {
-	console.log(props.options);
 	return (
 		<OptionAreaWrap>
 			<Color exterior={props.exterior} interior={props.interior}/>
