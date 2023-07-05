@@ -26,7 +26,7 @@ export function MakeCar() {
 
 	return (
 		<div>
-			<Header carId={searchParams.get('carId')}></Header>
+			<Header carCode={searchParams.get('carCode')}></Header>
 			<ContentWrap>
 				<ModelPreview model={model}></ModelPreview>
 				<OptionArea 

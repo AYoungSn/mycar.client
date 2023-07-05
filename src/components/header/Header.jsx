@@ -51,17 +51,17 @@ function Menu(props) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [carName, setCarName] = useState('');
 	const [data, setData] = useState([]);
-	async function fetchData() {
-		setData((await carsApi.carList).data);
-		for(let i = 0; i < data.length; i++) {
-			if (data[i].carId === Number(props.carId)) {
-				setCarName(data[i].carName);
+	useEffect(() => {
+		async function fetchData() {
+			setData((await carsApi.carList).data);
+			for(let i = 0; i < data.length; i++) {
+				if (data[i].carCode === props.carCode) {
+					setCarName(data[i].carName);
+				}
 			}
 		}
-	}
-	useEffect(() => {
 		fetchData();
-	}, [data.length]);
+	}, [data.length, props.carCode, data]);
 	return (
 		<>
 			<MenuBtn onClick={(e) => {
@@ -83,7 +83,7 @@ function Header(props) {
 					<Link to='/'>
 						<Logo type="button" name="hyundai"/>
 					</Link>
-					<Menu carId={props.carId}/>
+					<Menu carCode={props.carCode}/>
 				</div>
 			</Head>
 		</HeaderWrap>

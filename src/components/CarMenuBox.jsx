@@ -18,8 +18,9 @@ const Button = styled.button`
 	cursor: pointer;
 `
 function CarMenuBox({data}) {
+	console.log(data);
 	return (
-		<a href={"/cars/estimation/model?carId=" + data.carId}>
+		<a href={`/cars/estimation/model?carCode=${data.carCode}`}>
 			<Button>
 				<input hidden={true} value={data.carId}/>
 				<TrimName isHome={window.location.pathname === '/' ? true : false}>{data.carName}</TrimName>

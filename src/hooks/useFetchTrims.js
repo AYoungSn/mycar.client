@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useMakePath } from "./useMakePath";
 import { carsApi } from "../utils/Api";
 
-export function useFetchTrims(carId, engineId, gearboxId, drivingId) {
+function useFetchTrims(carCode, engineId, gearboxId, drivingId) {
 	const [trims, setTrims] = useState('');
-	const baseQuery = useMakePath(carId, engineId, gearboxId, drivingId);
+	const baseQuery = useMakePath(carCode, engineId, gearboxId, drivingId);
 	useEffect(() => {
 		async function fetchTrims() {
 			setTrims((await carsApi.trims(baseQuery)).data.trims);
@@ -12,6 +12,8 @@ export function useFetchTrims(carId, engineId, gearboxId, drivingId) {
 		if (engineId !== 0) {
 			fetchTrims();
 		}
-	}, [carId, engineId, gearboxId, drivingId]);
+	}, [carCode, engineId, gearboxId, drivingId, baseQuery]);
 	return trims;
 }
+
+export default useFetchTrims;

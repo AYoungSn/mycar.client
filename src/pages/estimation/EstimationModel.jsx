@@ -4,7 +4,7 @@ import ToolTips from "../../components/ToolTips";
 import { useState } from "react";
 import styled from "styled-components";
 import useFetchToolTips from "../../hooks/useFetchToolTips";
-import { useFetchTrims } from "../../hooks/useFetchTrims";
+import useFetchTrims from "../../hooks/useFetchTrims";
 import { TrimBox } from "../../components/TrimBox";
 import { FlexDiv } from "../../components/styled/Flex";
 
@@ -27,14 +27,14 @@ function EstimationModel() {
 	const [engineId, setEngineId] = useState(0);
 	const [gearboxId, setGearboxId] = useState(0);
 	const [drivingId, setDrivingId] = useState(0);
-	const tooltips = useFetchToolTips(searchParams.get('carId'), engineId, gearboxId, drivingId);
-	const trims = useFetchTrims(searchParams.get('carId'), engineId, gearboxId, drivingId);
+	const tooltips = useFetchToolTips(searchParams.get('carCode'), engineId, gearboxId, drivingId);
+	const trims = useFetchTrims(searchParams.get('carCode'), engineId, gearboxId, drivingId);
 	const trimList = trims && trims?.map((trim) => {
-		return (<TrimBox trim={trim} carId={searchParams.get('carId')}/>)
+		return (<TrimBox trim={trim} carId={searchParams.get('carCode')}/>)
 	});
 	return (
 		<div>
-			<Header carId={searchParams.get('carId')}></Header>
+			<Header carCode={searchParams.get('carCode')}></Header>
 			<ContentWrap>
 				<div>
 					<ToolTips tooltips={tooltips} 

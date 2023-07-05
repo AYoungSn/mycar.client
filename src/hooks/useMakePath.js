@@ -1,6 +1,5 @@
-export function useMakePath(carId, engineId, gearboxId, drivingId) {
-	// const [path, setPath] = useState(`carId=${carId}`);
-	let baseQuery = `carId=${carId}`;
+export function useMakePath(carCode, engineId, gearboxId, drivingId) {
+	let baseQuery = `carCode=${carCode}`;
 	if (engineId !== 0) {
 		baseQuery += `&engineId=${engineId}`;
 	}
