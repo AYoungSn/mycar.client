@@ -10,8 +10,13 @@ const OptionAreaWrap = styled(FlexItem)`
 export function OptionArea(props) {
 	return (
 		<OptionAreaWrap>
-			<Color exterior={props.exterior} interior={props.interior}/>
-			<Options options={props.options}></Options>
+			<Color exterior={props.exterior} interior={props.interior}
+				onChangeExteriorList={props.onChangeExteriorList}
+				onChangeInteriorList={props.onChangeInteriorList}
+			/>
+			<Options options={props.options} 
+				onChange={props.onChangeOptionList}
+			/>
 		</OptionAreaWrap>
 	)
 }

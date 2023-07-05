@@ -8,7 +8,7 @@ function OptionItemList(props) {
 	</div>
 }
 
-export function Options({options}) {
+export function Options({options, onChange}) {
 	return <div>
 		<OptionHead>옵션</OptionHead>
 		<OptionItemList options={options.select} 
@@ -17,6 +17,7 @@ export function Options({options}) {
 				// 선택 시 중복 선택 불가한 다른 상세품목이 있는지 조회
 				// 현재 옵션 선택 시 같이 선택되어야 하는 옵션이 있는지
 				// 옵션 선택 시 hga, npf 옵션 목록 재요청
+				
 			}}/>
 		{
 			options.hga?.length > 0 && 
