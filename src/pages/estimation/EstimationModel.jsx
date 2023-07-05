@@ -23,7 +23,7 @@ const TrimWrap = styled(FlexDiv)`
 `
 
 function EstimationModel() {
-	const [searchParams, setSearchParmas] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [engineId, setEngineId] = useState(0);
 	const [gearboxId, setGearboxId] = useState(0);
 	const [drivingId, setDrivingId] = useState(0);
