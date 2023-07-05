@@ -22,7 +22,7 @@ export function Exterior({data}) {
 			}
 		}
 		initExterior();
-	}, [data.length]);
+	}, [data.length, exterior.id, data, setExterior]);
 	return (
 		<section>
 			<OptionTitle>

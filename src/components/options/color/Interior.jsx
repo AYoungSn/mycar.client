@@ -3,7 +3,7 @@ import { FlexUl } from "../../styled/Flex"
 import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option"
 import { useRecoilState } from "recoil";
 import { interiorState } from "../../../utils/recoil/options";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const InteriorItem = styled.li`
 	margin-bottom: 25px;
@@ -21,7 +21,7 @@ export function Interior({ data }) {
 			}
 		}
 		initInterior();
-	}, [data.length]);
+	}, [data.length, data, interior.id, setInterior]);
 	return (
 		<section>
 			<OptionTitle>
