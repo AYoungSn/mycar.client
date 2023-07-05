@@ -40,11 +40,15 @@ export function Interior(props) {
 								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${item.imgUri})`}}
 									active={item.id === interior.id}
 									onClick={() => {
+										// 현재 선택된 외장색상 기반으로 선택 가능한 내장색인지 조회
 										setInterior({
 											id: props.data[id]?.id,
 											name: props.data[id]?.name,
 											price: props.data[id]?.price
 										});
+										// price 변경
+										// 외장색상 목록 재요청
+										// -> 기존 외장 색상이 선택 불가한 경우 선택가능한 색상으로 변경
 									}}/>
 							</InteriorItem>
 							:
