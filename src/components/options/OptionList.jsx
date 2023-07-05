@@ -39,11 +39,10 @@ function OptionItem(props) {
 	</Item>
 }
 
-export function OptionList(props) {
-	console.log('optionList', props.options);
+export function OptionList({options}) {
 	return <OptionWrap>
 		{
-			props.options?.map((option) => {
+			options?.map((option) => {
 				return <OptionItem option={option}></OptionItem>
 			})
 		}

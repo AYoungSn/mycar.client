@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { OptionHead, OptionName } from "../styled/Option";
 import { OptionList } from "./OptionList";
 
@@ -9,10 +8,10 @@ function OptionItemList(props) {
 	</div>
 }
 
-export function Options(props) {
+export function Options({options}) {
 	return <div>
 		<OptionHead>옵션</OptionHead>
-		<OptionItemList options={props.options.select} 
+		<OptionItemList options={options.select} 
 			name="상세 품목" onChange={(id) => {
 				// 현재 선택된 옵션들을 바탕으로 선택 가능한 항목인지 조회
 				// 선택 시 중복 선택 불가한 다른 상세품목이 있는지 조회
@@ -20,9 +19,9 @@ export function Options(props) {
 				// 옵션 선택 시 hga, npf 옵션 목록 재요청
 			}}/>
 		{
-			props.options.hga?.length > 0 && 
+			options.hga?.length > 0 && 
 				<OptionItemList 
-					options={props.options.hga}
+					options={options.hga}
 					name="H Genuine Accessories" 
 					onChange={(id) => {
 						// 해당 옵션 선택시 가격 변경
@@ -30,9 +29,9 @@ export function Options(props) {
 				/>
 		}
 		{
-			props.options.npf?.length > 0 &&
+			options.npf?.length > 0 &&
 				<OptionItemList 
-					options={props.options.npf} 
+					options={options.npf} 
 					name="N Performance Parts"
 					onChange={() => {
 						// 현재 선택된 옵션을 기반으로 선택 가능한 항목인지 조회

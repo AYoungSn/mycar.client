@@ -17,8 +17,7 @@ const Button = styled.button`
 	padding: 30px;
 	cursor: pointer;
 `
-function CarMenuBox(props) {
-	const data = props.data;
+function CarMenuBox({data}) {
 	return (
 		<a href={"/cars/estimation/model?carId=" + data.carId}>
 			<Button>

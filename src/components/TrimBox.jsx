@@ -43,16 +43,15 @@ const MakeCarBtn = styled.button`
 	color: #FFF;
 	margin-top: 20px;
 `
-export function TrimBox(props) {
-	console.log('trim', props.trim)
+export function TrimBox({trim, carId}) {
 	return (
 		<Item>
-			<TrimName>{props.trim.trimName}</TrimName>
-			<Price>{props.trim.price}원</Price>
+			<TrimName>{trim.trimName}</TrimName>
+			<Price>{trim.price}원</Price>
 			<div style={{marginTop: "30px"}}>
-				<Info>{props.trim.basicInfo}</Info>
+				<Info>{trim.basicInfo}</Info>
 			</div>
-			<Link to={`/cars/estimation/models/making?modelId=${props.trim.modelId}&carId=${props.carId}`}>
+			<Link to={`/cars/estimation/models/making?modelId=${trim.modelId}&carId=${carId}`}>
 				<MakeCarBtn>
 					<span>내 차 만들기</span>
 				</MakeCarBtn>

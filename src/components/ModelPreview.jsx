@@ -32,13 +32,13 @@ const Price = styled.b`
 	font-size: 30px;
 `
 
-export function ModelPreview(props) {
+export function ModelPreview({model}) {
 	const [price, setPrice] = useRecoilState(priceState);
 	return (
 		<PreviewWrap>
 			<Preview>
-				<h2>{props.model.carName} - {props.model.trimName}</h2>
-				<ModelName>{props.model.modelName}</ModelName>
+				<h2>{model.carName} - {model.trimName}</h2>
+				<ModelName>{model.modelName}</ModelName>
 				<PriceDiv>
 					<PLabel>총 차량 가격</PLabel>
 					<Price>{price}</Price>

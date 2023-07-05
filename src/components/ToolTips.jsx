@@ -1,11 +1,10 @@
-import styled from "styled-components";
 import Tool from "./styled/Tool";
 import { FlexUl } from "./styled/Flex";
 
-function ToolTips(props) {
-	const engines = props.tooltips.engines;
-	const gearbox = props.tooltips.gearbox;
-	const driving = props.tooltips.driving;
+function ToolTips({tooltips, ...props}) {
+	const engines = tooltips.engines;
+	const gearbox = tooltips.gearbox;
+	const driving = tooltips.driving;
 	return (
 	<section>
 		<FlexUl>
