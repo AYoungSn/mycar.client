@@ -30,7 +30,7 @@ function EstimationModel() {
 	const tooltips = useFetchToolTips(searchParams.get('carCode'), engineId, gearboxId, drivingId);
 	const trims = useFetchTrims(searchParams.get('carCode'), engineId, gearboxId, drivingId);
 	const trimList = trims && trims?.map((trim) => {
-		return (<TrimBox trim={trim} carId={searchParams.get('carCode')}/>)
+		return (<TrimBox trim={trim} carCode={searchParams.get('carCode')}/>)
 	});
 	return (
 		<div>

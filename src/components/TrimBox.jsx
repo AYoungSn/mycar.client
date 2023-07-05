@@ -43,7 +43,7 @@ const MakeCarBtn = styled.button`
 	color: #FFF;
 	margin-top: 20px;
 `
-export function TrimBox({trim, carId}) {
+export function TrimBox({trim, carCode}) {
 	return (
 		<Item>
 			<TrimName>{trim.trimName}</TrimName>
@@ -51,7 +51,7 @@ export function TrimBox({trim, carId}) {
 			<div style={{marginTop: "30px"}}>
 				<Info>{trim.basicInfo}</Info>
 			</div>
-			<Link to={`/cars/estimation/models/making?modelId=${trim.modelId}&carId=${carId}`}>
+			<Link to={`/cars/estimation/models/making?modelId=${trim.modelId}&carCode=${carCode}`}>
 				<MakeCarBtn>
 					<span>내 차 만들기</span>
 				</MakeCarBtn>
