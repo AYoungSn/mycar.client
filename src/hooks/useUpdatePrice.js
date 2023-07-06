@@ -26,6 +26,11 @@ export default function useUpdatePrice() {
 				tmp += hgaListOpt[i].price;
 			}
 		}
+		for(let i = 0; i < npfListOpt.length; i++) {
+			if (npfOpt.get(npfListOpt[i].code) === true) {
+				tmp += npfListOpt[i].price;
+			}
+		}
 		setTotalPrice(tmp);
 	}, [price, exterior, selectListOpt, selectOpt, hgaListOpt, hgaOpt, npfListOpt, npfOpt])
 	return totalPrice;
