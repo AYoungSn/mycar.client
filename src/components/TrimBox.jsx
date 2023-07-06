@@ -51,7 +51,7 @@ export function TrimBox({trim, carCode}) {
 			<div style={{marginTop: "30px"}}>
 				<Info>{trim.basicInfo}</Info>
 			</div>
-			<Link to={`/cars/estimation/models/making?modelId=${trim.modelId}&carCode=${carCode}`}>
+			<Link to={`/cars/estimation/models/making?modelId=${trim.modelId}&carCode=${carCode}&trimCode=${trim.trimCode}`}>
 				<MakeCarBtn>
 					<span>내 차 만들기</span>
 				</MakeCarBtn>
