@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { FlexUl } from "../../styled/Flex"
 import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option"
 import { useRecoilState } from "recoil";
-import { interiorState } from "../../../utils/recoil/options";
+import { interiorListState, interiorState } from "../../../utils/recoil/options";
 import { useEffect } from "react";
 
 const InteriorItem = styled.li`
@@ -10,11 +10,12 @@ const InteriorItem = styled.li`
 	position: relative;
 `;
 
-export function Interior({ data }) {
+export function Interior() {
 	const [interior, setInterior] = useRecoilState(interiorState);
+	const [data, setData] = useRecoilState(interiorListState);
 	useEffect(() => {
 		async function initInterior() {
-			if (interior.id === undefined || interior.id === 0) {
+			if (data && (interior.id === undefined || interior.id === 0)) {
 				setInterior({
 					...data[0]
 				});
@@ -30,8 +31,7 @@ export function Interior({ data }) {
 			</OptionTitle>
 			<FlexUl>
 				{
-					data?.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1))
-						.map((item, id) => {
+					data?.map((item, id) => {
 						return (
 							item.choiceYN === true ?
 							<InteriorItem key={item.id}>

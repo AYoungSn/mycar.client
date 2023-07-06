@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option";
 import { FlexUl } from "../../styled/Flex";
-import { exteriorState } from "../../../utils/recoil/options";
+import { exteriorListState, exteriorState } from "../../../utils/recoil/options";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
@@ -10,8 +10,9 @@ const ExteriorItem = styled.li`
 	position: relative;
 `;
 
-export function Exterior({data}) {
+export function Exterior() {
 	const [exterior, setExterior] = useRecoilState(exteriorState);
+	const [data, setData] = useRecoilState(exteriorListState);
 	useEffect(() => {
 		async function initExterior() {
 			if (exterior.id === undefined || exterior.id === 0) {

@@ -6,8 +6,8 @@ export function Color(props) {
 	return (
 		<div>
 			<OptionHead>색상</OptionHead>
-			<Exterior data={props.exterior}/>
-			<Interior data={props.interior}/>
+			<Exterior />
+			<Interior />
 		</div>
 	)
 }

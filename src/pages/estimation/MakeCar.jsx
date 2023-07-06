@@ -19,30 +19,13 @@ const ContentWrap = styled(FlexDiv)`
 export function MakeCar() {
 	const [searchParams] = useSearchParams();
 	const [model, setModel] = useState('');
-	const [exterior, setExterior] = useState([]);
-	const [interior, setInterior] = useState([]);
-	const [options, setOptions] = useState('');
-	useFetchModelInit(searchParams.get('modelId'), setModel, setExterior, setInterior, setOptions);
-
+	useFetchModelInit(searchParams.get('modelId'), setModel);
 	return (
 		<div>
 			<Header carCode={searchParams.get('carCode')}></Header>
 			<ContentWrap>
 				<ModelPreview model={model}></ModelPreview>
-				<OptionArea 
-					exterior={exterior} 
-					interior={interior} 
-					options={options}
-					onChangeExteriorList={(ext) => {
-						setExterior(ext);
-					}}
-					onChangeInteriorList={(inter) => {
-						setInterior(inter);
-					}}
-					onChangeOptionList={(data) => {
-						setOptions(data);
-					}}
-				/>
+				<OptionArea />
 			</ContentWrap>
 		</div>
 	);

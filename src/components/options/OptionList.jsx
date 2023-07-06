@@ -17,6 +17,7 @@ const Item = styled(FlexLi)`
 	margin-right: 10px;
 	margin-bottom: 30px;
 	overflow: hidden;
+	background: ${props => props.choiceYN === true ? "#FFF" : "#AAA"}
 `;
 const OptionBtn = styled.button`
 	height: 100%;
@@ -26,24 +27,30 @@ const OptionBtn = styled.button`
 	padding: 10px;
 `;
 
-function OptionItem(props) {
-	return <Item active={props.option.active}>
-		<OptionBtn>
+function OptionItem({ option, curOptions, onChange}) {
+	console.log(curOptions);
+	return <Item active={curOptions?.get(option.code) === true} choiceYN={option.choiceYN}>
+		<OptionBtn onClick={() => {
+				onChange(option.code)
+			}}>
 			<label>
 				<div>
-					<p>{props.option.name}</p>
+					<p>{option.name}</p>
 				</div>
-				<div><p>{props.option.price}</p></div>
+				<div><p>{option.price}</p></div>
 			</label>
 		</OptionBtn>
 	</Item>
 }
 
-export function OptionList({options}) {
+export function OptionList({options, curOptions, onChange}) {
 	return <OptionWrap>
 		{
-			options?.map((option) => {
-				return <OptionItem option={option}></OptionItem>
+			options?.length > 0 &&
+			options.map((opt) => {
+				return <OptionItem 
+					option={opt} curOptions={curOptions}
+					onChange={onChange} />
 			})
 		}
 	</OptionWrap>
