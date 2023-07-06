@@ -28,7 +28,6 @@ const OptionBtn = styled.button`
 `;
 
 function OptionItem({ option, curOptions, onChange}) {
-	console.log(curOptions);
 	return <Item active={curOptions?.get(option.code) === true} choiceYN={option.choiceYN}>
 		<OptionBtn onClick={() => {
 				onChange(option.code)

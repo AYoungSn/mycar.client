@@ -18,7 +18,6 @@ const Button = styled.button`
 	cursor: pointer;
 `
 function CarMenuBox({data}) {
-	console.log(data);
 	return (
 		<a href={`/cars/estimation/model?carCode=${data.carCode}`}>
 			<Button>

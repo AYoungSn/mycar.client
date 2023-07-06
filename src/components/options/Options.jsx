@@ -5,7 +5,6 @@ import { hgaOptListState, hgaOptState, npfOptListState, npfOptState, selectOptLi
 import { optionUpdate } from "../../hooks/useChoiceOption";
 
 function OptionItemList(props) {
-	console.log(props);
 	return <div>
 		<OptionName marginTop="30px">{props.name}</OptionName>
 		<OptionList 
@@ -22,7 +21,6 @@ export function Options() {
 	const [hgaOpts, setHgaOpts] = useRecoilState(hgaOptState);
 	const [npfListOpts, setNpfListOpts] = useRecoilState(npfOptListState);
 	const [npfOpts, setNpfOpts] = useRecoilState(npfOptState);
-	console.log(selectOpts);
 	return <div>
 		<OptionHead>옵션</OptionHead>
 		<OptionItemList options={selectListOpts} curOptions={selectOpts}
