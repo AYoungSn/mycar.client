@@ -1,8 +1,9 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import { RecoilRoot } from 'recoil';
 import EstimationModel from "./pages/estimation/EstimationModel";
 import Home from "./pages/Home";
 import { MakeCar } from "./pages/estimation/MakeCar";
+import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
 	{
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
 function App() {
 	return (
 	<RecoilRoot>
-		<RouterProvider router={router}/>
+		<RouterProvider router={router} />
 	</RecoilRoot>
 	)
 }

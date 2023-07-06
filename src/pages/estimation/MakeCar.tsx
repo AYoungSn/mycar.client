@@ -23,6 +23,10 @@ export function MakeCar() {
 	const [model, setModel] = useState({});
 	const selectList = useRecoilValue(selectOptListState);
 	useFetchModelInit(searchParams.get('modelId'), setModel);
+	if (model) {
+		searchParams.set('carCode', model.carCode);
+		searchParams.set('trimCode', model.trimCode);
+	}
 	return (
 		<div>
 			<Header carCode={searchParams.get('carCode')}></Header>
