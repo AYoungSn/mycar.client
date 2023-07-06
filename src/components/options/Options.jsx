@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { OptionHead, OptionName } from "../styled/Option";
 import { OptionList } from "./OptionList";
 import { hgaOptListState, hgaOptState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../../utils/recoil/options";
-import { optionUpdate } from "../../hooks/useChoiceOption";
+import { optionUpdate } from "../../utils/optionUpdate";
 
 function OptionItemList(props) {
 	return <div>

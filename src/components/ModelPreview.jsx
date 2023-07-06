@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { priceState } from "../utils/recoil/price";
 import { FlexItem } from "./styled/Flex";
+import useUpdatePrice from "../hooks/useUpdatePrice";
 
 const PreviewWrap = styled.div`
 	position: relative;
@@ -33,7 +32,7 @@ const Price = styled.b`
 `
 
 export function ModelPreview({model}) {
-	const price = useRecoilValue(priceState);
+	const price = useUpdatePrice();
 	return (
 		<PreviewWrap>
 			<Preview>

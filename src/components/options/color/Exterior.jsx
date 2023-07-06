@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../../styled/Option";
 import { FlexUl } from "../../styled/Flex";
 import { exteriorListState, exteriorState } from "../../../utils/recoil/options";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useEffect } from "react";
 
 const ExteriorItem = styled.li`
@@ -12,18 +12,21 @@ const ExteriorItem = styled.li`
 
 export function Exterior() {
 	const [exterior, setExterior] = useRecoilState(exteriorState);
-	const [data, setData] = useRecoilState(exteriorListState);
+	const exteriorList = useRecoilValue(exteriorListState);
 	useEffect(() => {
-		async function initExterior() {
-			if (exterior.id === undefined || exterior.id === 0) {
-				// 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
-				setExterior({
-					...data[0]
-				});
+		if (exteriorList[0])
+		{
+			function initExterior() {
+				if (exteriorList[0] && (exterior.id === undefined || exterior.id === 0)) {
+					// 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
+					setExterior({
+						...exteriorList[0]
+					});
+				}
 			}
+			initExterior();
 		}
-		initExterior();
-	}, [data.length, exterior.id, data, setExterior]);
+	}, [exteriorList, exterior]);
 	return (
 		<section>
 			<OptionTitle>
@@ -32,7 +35,7 @@ export function Exterior() {
 			</OptionTitle>
 			<FlexUl>
 				{
-					data?.map((ext, id) => {
+					exteriorList?.map((ext, id) => {
 						return (
 							ext.choiceYN === true ?
 							<ExteriorItem key={ext.id}>
@@ -41,7 +44,7 @@ export function Exterior() {
 									onClick={() => {
 										// 현재 선택된 내장색상 기반으로 선택 가능한 외장색상인지
 										setExterior({
-											...data[id]
+											...exteriorList[id]
 										});
 										// 선택된 외장색상의 가격을 priceState 에 추가
 										// 선택한 외장색상 기반으로 내장 색상 목록 재요청
@@ -55,7 +58,7 @@ export function Exterior() {
 									onClick={() => {
 										// 현재 선택된 내장색상 기반으로 선택 가능한 외장색상인지
 										setExterior({
-											...data[id]
+											...exteriorList[id]
 										});
 										// 선택된 외장색상의 가격을 priceState 에 추가
 										// 선택한 외장색상 기반으로 내장 색상 목록 재요청

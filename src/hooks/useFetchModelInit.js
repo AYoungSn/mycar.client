@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
 import { exteriorListState, hgaOptListState, hgaOptState, interiorListState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../utils/recoil/options";
 
-export function useFetchModelInit(modelId, setModel) {
+export default function useFetchModelInit(modelId, setModel) {
 	const setExterior = useSetRecoilState(exteriorListState);
 	const setInterior = useSetRecoilState(interiorListState);
 	const setSelectListOpt = useSetRecoilState(selectOptListState);
@@ -29,5 +29,5 @@ export function useFetchModelInit(modelId, setModel) {
 			setNpfOpts(new Map());
 		}
 		fetchData();
-	}, [modelId, setModel, setInterior, setExterior, setSelectListOpt, setHgaListOpt, setNpfListOpt, setPrice, setHgaOpts, setNpfOpts, setSelectOpts]);
+	}, [modelId]);
 }

@@ -1,4 +1,4 @@
-export function useMakePath(carCode, engineId, gearboxId, drivingId) {
+export default function useMakePath(carCode, engineId, gearboxId, drivingId) {
 	let baseQuery = `carCode=${carCode}`;
 	if (engineId !== 0) {
 		baseQuery += `&engineId=${engineId}`;

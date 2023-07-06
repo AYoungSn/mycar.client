@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMakePath } from "./useMakePath";
+import useMakePath from "./useMakePath";
 import { carsApi } from "../utils/Api";
 
 function useFetchTrims(carCode, engineId, gearboxId, drivingId) {

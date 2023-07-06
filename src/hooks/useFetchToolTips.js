@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { carsApi } from "../utils/Api";
-import { useMakePath } from "./useMakePath";
+import useMakePath from "./useMakePath";
 
 function useFetchToolTips(carCode, engineId, gearboxId, drivingId) {
 	const [tooltips, setToolTips] = useState('');
