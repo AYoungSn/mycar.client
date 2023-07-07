@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { carsApi } from "../utils/Api";
 import { useSetRecoilState } from "recoil";
 import { priceState } from "../utils/recoil/price";
-import { exteriorListState, hgaOptListState, hgaOptState, interiorListState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../utils/recoil/options";
+import { exteriorListState, exteriorState, hgaOptListState, hgaOptState, interiorListState, interiorState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../utils/recoil/options";
 import { ModelInfo } from "../type/ApiResponseType";
 import { ExteriorType } from "../type/optionType";
 
 export default function useFetchModelInit(modelId :number, setModel:any) {
-	const setExterior = useSetRecoilState(exteriorListState);
-	const setInterior = useSetRecoilState(interiorListState);
+	const setExteriorList = useSetRecoilState(exteriorListState);
+	const setInteriorList = useSetRecoilState(interiorListState);
 	const setSelectListOpt = useSetRecoilState(selectOptListState);
 	const setHgaListOpt = useSetRecoilState(hgaOptListState);
 	const setNpfListOpt = useSetRecoilState(npfOptListState);
@@ -16,13 +16,16 @@ export default function useFetchModelInit(modelId :number, setModel:any) {
 	const setHgaOpts = useSetRecoilState(hgaOptState);
 	const setNpfOpts = useSetRecoilState(npfOptState);
 	const setPrice = useSetRecoilState(priceState);
+	const setInterior = useSetRecoilState(interiorState);
+	const setExterior = useSetRecoilState(exteriorState);
+	
 	useEffect(() => {
 		async function fetchData() {
 			const data : ModelInfo = (await carsApi.init(modelId)).data;
 			setModel(data.model);
 			setPrice(data.model.price);
-			setExterior(data.exterior.sort((a :ExteriorType, b :ExteriorType) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1)));
-			setInterior(data.interior.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1)));
+			setExteriorList(data.exterior.sort((a:ExteriorType, b:ExteriorType) => a.choiceYN === true ? -1 : (b.choiceYN === true ? (a.id > b.id ? 1 : -1) : 1)));
+			setInteriorList(data.interior.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? (a.id > b.id ? 1 : -1) : 1)));
 			setSelectListOpt(data.options.select);
 			setHgaListOpt(data.options.hga);
 			setNpfListOpt(data.options.npf);
