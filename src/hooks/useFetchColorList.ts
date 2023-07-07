@@ -2,35 +2,40 @@ import { useEffect, useState } from "react";
 import { carsApi } from "../utils/Api";
 import { useSetRecoilState } from "recoil";
 import { exteriorListState, exteriorState, interiorListState, interiorState } from "../utils/recoil/options";
+import { ExteriorType, InteriorType } from "../type/optionType";
 
-export function useFetchInteriorColor() {
+export function useFetchInteriorColor(carCode: string, trimCode: string) {
 	const setExterior = useSetRecoilState(exteriorState);
 	const setInteriorList = useSetRecoilState(interiorListState);
-	const [carCode, setCarCode] = useState('');
-	const [trimCode, setTrimCode] = useState('');
-	const [newExterior, setNewExterior] = useState('');
+	const [newExterior, setNewExterior] = useState<ExteriorType>({
+		id: 0,
+		name: '',
+		imgUri: '',
+		choiceYN: true,
+		code: '',
+		price: 0
+	});
 	
 	useEffect(() => {
+		async function fetchData() {
+			const data = (await carsApi.enableInteriorList(carCode, trimCode, newExterior.code)).data;
+			setInteriorList(data);
+			setExterior(newExterior);
+		}
 		if (carCode && trimCode && newExterior)
 		{
-			async function fetchData() {
-				const data = (await carsApi.enableInteriorList(carCode, trimCode, newExterior)).data;
-				setInteriorList(data);
-				setExterior(newExterior);
-			}
 			fetchData();
 		}
-
 	}, [carCode, trimCode, newExterior]);
-	return [setCarCode, setTrimCode, setNewExterior];
+	return setNewExterior;
 }
 
-export function useFetchExteriorColor(carCode, trimCode, newInterior) {
+export function useFetchExteriorColor(carCode :string, trimCode :string, newInterior : InteriorType) {
 	const setInterior = useSetRecoilState(interiorState);
 	const setExteriorList = useSetRecoilState(exteriorListState);
 	useEffect(() => {
 		async function fetchData() {
-			const data = (await carsApi.enableExteriorList(carCode, trimCode, newInterior)).data;
+			const data = (await carsApi.enableExteriorList(carCode, trimCode, newInterior.code)).data;
 			setExteriorList(data);
 			setInterior(newInterior);
 		}

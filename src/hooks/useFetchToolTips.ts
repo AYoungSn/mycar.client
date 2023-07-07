@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { carsApi } from "../utils/Api";
 import useMakePath from "./useMakePath";
+import { Tooltips } from "../type/ApiResponseType";
 
-function useFetchToolTips(carCode, engineId, gearboxId, drivingId) {
-	const [tooltips, setToolTips] = useState('');
+function useFetchToolTips(carCode :string | null, engineId : number, gearboxId :number, drivingId :number) {
+	const [tooltips, setToolTips] = useState<Tooltips>({
+		gearbox: [],
+		engines: [],
+		driving: []
+	});
 	const baseQuery = useMakePath(carCode, engineId, gearboxId, drivingId);
 	useEffect(() => {
 		async function fetchData() {

@@ -7,6 +7,7 @@ import useFetchToolTips from "../../hooks/useFetchToolTips";
 import useFetchTrims from "../../hooks/useFetchTrims";
 import { TrimBox } from "../../components/TrimBox";
 import { FlexDiv } from "../../components/styled/Flex";
+import { Trim } from "../../type/ApiResponseType";
 
 const ContentWrap = styled.div`
 	padding: 0 50px;
@@ -29,21 +30,27 @@ function EstimationModel() {
 	const [drivingId, setDrivingId] = useState(0);
 	const tooltips = useFetchToolTips(searchParams.get('carCode'), engineId, gearboxId, drivingId);
 	const trims = useFetchTrims(searchParams.get('carCode'), engineId, gearboxId, drivingId);
-	const trimList = trims && trims?.map((trim) => {
-		return (<TrimBox trim={trim} carCode={searchParams.get('carCode')}/>)
-	});
+	const carCode : string = searchParams.get('carCode') || '';
 	return (
 		<div>
-			<Header carCode={searchParams.get('carCode')}></Header>
+			<Header carCode={carCode}></Header>
 			<ContentWrap>
 				<div>
 					<ToolTips tooltips={tooltips} 
-					onChangeEngineId={(id) => {setEngineId(id)}} engineId={engineId}
-					onChangeDrivingId={(id) => {setDrivingId(id)}} drivingId={drivingId}
-					onChangeGearboxId={(id) => {setGearboxId(id)}} gearboxId={gearboxId}/>
+					onChangeEngineId={(id :number) => {setEngineId(id)}} engineId={engineId}
+					onChangeDrivingId={(id :number) => {setDrivingId(id)}} drivingId={drivingId}
+					onChangeGearboxId={(id :number) => {setGearboxId(id)}} gearboxId={gearboxId}/>
 				</div>
 				<TrimWrap>
-					{trimList}
+					{ trims && 
+						trims.map((trim : Trim) => {
+							return (
+								<TrimBox 
+									trim={trim} 
+									carCode={carCode}
+								/>)
+						})
+					}
 				</TrimWrap>
 			</ContentWrap>
 		</div>

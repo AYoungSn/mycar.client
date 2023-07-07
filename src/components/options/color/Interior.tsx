@@ -4,6 +4,7 @@ import { ColorBtn, DisabledBtn, OptionColor, OptionName, OptionTitle } from "../
 import { useRecoilState } from "recoil";
 import { interiorListState, interiorState } from "../../../utils/recoil/options";
 import { useEffect } from "react";
+import { InteriorType } from "../../../type/optionType";
 
 const InteriorItem = styled.li`
 	margin-bottom: 25px;
@@ -12,35 +13,36 @@ const InteriorItem = styled.li`
 
 export function Interior() {
 	const [interior, setInterior] = useRecoilState(interiorState);
-	const [data, setData] = useRecoilState(interiorListState);
+	const [interiorList, setInteriorList] = useRecoilState<InteriorType[]>(interiorListState);
 	useEffect(() => {
 		async function initInterior() {
-			if (data && (interior.id === undefined || interior.id === 0)) {
+			if (interiorList && (interior.id === undefined || interior.id === 0)) {
 				setInterior({
-					...data[0]
+					...interiorList[0]
 				});
 			}
 		}
 		initInterior();
-	}, [data.length, data, interior.id, setInterior]);
+	}, [interiorList.length, interiorList, interior.id, setInterior]);
 	return (
 		<section>
 			<OptionTitle>
-				<OptionName>내장색상</OptionName>
-				<OptionColor>{interior.name}</OptionColor>
+				<OptionName marginTop="0" textAlign="left">내장색상</OptionName>
+				<OptionColor marginTop="0" textAlign="right">{interior.name}</OptionColor>
 			</OptionTitle>
 			<FlexUl>
 				{
-					data?.map((item, id) => {
+					interiorList.length > 0 &&
+					interiorList.map((item, id) => {
 						return (
 							item.choiceYN === true ?
 							<InteriorItem key={item.id}>
-								<ColorBtn width={"496px"} height={"75px"} style={{backgroundImage:`url(${item.imgUri})`}}
+								<ColorBtn width="496px" height="75px" style={{backgroundImage:`url(${item.imgUri})`}}
 									active={item.id === interior.id}
 									onClick={() => {
 										// 현재 선택된 외장색상 기반으로 선택 가능한 내장색인지 조회
 										setInterior({
-											...data[id]
+											...interiorList[id]
 										});
 										// price 변경
 										// 외장색상 목록 재요청
@@ -53,7 +55,7 @@ export function Interior() {
 									active={item.id === interior.id}
 									onClick={() => {
 										setInterior({
-											...data[id]
+											...interiorList[id]
 										});
 									}}/>
 								<DisabledBtn/>

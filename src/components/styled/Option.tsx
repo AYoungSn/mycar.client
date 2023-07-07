@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FlexDiv, FlexItem } from "./Flex";
+import { FlexDivItemType } from "../../type/styledType";
 
 export const OptionHead = styled.h2`
 	font-family: "HyundaiSansHeadKR";
@@ -11,7 +12,7 @@ export const OptionTitle = styled(FlexDiv)`
 	justify-content: space-between;
 `;
 
-export const OptionName = styled(FlexItem)`
+export const OptionName = styled(FlexItem)<FlexDivItemType>`
 	font-size: 20px;
 	padding: 0px;
 	margin-top: ${props => props.marginTop};
@@ -21,7 +22,7 @@ export const OptionColor = styled(FlexItem)`
 	float: right;
 `;
 
-export const ColorBtn = styled.button`
+export const ColorBtn = styled.button<{width: string, height: string, active: boolean}>`
 	width: ${props => props.width};
 	height: ${props => props.height};
 	border: ${props => props.active === true ? "4px solid #007fa8;": 0};

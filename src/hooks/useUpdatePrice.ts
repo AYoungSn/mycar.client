@@ -1,13 +1,12 @@
 import { useRecoilValue } from "recoil";
 import { priceState } from "../utils/recoil/price";
-import { exteriorState, hgaOptListState, hgaOptState, interiorState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../utils/recoil/options";
+import { exteriorState, hgaOptListState, hgaOptState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../utils/recoil/options";
 import { useEffect, useState } from "react";
 
 export default function useUpdatePrice() {
 	const price = useRecoilValue(priceState);
 	const [totalPrice, setTotalPrice] = useState(price);
 	const exterior = useRecoilValue(exteriorState);
-	// const interior = useRecoilValue(interiorState);
 	const selectOpt = useRecoilValue(selectOptState);
 	const selectListOpt = useRecoilValue(selectOptListState);
 	const hgaOpt = useRecoilValue(hgaOptState);

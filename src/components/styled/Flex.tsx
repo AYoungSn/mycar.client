@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FlexDivItemType } from "../../type/styledType";
 
 export const FlexDiv = styled.div`
 	display:flex;
@@ -9,7 +10,7 @@ export const FlexDiv = styled.div`
     gap: 30px;
 `;
 
-export const FlexItem = styled.div`
+export const FlexItem = styled.div<FlexDivItemType>`
 	position: relative;
 	text-align: ${props=> props.textAlign};
 	padding: 30px;

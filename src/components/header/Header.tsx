@@ -5,6 +5,7 @@ import { carsApi } from "../../utils/Api";
 import CarMenuBox from "../CarMenuBox";
 import { Head, HeaderWrap } from "../styled/Head";
 import Logo from "../styled/Logo";
+import { CarItem } from "../../type/ApiResponseType";
 
 const MenuBtn = styled.button`
 	position: relative;
@@ -17,7 +18,7 @@ const MenuBtn = styled.button`
 	border: 0;
 	vertical-align: top;
 `
-const Triangle = styled.div`
+const Triangle = styled.div<{isOpen: boolean}>`
 	border-top: ${props => !props.isOpen ? "7px solid #000" : 0}; // 위
 	border-bottom: ${props => props.isOpen ? "7px solid #000" : 0}; // 아래
 	border-right: 5px solid transparent;
@@ -38,44 +39,41 @@ const Section = styled.section`
 	grid-gap: 30px;
 `
 
-function DropDown(props) {
-	const list = []
-	for(var i = 0; i < props.data.length; i++) {
-		list.push(<CarMenuBox key={i} data={props.data[i]}/>)
-	}
-	return <Section>
-		{list}
-	</Section>
-}
-function Menu(props) {
+function Menu({carCode}: {carCode: string}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [carName, setCarName] = useState('');
-	const [data, setData] = useState([]);
+	const [data, setData] = useState<CarItem[]>([]);
 	useEffect(() => {
 		async function fetchData() {
 			setData((await carsApi.carList).data);
 			for(let i = 0; i < data.length; i++) {
-				if (data[i].carCode === props.carCode) {
+				if (data[i].carCode === carCode) {
 					setCarName(data[i].carName);
 				}
 			}
 		}
 		fetchData();
-	}, [data.length, props.carCode, data]);
+	}, [data.length, carCode, data]);
 	return (
 		<>
-			<MenuBtn onClick={(e) => {
+			<MenuBtn onClick={() => {
 				setIsOpen(!isOpen);
 			}}>
 				<span>{carName}</span>
 				<Triangle isOpen={isOpen}></Triangle>
 			</MenuBtn>
-			{isOpen ? <DropDown data={data}/> : ''}
+			{isOpen && 
+				<Section>
+					{data.map((item:CarItem, id:number) => {
+						return (<CarMenuBox key={id} data={item}/>)
+					})}
+			</Section>
+			}
 		</>
 	)
 }
 
-function Header(props) {
+function Header({carCode}:{carCode: string}) {
 	return (
 		<HeaderWrap>
 			<Head>
@@ -83,7 +81,7 @@ function Header(props) {
 					<Link to='/'>
 						<Logo type="button" name="hyundai"/>
 					</Link>
-					<Menu carCode={props.carCode}/>
+					<Menu carCode={carCode}/>
 				</div>
 			</Head>
 		</HeaderWrap>

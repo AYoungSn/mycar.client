@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { carsApi } from "../utils/Api";
 import CarMenuBox from "../components/CarMenuBox";
 import SimpleHeader from "../components/header/SimpleHeader";
+import { CarItem } from "../type/ApiResponseType";
 
 const Nav = styled.nav`
 	display:flex;
@@ -12,16 +13,11 @@ const Nav = styled.nav`
 `;
 
 function Home() {
-	const [menuList, setMenuList] = useState([]);
+	const [carList, setCarList] = useState<CarItem[]>([]);
 	useEffect(() => {
 		async function fetchData() {
 			const data = (await carsApi.carList).data;
-			const list = [];
-			let i = 0;
-			for (i = 0; i < data.length; i++) {
-				list.push(<CarMenuBox data={data[i]}/>);
-			}
-			setMenuList(list);
+			setCarList(data);
 		}
 		fetchData();
 	}, []);
@@ -29,7 +25,9 @@ function Home() {
 		<div>
 			<SimpleHeader/>
 			<Nav>
-				{menuList}
+				{ carList?.map((menu) => {
+					return <CarMenuBox data={menu}/>
+				})}
 			</Nav>
 		</div>
 	)

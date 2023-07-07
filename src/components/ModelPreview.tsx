@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { FlexItem } from "./styled/Flex";
 import useUpdatePrice from "../hooks/useUpdatePrice";
+import { Model } from "../type/ApiResponseType";
+import { FlexDivItemType } from "../type/styledType";
 
 const PreviewWrap = styled.div`
 	position: relative;
 `
-const Preview = styled(FlexItem)`
+const Preview = styled(FlexItem)<FlexDivItemType>`
 	width: 400px;
 	position: fixed;
 	left: 0;
@@ -31,11 +33,11 @@ const Price = styled.b`
 	font-size: 30px;
 `
 
-export function ModelPreview({model}) {
+export function ModelPreview({model} : {model: Model}) {
 	const price = useUpdatePrice();
 	return (
 		<PreviewWrap>
-			<Preview>
+			<Preview marginTop="0" textAlign="none">
 				<h2>{model.carName} - {model.trimName}</h2>
 				<ModelName>{model.modelName}</ModelName>
 				<PriceDiv>

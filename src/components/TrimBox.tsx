@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FlexItem } from "./styled/Flex";
+import { Trim } from "../type/ApiResponseType";
+import { FlexDivItemType } from "../type/styledType";
 
-const Item = styled(FlexItem)`
+const Item = styled(FlexItem)<FlexDivItemType>`
 	background: #f6f3f2;
 `
 const TrimName = styled.h4`
@@ -43,9 +45,10 @@ const MakeCarBtn = styled.button`
 	color: #FFF;
 	margin-top: 20px;
 `
-export function TrimBox({trim, carCode}) {
+
+export function TrimBox({ trim, carCode }: {trim: Trim, carCode: string}) {
 	return (
-		<Item>
+		<Item textAlign="" marginTop="">
 			<TrimName>{trim.trimName}</TrimName>
 			<Price>{trim.price}원</Price>
 			<div style={{marginTop: "30px"}}>

@@ -1,15 +1,16 @@
 import styled from "styled-components"
+import { CarItem } from "../type/ApiResponseType"
 
-const TrimName = styled.h4`
-	font-size: ${props => props.isHome ? "26px" : "16px"};
-	text-align: ${props => props.isHome ? "left" : "center"};
+const TrimName = styled.h4<{ishome: boolean}>`
+	font-size: ${props => props.ishome ? "26px" : "16px"};
+	text-align: ${props => props.ishome ? "left" : "center"};
 `
-const Price = styled.div`
+const Price = styled.div<{ishome: boolean}>`
 	font-family: "HyundaiSansHeadKR";
-	font-size: ${props => props.isHome ? "22px" : "14px"};
+	font-size: ${props => props.ishome ? "22px" : "14px"};
 	color: #666;
 	margin-top: 8px;
-	text-align: ${props => props.isHome ? "left" : "center"};
+	text-align: ${props => props.ishome ? "left" : "center"};
 `
 const Button = styled.button`
 	background: #f6f3f2;
@@ -17,13 +18,13 @@ const Button = styled.button`
 	padding: 30px;
 	cursor: pointer;
 `
-function CarMenuBox({data}) {
+function CarMenuBox({data} :{data: CarItem}) {
 	return (
 		<a href={`/cars/estimation/model?carCode=${data.carCode}`}>
 			<Button>
 				<input hidden={true} value={data.carId}/>
-				<TrimName isHome={window.location.pathname === '/' ? true : false}>{data.carName}</TrimName>
-				<Price isHome={window.location.pathname === '/' ? true : false}>{data.price} 원 ~</Price>
+				<TrimName ishome={window.location.pathname === '/' ? true : false}>{data.carName}</TrimName>
+				<Price ishome={window.location.pathname === '/' ? true : false}>{data.price} 원 ~</Price>
 			</Button>
 		</a>
 	)

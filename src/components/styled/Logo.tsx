@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Logo = styled.h2`
+const Logo = styled.h2<{type: string, name: string}>`
     background-image: url(https://www.hyundai.com/static/images/logo_black.png);
     width: 150px;
     height: 20px;

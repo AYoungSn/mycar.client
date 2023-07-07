@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { FlexLi, FlexUl } from "../styled/Flex";
+import { FlexLiType } from "../../type/styledType";
+import { OptionType } from "../../type/optionType";
 
 const OptionWrap = styled(FlexUl)`
 	flex: flex-wrap;
@@ -7,7 +9,7 @@ const OptionWrap = styled(FlexUl)`
 	justify-content: flex-start;
 	margin-top: 30px;
 `;
-const Item = styled(FlexLi)`
+const Item = styled(FlexLi)<FlexLiType>`
 	position: relative;
 	width: 237px;
 	height: 130px;
@@ -27,7 +29,7 @@ const OptionBtn = styled.button`
 	padding: 10px;
 `;
 
-function OptionItem({ id, option, curOptions, onChange }) {
+function OptionItem({ id, option, curOptions, onChange }:{id: number, option: OptionType, curOptions : Map<string, boolean>, onChange:any}) {
 	return <Item active={curOptions?.get(option.code) === true} 
 				choiceYN={option.choiceYN} key={id}>
 		<OptionBtn onClick={() => {
@@ -43,12 +45,12 @@ function OptionItem({ id, option, curOptions, onChange }) {
 	</Item>
 }
 
-export function OptionList({options, curOptions, onChange}) {
+export function OptionList({options, curOptions, onChange}:{options:OptionType[], curOptions : Map<string, boolean>, onChange:any}) {
 	return <OptionWrap>
 		{
 			options?.length > 0 &&
-			options.map((opt, id) => {
-				return <OptionItem key={id}
+			options.map((opt) => {
+				return <OptionItem id={opt.id}
 					option={opt} curOptions={curOptions}
 					onChange={onChange} />
 			})

@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil';
 import EstimationModel from "./pages/estimation/EstimationModel";
 import Home from "./pages/Home";
 import { MakeCar } from "./pages/estimation/MakeCar";
-import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
 	{

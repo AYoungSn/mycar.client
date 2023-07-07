@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { useEffect } from "react";
 import { useFetchInteriorColor } from "../../../hooks/useFetchColorList";
 import { useSearchParams } from "react-router-dom";
+import { ExteriorType } from "../../../type/optionType";
 
 const ExteriorItem = styled.li`
 	margin: 8px;
@@ -13,44 +14,44 @@ const ExteriorItem = styled.li`
 `;
 
 export function Exterior() {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [exterior, setExterior] = useRecoilState(exteriorState);
-	const exteriorList = useRecoilValue(exteriorListState);
-	const [setCarCode, setTrimCode, setNewExterior] = useFetchInteriorColor();
-	setCarCode(searchParams.get('carCode'));
-	setTrimCode(searchParams.get('trimCode'));
+	const exteriorList = useRecoilValue<ExteriorType[]>(exteriorListState);
+	const carCode = searchParams.get('carCode') || 'undefined';
+	const trimCode = searchParams.get('trimCode') || 'undefined';
+	const setNewExterior = useFetchInteriorColor(carCode, trimCode);
 
 	useEffect(() => {
+		function initExterior() {
+			if (exteriorList[0] && (exterior.id === undefined || exterior.id === 0)) {
+				// 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
+				setExterior({
+					...exteriorList[0]
+				});
+			}
+		}
 		if (exteriorList[0])
 		{
-			function initExterior() {
-				if (exteriorList[0] && (exterior.id === undefined || exterior.id === 0)) {
-					// 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
-					setExterior({
-						...exteriorList[0]
-					});
-				}
-			}
 			initExterior();
 		}
 	}, [exteriorList, exterior]);
 	return (
 		<section>
 			<OptionTitle>
-				<OptionName>외장색상</OptionName>
-				<OptionColor>{exterior.name}</OptionColor>
+				<OptionName marginTop="0" textAlign="left">외장색상</OptionName>
+				<OptionColor marginTop="0" textAlign="right">{exterior.name}</OptionColor>
 			</OptionTitle>
 			<FlexUl>
 				{
-					exteriorList?.map((ext, id) => {
+					exteriorList?.map((ext:ExteriorType, id) => {
 						return (
 							ext.choiceYN === true ?
 							<ExteriorItem key={ext.id}>
 								<ColorBtn width={"85px"} height={"85px"} style={{backgroundImage:`url(${ext.imgUri})`}}
-									active={ext.id === exterior.id}
+									active={ext.id === exterior.id ? true : false}
 									onClick={() => {
 										// 현재 선택된 내장색상 기반으로 선택 가능한 외장색상인지
-										setNewExterior(ext.code);
+										setNewExterior(ext);
 										// setExterior({
 										// 	...exteriorList[id]
 										// });
@@ -64,7 +65,7 @@ export function Exterior() {
 							:
 							<ExteriorItem key={ext.id}>
 								<ColorBtn width={"85px"} height={"85px"} style={{backgroundImage:`url(${ext.imgUri})`}}
-									active={ext.id === exterior.id}
+									active={ext.id === exterior.id ? true : false}
 									onClick={() => {
 										// 현재 선택된 내장색상 기반으로 선택 가능한 외장색상인지
 										setExterior({
