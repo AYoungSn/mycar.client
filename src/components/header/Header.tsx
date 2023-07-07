@@ -65,7 +65,7 @@ function Menu({carCode}: {carCode: string}) {
 			{isOpen && 
 				<Section>
 					{data.map((item:CarItem, id:number) => {
-						return (<CarMenuBox key={id} data={item}/>)
+						return (<CarMenuBox key={item.carCode} data={item}/>)
 					})}
 			</Section>
 			}

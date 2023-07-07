@@ -29,9 +29,9 @@ const OptionBtn = styled.button`
 	padding: 10px;
 `;
 
-function OptionItem({ id, option, curOptions, onChange }:{id: number, option: OptionType, curOptions : Map<string, boolean>, onChange:any}) {
+function OptionItem({ option, curOptions, onChange }:{option: OptionType, curOptions : Map<string, boolean>, onChange:any}) {
 	return <Item active={curOptions?.get(option.code) === true} 
-				choiceYN={option.choiceYN} key={id}>
+				choiceYN={option.choiceYN} key={option.code}>
 		<OptionBtn onClick={() => {
 				onChange(option.code)
 			}}>
@@ -50,7 +50,7 @@ export function OptionList({options, curOptions, onChange}:{options:OptionType[]
 		{
 			options?.length > 0 &&
 			options.map((opt) => {
-				return <OptionItem id={opt.id}
+				return <OptionItem
 					option={opt} curOptions={curOptions}
 					onChange={onChange} />
 			})
