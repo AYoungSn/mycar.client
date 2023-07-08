@@ -59,7 +59,7 @@ export function Exterior() {
 										// 현재 선택된 내장색상 기반으로 선택 가능한 외장색상인지
 										async function fetchInteriorList() {
 											const data = (await carsApi.enableInteriorList(carCode, trimCode, ext.code)).data;
-											setInteriorList(data.interior.sort((a :InteriorType, b: InteriorType) => a.choiceYN === true ? -1 : (b.choiceYN === true ? 0 : 1)));
+											setInteriorList(data.interior.sort((a :InteriorType, b: InteriorType) => a.choiceYN === true ? -1 : (b.choiceYN === true ? (a.id > b.id ? 1 : -1) : 1)));
 											setExterior(ext);
 										}
 										fetchInteriorList();

@@ -24,7 +24,7 @@ export default function useFetchModelInit(modelId :number, setModel:any) {
 			const data : ModelInfo = (await carsApi.init(modelId)).data;
 			setModel(data.model);
 			setPrice(data.model.price);
-			setExteriorList(data.exterior.sort((a:ExteriorType, b:ExteriorType) => a.choiceYN === true ? -1 : (b.choiceYN === true ? (a.id > b.id ? 1 : -1) : 1)));
+			setExteriorList(data.exterior.sort((a:ExteriorType, b:ExteriorType) => a.choiceYN === true ? -1 : (b.choiceYN === true ? (a.id > b.id ? 1 : 0) : 1)));
 			setInteriorList(data.interior.sort((a, b) => a.choiceYN === true ? -1 : (b.choiceYN === true ? (a.id > b.id ? 1 : -1) : 1)));
 			setSelectListOpt(data.options.select);
 			setHgaListOpt(data.options.hga);
