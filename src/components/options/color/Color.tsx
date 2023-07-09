@@ -1,6 +1,6 @@
 import { OptionHead } from "../../styled/Option";
-import { Exterior } from "./Exterior";
-import { Interior } from "./Interior";
+import Exterior from "./Exterior";
+import Interior from "./Interior";
 
 export function Color() {
 	return (

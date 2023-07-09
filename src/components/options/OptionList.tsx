@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { FlexLi, FlexUl } from "../styled/Flex";
 import { FlexLiType } from "../../type/styledType";
-import { OptionType } from "../../type/optionType";
+import { OptionChoiceType } from "../../type/optionType";
 
 const OptionWrap = styled(FlexUl)`
 	flex: flex-wrap;
@@ -29,7 +29,7 @@ const OptionBtn = styled.button`
 	padding: 10px;
 `;
 
-function OptionItem({ option, curOptions, onChange }:{option: OptionType, curOptions : Map<string, boolean>, onChange:any}) {
+function OptionItem({ option, curOptions, onChange }:{option: OptionChoiceType, curOptions : Map<string, boolean>, onChange:any}) {
 	return <Item active={curOptions?.get(option.code) === true} 
 				choiceYN={option.choiceYN} key={option.code}>
 		<OptionBtn onClick={() => {
@@ -45,7 +45,7 @@ function OptionItem({ option, curOptions, onChange }:{option: OptionType, curOpt
 	</Item>
 }
 
-export function OptionList({options, curOptions, onChange}:{options:OptionType[], curOptions : Map<string, boolean>, onChange:any}) {
+export function OptionList({options, curOptions, onChange}:{options:OptionChoiceType[], curOptions : Map<string, boolean>, onChange:any}) {
 	return <OptionWrap>
 		{
 			options?.length > 0 &&

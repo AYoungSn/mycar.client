@@ -15,11 +15,18 @@ export type InteriorType = {
 	code: string
 }
 
-export type OptionType = {
+export type OptionChoiceType = {
 	id: number,
 	name: string,
 	imgUri: string,
 	choiceYN: boolean,
+	code: string,
+	price: number
+}
+
+export type OptionType = {
+	name: string,
+	imgUri: string,
 	code: string,
 	price: number
 }

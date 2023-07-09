@@ -21,6 +21,15 @@ export const FlexUl = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
 `;
+export const FlexLiItem = styled.li`
+	position: relative;
+	width: 45%;
+	text-align: center;
+	margin-right: 30px;
+	&:last-child {
+		margin-right: 0;
+	}
+`;
 
 export const FlexLi = styled.li`
 	display: flex;

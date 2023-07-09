@@ -3,11 +3,11 @@ import { OptionHead, OptionName } from "../styled/Option";
 import { OptionList } from "./OptionList";
 import { hgaOptListState, hgaOptState, npfOptListState, npfOptState, selectOptListState, selectOptState } from "../../utils/recoil/options";
 import { optionUpdate } from "../../utils/optionUpdate";
-import { OptionType } from "../../type/optionType";
+import { OptionChoiceType } from "../../type/optionType";
 
 type Props = {
 	name: string;
-	options: OptionType[];
+	options: OptionChoiceType[];
 	curOptions: Map<string, boolean>;
 	onChange: any;
 }
@@ -22,7 +22,7 @@ function OptionItemList(props: Props) {
 }
 
 export function Options() {
-	const [selectListOpts, setSelectListOpts] = useRecoilState<OptionType[]>(selectOptListState);
+	const [selectListOpts, setSelectListOpts] = useRecoilState<OptionChoiceType[]>(selectOptListState);
 	const [selectOpts, setSelectOpts] = useRecoilState(selectOptState);
 	const [hgaListOpts, setHgaListOpts] = useRecoilState(hgaOptListState);
 	const [hgaOpts, setHgaOpts] = useRecoilState(hgaOptState);

@@ -6,7 +6,7 @@ export const Head = styled.header`
 	position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 100;
+	z-index: 10;
 `;
 
 export const HeaderWrap = styled.div`

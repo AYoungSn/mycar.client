@@ -1,4 +1,4 @@
-import { ExteriorType, InteriorType, OptionType, TooltipType } from "./optionType"
+import { ExteriorType, InteriorType, OptionChoiceType, OptionType, TooltipType } from "./optionType"
 
 export type CarItem = {
 	carId: number,
@@ -35,9 +35,9 @@ export type Tooltips = {
 }
 
 export type Options = {
-	select: OptionType[],
-	hga: OptionType[],
-	npf: OptionType[]
+	select: OptionChoiceType[],
+	hga: OptionChoiceType[],
+	npf: OptionChoiceType[]
 }
 
 export type ModelInfo = {
@@ -45,4 +45,29 @@ export type ModelInfo = {
 	exterior: ExteriorType[],
 	interior: InteriorType[],
 	options: Options
+}
+
+export type ChangeOptionType = {
+	delOptions: OptionType[];
+	addOptions: OptionType[];
+}
+
+export type ChangeTrimInfoType = {
+	beforeTrimName: string;
+    beforeCarPrice: number;
+    changeTrimName: string;
+    changeCarPrice: number;
+    changeModelId: number;
+    changeCarCode: string;
+    changeTrimCode: string;
+    interiorCode: string;
+    interiorName: string;
+    optionCode: string;
+}
+
+export type TrimChangeModalDataType = {
+	interiorChangeColorYn?: boolean;
+	exteriorChangeColorYn?: boolean;
+	changeOptionInfo?: ChangeOptionType;
+	changeTrimInfo?: ChangeTrimInfoType;
 }

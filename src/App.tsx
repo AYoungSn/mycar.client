@@ -3,6 +3,7 @@ import EstimationModel from "./pages/estimation/EstimationModel";
 import Home from "./pages/Home";
 import { MakeCar } from "./pages/estimation/MakeCar";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import ModalProvider from './components/modal/ModalProvider';
 
 const router = createBrowserRouter([
 	{
@@ -23,6 +24,7 @@ function App() {
 	return (
 	<RecoilRoot>
 		<RouterProvider router={router} />
+		<ModalProvider />
 	</RecoilRoot>
 	)
 }

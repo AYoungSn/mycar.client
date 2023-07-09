@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { ExteriorType, InteriorType, OptionType } from "../../type/optionType";
+import { ExteriorType, InteriorType, OptionChoiceType } from "../../type/optionType";
 
 export const exteriorState = atom<ExteriorType>({
 	key: 'exterior',
@@ -34,17 +34,17 @@ export const interiorListState = atom<InteriorType[]>({
 	default: []
 })
 
-export const selectOptListState = atom<OptionType[]>({
+export const selectOptListState = atom<OptionChoiceType[]>({
 	key: 'selectListOpt',
 	default: []
 })
 
-export const hgaOptListState = atom<OptionType[]>({
+export const hgaOptListState = atom<OptionChoiceType[]>({
 	key: 'hgaListOpt',
 	default: []
 })
 
-export const npfOptListState = atom<OptionType[]>({
+export const npfOptListState = atom<OptionChoiceType[]>({
 	key: 'npfListOpt',
 	default: []
 })
