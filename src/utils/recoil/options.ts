@@ -1,66 +1,69 @@
-import { atom } from "recoil";
-import { ExteriorType, InteriorType, OptionChoiceType } from "../../type/optionType";
+import { atom } from 'recoil';
+import {
+  ExteriorType,
+  InteriorType,
+  OptionChoiceType,
+} from '../../type/optionType';
 
 export const exteriorState = atom<ExteriorType>({
-	key: 'exterior',
-	default: {
-		id: 0,
-		name: '',
-		code: '',
-		price: 0,
-		imgUri: '',
-		choiceYN: false
-	}
-})
+  key: 'exterior',
+  default: {
+    id: 0,
+    name: '',
+    code: '',
+    price: 0,
+    imgUri: '',
+    choiceYN: false,
+  },
+});
 
 export const exteriorListState = atom<ExteriorType[]>({
-	key: 'exteriorList',
-	default: []
-})
+  key: 'exteriorList',
+  default: [],
+});
 
 export const interiorState = atom<InteriorType>({
-	key: 'interior',
-	default: {
-		id: 0,
-		name: '',
-		code: '',
-		imgUri: '',
-		choiceYN: false
-	}
-})
+  key: 'interior',
+  default: {
+    id: 0,
+    name: '',
+    code: '',
+    imgUri: '',
+    choiceYN: false,
+  },
+});
 
 export const interiorListState = atom<InteriorType[]>({
-	key: 'interiorList',
-	default: []
-})
+  key: 'interiorList',
+  default: [],
+});
 
 export const selectOptListState = atom<OptionChoiceType[]>({
-	key: 'selectListOpt',
-	default: []
-})
+  key: 'selectListOpt',
+  default: [],
+});
 
 export const hgaOptListState = atom<OptionChoiceType[]>({
-	key: 'hgaListOpt',
-	default: []
-})
+  key: 'hgaListOpt',
+  default: [],
+});
 
 export const npfOptListState = atom<OptionChoiceType[]>({
-	key: 'npfListOpt',
-	default: []
-})
+  key: 'npfListOpt',
+  default: [],
+});
 
 export const selectOptState = atom<Map<string, boolean>>({
-	key: 'selectOpt',
-	default: new Map()
-})
+  key: 'selectOpt',
+  default: new Map(),
+});
 
 export const hgaOptState = atom<Map<string, boolean>>({
-	key: 'hgaOpt',
-	default: new Map()
-})
+  key: 'hgaOpt',
+  default: new Map(),
+});
 
 export const npfOptState = atom<Map<string, boolean>>({
-	key: 'npfOpt',
-	default: new Map()
-})
-
+  key: 'npfOpt',
+  default: new Map(),
+});

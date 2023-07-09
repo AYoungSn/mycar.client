@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const priceState = atom<number>({
-	key: 'price',
-	default: 0
+  key: 'price',
+  default: 0,
 });
