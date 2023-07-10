@@ -52,7 +52,6 @@ export default function TrimChangeModal({
   setModal: any;
   data: TrimChangeModalDataType;
 }) {
-  const price = useRecoilValue(priceState);
   let addPrice = 0;
   let delPrice = 0;
   data.changeOptionInfo?.addOptions.map((item, id) => {
