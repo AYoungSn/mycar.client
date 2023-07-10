@@ -1,9 +1,8 @@
 import { styled } from 'styled-components';
 import Modal from './Modal';
-import { FlexDiv, FlexLi, FlexLiItem, FlexUl } from '../styled/Flex';
+import { FlexDiv, FlexLiItem, FlexUl } from '../styled/Flex';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
-import { useRecoilValue } from 'recoil';
-import { priceState } from '../../utils/recoil/price';
+import ChangeOptionList from './options/ChangeOptionList';
 
 const PopupHeader = styled.div`
   margin-bottom: 30px;
@@ -28,18 +27,18 @@ const FlexTrim = styled(FlexUl)`
   font-size: 16px;
   margin-bottom: 20px;
 `;
-const OptionList = styled(FlexLi)`
-  justify-content: space-between;
-  text-align: left;
-  padding: 15px 20px;
-`;
 
-function TrimBox({ trimName, price }: { trimName: string; price: number }) {
+
+function TrimBox({ title, trimName, price }: { title: string; trimName: string; price: number }) {
   return (
-    <div>
-      <p>{trimName}</p>
-      <p>{price}</p>
-    </div>
+		<FlexLiItem>
+			<b>{title}</b>
+			<div>
+				<p>{trimName}</p>
+				<p>{price}</p>
+    	</div>
+    </FlexLiItem>
+    
   );
 }
 
@@ -54,12 +53,8 @@ export default function TrimChangeModal({
 }) {
   let addPrice = 0;
   let delPrice = 0;
-  data.changeOptionInfo?.addOptions.map((item, id) => {
-    addPrice += item.price;
-  });
-  data.changeOptionInfo?.delOptions.map((item) => {
-    delPrice += item.price;
-  });
+  data.changeOptionInfo?.addOptions.map((item, id) => addPrice += item.price);
+  data.changeOptionInfo?.delOptions.map((item) => delPrice += item.price);
   return (
     <Modal>
       <div>
@@ -70,55 +65,18 @@ export default function TrimChangeModal({
           <p>트림을 변경하시겠습니까?</p>
           <TrimWrap>
             <FlexTrim>
-              <FlexLiItem>
-                <b>현재 트림</b>
-                <TrimBox
-                  trimName={data.changeTrimInfo?.beforeTrimName || 'null'}
-                  price={data.changeTrimInfo?.beforeCarPrice || 0}
-                ></TrimBox>
-              </FlexLiItem>
-              <FlexLiItem>
-                <b>변경 트림</b>
-                <TrimBox
-                  trimName={data.changeTrimInfo?.changeTrimName || 'null'}
-                  price={data.changeTrimInfo?.changeCarPrice || 0}
-                />
-              </FlexLiItem>
+              <TrimBox title='현재 트림' 
+								trimName={data.changeTrimInfo?.beforeTrimName || 'null'}
+								price={data.changeTrimInfo?.beforeCarPrice || 0}/>
+							<TrimBox title='변경 트림' 
+								trimName={data.changeTrimInfo?.changeTrimName || 'null'}
+								price={data.changeTrimInfo?.changeCarPrice || 0}/>
             </FlexTrim>
             {(data.changeOptionInfo?.addOptions.length || 0) > 0 && (
-              <div>
-                <p style={{ marginBottom: '20px' }}>
-                  변경 시 선택 추가되는 품목
-                </p>
-                <ul>
-                  {data.changeOptionInfo?.addOptions.map((item, id) => {
-                    return (
-                      <OptionList>
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                      </OptionList>
-                    );
-                  })}
-                </ul>
-              </div>
+              <ChangeOptionList change='add' optionList={data.changeOptionInfo?.addOptions || null} />
             )}
             {(data.changeOptionInfo?.delOptions.length || 0) > 0 && (
-              <div>
-                <p style={{ marginBottom: '20px' }}>
-                  변경 시 선택 해제되는 품목
-                </p>
-
-                <ul>
-                  {data.changeOptionInfo?.delOptions.map((item, id) => {
-                    return (
-                      <OptionList>
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                      </OptionList>
-                    );
-                  })}
-                </ul>
-              </div>
+							<ChangeOptionList change='del' optionList={data.changeOptionInfo?.delOptions || null} />
             )}
             <FlexDiv
               style={{ justifyContent: 'space-between', marginTop: '40px' }}
