@@ -16,6 +16,7 @@ export const ModalContainer = styled.div<ModalContainerType>`
   padding: 80px 60px;
   text-align: center;
   overflow: hidden;
+  z-index: 10;
 `;
 
 export const ModalBackground = styled.div`

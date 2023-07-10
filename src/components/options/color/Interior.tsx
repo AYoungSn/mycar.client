@@ -157,7 +157,7 @@ export default function Interior() {
                       const optionCodes = MakeOptionCodeList(selectOpts);
                       const data = (
                         await carsApi.checkedOptions(
-                          interior.code,
+                          item.code,
                           optionCodes,
                           modelId,
                         )

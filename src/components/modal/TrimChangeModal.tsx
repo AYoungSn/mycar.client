@@ -115,7 +115,7 @@ export default function TrimChangeModal({
                 </ul>
               </div>
             )}
-            {data.changeOptionInfo?.delOptions && (
+            {(data.changeOptionInfo?.delOptions.length || 0) > 0 && (
               <div>
                 <p style={{ marginBottom: '20px' }}>
                   변경 시 선택 해제되는 품목
