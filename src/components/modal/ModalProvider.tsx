@@ -17,14 +17,12 @@ function ModalProvider() {
       <ColorChangeModal
         colorChange="interior"
         colorName={colorName || ''}
-        setModal={() => setModal({ modalName: null })}
       />
     ),
     'CHANGE-EXTERIOR': (
       <ColorChangeModal
         colorChange="exterior"
         colorName={colorName || ''}
-        setModal={() => setModal({ modalName: null })}
       />
     ),
     'CHANGE-TRIM': (

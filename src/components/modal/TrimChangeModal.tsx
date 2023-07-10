@@ -20,18 +20,6 @@ const TrimWrap = styled.div`
     display: inline-block;
     margin: 30px 0;
   }
-  & > ul > li:last-child:before {
-    position: absolute;
-    top: calc(50% + 28px);
-    left: -26px;
-    width: 14px;
-    height: 14px;
-    border: 2px solid #000;
-    border-left: 0;
-    border-bottom: 0;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
 `;
 
 const FlexTrim = styled(FlexUl)`
@@ -74,7 +62,7 @@ export default function TrimChangeModal({
     delPrice += item.price;
   });
   return (
-    <Modal setModal={setModal}>
+    <Modal>
       <div>
         <PopupHeader>
           <h3>{colorName}색상은 트림 변경 후 선택 가능합니다.</h3>
@@ -134,7 +122,7 @@ export default function TrimChangeModal({
               </div>
             )}
             <FlexDiv
-              style={{ justifyContent: 'space-between', marginTop: '20px' }}
+              style={{ justifyContent: 'space-between', marginTop: '40px' }}
             >
               <p>변경 금액</p>
               <p>
@@ -145,6 +133,9 @@ export default function TrimChangeModal({
                     delPrice}
               </p>
             </FlexDiv>
+						<a href={`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`}>
+							<button>확인</button>
+						</a>
           </TrimWrap>
         </div>
       </div>
