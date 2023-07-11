@@ -29,7 +29,7 @@ export default function useUpdatePrice() {
 			}
 		});
 		[...hgaListOpt].map(([key, value], id) => {
-			if (hgaOpt.get(hgaListOpt.get(key)?.code || '') === true) {
+			if (hgaOpt.get(value.code || '') === true) {
 				tmp += value.price || 0;
 			}
 		});
