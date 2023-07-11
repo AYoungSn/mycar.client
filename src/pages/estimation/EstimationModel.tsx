@@ -15,9 +15,9 @@ const ContentWrap = styled.div`
 `;
 const TrimWrap = styled(FlexDiv)`
   margin-top: 30px;
-  background: #222;
+  // background: #222;
   margin: 0 auto;
-  // width:100%;
+  width:100%;
   height: 370px;
   position: relative;
   display: flex;

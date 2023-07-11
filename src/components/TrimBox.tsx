@@ -6,6 +6,7 @@ import { FlexDivItemType } from '../type/styledType';
 
 const Item = styled(FlexItem)<FlexDivItemType>`
   background: #f6f3f2;
+	min-width: 200px;
 `;
 const TrimName = styled.h4`
   font-family: 'HyundaiSansHeadKR';
