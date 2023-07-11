@@ -3,7 +3,7 @@ import Modal from './Modal';
 import { FlexDiv, FlexLiItem, FlexUl } from '../styled/Flex';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
 import ChangeOptionList from './options/ChangeOptionList';
-import { PopupHeader } from '../styled/Modal';
+import { ConfirmBtn, PopupHeader } from '../styled/Modal';
 import ChangePrice from './options/ChangePrice';
 
 const TrimWrap = styled.div`
@@ -80,7 +80,7 @@ export default function TrimChangeModal({
 								addPrice -
 								delPrice) || 0}/>
 						<a href={`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`}>
-							<button>확인</button>
+							<ConfirmBtn>확인</ConfirmBtn>
 						</a>
           </TrimWrap>
         </div>

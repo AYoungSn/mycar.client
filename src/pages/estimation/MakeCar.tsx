@@ -26,7 +26,7 @@ const OptionAreaWrap = styled(FlexItem)<FlexDivItemType>`
   padding: 100px 72px 120px 80px;
 `;
 
-export function MakeCar() {
+export default function MakeCar() {
   const [searchParams] = useSearchParams();
   const [model, setModel] = useRecoilState<Model>(modelState);
   const detailList = useRecoilValue(detailOptListState);

@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { ChangeOptionType } from "../../type/ApiResponseType";
-import { PopupHeader } from "../styled/Modal";
+import { ConfirmBtn, PopupHeader } from "../styled/Modal";
 import Modal from "./Modal";
 import ChangeOptionList from "./options/ChangeOptionList";
 import { detailOptListState, detailOptState } from "../../utils/recoil/options";
@@ -53,12 +53,12 @@ export default function OptionChangeModal({
 			{changeOptionData.addOptions.length > 0 && <ChangeOptionList change='add' optionList={changeOptionData.addOptions} />}
 			{changeOptionData.delOptions.length > 0 && <ChangeOptionList change="del" optionList={changeOptionData.delOptions} />}
 			<ChangePrice changePrice={changePrice} />
-			<button onClick={() => {
+			<ConfirmBtn onClick={() => {
 				onChangeOptions(changeOptionData, setDetailOpts);
 				setModal({modalName: null});
 			}}>
 				확인
-			</button>
+			</ConfirmBtn>
 		</div>
 	</Modal>)
 }

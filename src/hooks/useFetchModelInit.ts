@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { carsApi } from '../utils/Api';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { priceState } from '../utils/recoil/carInfo';
 import {
   exteriorListState,
