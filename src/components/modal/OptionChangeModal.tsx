@@ -6,6 +6,7 @@ import ChangeOptionList from "./options/ChangeOptionList";
 import { selectOptListState, selectOptState } from "../../utils/recoil/options";
 import ChangePrice from "./options/ChangePrice";
 import { optionUpdate } from "../../utils/optionUpdate";
+import { modalState } from "../../utils/recoil/modal";
 
 function onChangeOptions(changeOptionData: ChangeOptionType, setSelectOpts: any) {
 	for(let i = 0; i < changeOptionData.addOptions.length;i++) {
@@ -42,6 +43,7 @@ export default function OptionChangeModal({
 	}
 	const selectOptionList = useRecoilValue(selectOptListState);
 	const setSelectOpts = useSetRecoilState(selectOptState);
+	const setModal = useSetRecoilState(modalState);
 
 	return (<Modal>
 		<div>
@@ -53,6 +55,7 @@ export default function OptionChangeModal({
 			<ChangePrice changePrice={changePrice} />
 			<button onClick={() => {
 				onChangeOptions(changeOptionData, setSelectOpts);
+				setModal({modalName: null});
 			}}>
 				확인
 			</button>
