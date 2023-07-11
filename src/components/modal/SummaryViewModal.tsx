@@ -3,7 +3,6 @@ import { modalState } from "../../utils/recoil/modal";
 import { CloseBtn, ModalBackground, ModalContainer } from "../styled/Modal";
 import { styled } from "styled-components";
 import { modelState } from "../../utils/recoil/carInfo";
-import { FlexDiv } from "../styled/Flex";
 import { exteriorState, interiorState, detailOptState, hgaOptState, npfOptState, detailOptListState, hgaOptListState, npfOptListState } from "../../utils/recoil/options";
 import useUpdatePrice from "../../hooks/useUpdatePrice";
 
@@ -124,7 +123,11 @@ export default function SummaryViewModal() {
 						<Price fontSize="20px" style={{lineHeight: "34px"}}>{price} 원</Price>
 					</Grid>
 				</PopDropDown>
-				
+				<a>
+					<button>
+						내 차 만들기 완료
+					</button>
+				</a>
 			</PopDropDown>
 		</MiniModalContainer>
 </>
