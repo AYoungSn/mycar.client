@@ -49,5 +49,7 @@ export const carsApi = {
 	optionsChange: (modelId: number, optionCodes: string, addOption: string) => 
 		Api.get(`/cars/options/change?modelId=${modelId}&optionCode=${optionCodes}&addOption=${addOption}`),
 	tuixList: (modelId: number, optionCode: string) => 
-		Api.get(`/cars/options/tuix?modelId=${modelId}&optionCode=${optionCode}`)
+		Api.get(`/cars/options/tuix?modelId=${modelId}&optionCode=${optionCode}`),
+	disableTuix: (modelId: number, optionCode: string) => 
+		Api.get(`/cars/options/tuix/disable?modelId=${modelId}&optionCode=${optionCode}`),
 };

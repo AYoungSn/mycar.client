@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { carsApi } from "../utils/Api";
 import { OptionChoiceType, OptionType } from "../type/optionType";
-import { useSetRecoilState } from "recoil";
-import { hgaOptListState, npfOptListState } from "../utils/recoil/options";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { detailOptState, hgaOptListState, npfOptListState, npfOptState } from "../utils/recoil/options";
+import { optionListUpdate } from "../utils/optionUpdate";
 
 export function useFetchSelectList(modelId: number, selectOpts: Map<string, boolean>, setSelectListOpts: any, selectListInit: Map<string, OptionChoiceType>) {
 	const setHgaList = useSetRecoilState(hgaOptListState);
@@ -33,11 +34,29 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 			})
 			setNpfList(npf);
 		}
-		console.log(tmp);
 		fetchData();
 	}, [selectOpts]);
 }
 
-export function useFetchTuixList(modelId: number, selectOpts: Map<string, boolean>, setSelectListOpts: any, selectListInit: Map<string, OptionChoiceType>) {
-
+export function useFetchTuixList(modelId: number) {
+	const npfOpt = useRecoilValue(npfOptState);
+	const [npfList, setNpfList] = useRecoilState(npfOptListState);
+	useEffect(() => {
+		const optionCodes = MakeOptionCodeList(npfOpt);
+		async function fetchData() {
+			const npf = new Map();
+			[...npfList].map(([key, value]) => {
+				npf.set(key, {...value, choiceYN: true})
+			})
+			if (optionCodes.length > 0){
+				const data = (await carsApi.disableTuix(modelId, optionCodes)).data;
+				data.delOptions.map((item: OptionType) => {
+					npf.set(item.code, {...item, choiceYN: false});
+				});
+			}
+			setNpfList(npf);
+		}
+		fetchData();
+		
+	}, [npfOpt]);
 }

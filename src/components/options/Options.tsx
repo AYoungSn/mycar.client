@@ -57,7 +57,6 @@ export function Options() {
   const [detailListOpts, setDetailListOpts] =
     useRecoilState<Map<string, OptionChoiceType>>(detailOptListState);
 	const detailListInit = useRecoilValue(detailInitListState);
-	const hgaListInit = useRecoilValue(hgaInitListState);
   const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
   const [hgaListOpts, setHgaListOpts] = useRecoilState(hgaOptListState);
   const [hgaOpts, setHgaOpts] = useRecoilState(hgaOptState);
@@ -67,7 +66,7 @@ export function Options() {
 	const modelId = Number(searchParams.get('modelId'));
 	const setModal = useSetRecoilState(modalState);
 	useFetchSelectList(modelId, detailOpts, setDetailListOpts, detailListInit);
-	useFetchTuixList(modelId, hgaOpts, setHgaListOpts, hgaListInit);
+	useFetchTuixList(modelId);
 
   return (
     <div>
@@ -77,10 +76,10 @@ export function Options() {
         options={detailListOpts}
         curOptions={detailOpts}
         name="상세 품목" 
-				disableOnChange={(key:string) => {
+				disableOnChange={(e: React.MouseEvent<HTMLButtonElement>, key:string) => {
 					disableOnChange(key, modelId, detailOpts, setModal);
 				}} 
-        onChange={(key: string) => {
+        onChange={(e: React.MouseEvent<HTMLButtonElement>, key: string) => {
           optionUpdate(key, detailOpts.get(key) || false, setDetailOpts);
         }}
       />
@@ -90,7 +89,7 @@ export function Options() {
           options={hgaListOpts}
           curOptions={hgaOpts}
           name="H Genuine Accessories"
-          onChange={(key: string) => {
+          onChange={(e: React.MouseEvent<HTMLButtonElement>, key: string) => {
             optionUpdate(key, hgaOpts.get(key) || false, setHgaOpts);
           }}
 					disableOnChange={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -103,7 +102,7 @@ export function Options() {
           options={npfListOpts}
           curOptions={npfOpts}
           name="N Performance Parts"
-          onChange={(key: string) => {
+          onChange={(e: React.MouseEvent<HTMLButtonElement>, key: string) => {
             // 현재 선택된 옵션을 기반으로 선택 가능한 항목인지 조회
             // 옵션 선택 시 선택 불가한 다른 항목 조회
             optionUpdate(key, npfOpts.get(key) || false, setNpfOpts);

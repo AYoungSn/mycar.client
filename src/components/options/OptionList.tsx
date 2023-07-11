@@ -46,8 +46,8 @@ function OptionItem({
       key={option.code}
     >
       <OptionBtn
-        onClick={() => {
-          onChange(option.code);
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          onChange(e, option.code);
         }}
       >
         <label>
