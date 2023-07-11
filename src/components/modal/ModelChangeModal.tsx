@@ -54,7 +54,7 @@ function TrimBox({trimList, selectModel, setModel}:{trimList: Trim[], selectMode
 	return (<FlexUl style={{justifyContent: "center"}}>
 		{
 			trimList && trimList.map((item) => {
-				return (<BoxLi>
+				return (<BoxLi key={item.modelId}>
 					<BoxBtn active={selectModel.modelId === item.modelId} onClick={() => setModel(item)}>
 						<b>{item.trimName}</b>
 						<p>{item.price}</p>
