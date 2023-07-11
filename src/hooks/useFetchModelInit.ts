@@ -66,25 +66,24 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 			// 		optionUpdate(item.code, false, setSelectDisableOpts);
 			// 	}
 			// })
-			// const select = new Map();
+			setSelectListInit(new Map());
+			setSelectListOpt(new Map());
 			data.options.select.map((item) => {
 				// select.set(item.code, item);
 				optionListUpdate(item.code, item, setSelectListOpt);
 				optionListUpdate(item.code, item, setSelectListInit);
 			})
-			// setSelectListInit();
-			// setSelectListOpt
+			setHgaListInit(new Map());
+			setHgaListOpt(new Map());
 			data.options.hga.map((item) => {
 				optionListUpdate(item.code, item, setHgaListOpt);
 			})
-			setHgaListInit(hgaListOpt);
+			setNpfListInit(new Map());
+			setNpfListOpt(new Map());
 			data.options.npf.map((item) => {
 				optionListUpdate(item.code, item, setNpfListOpt);
 			})
 			setNpfListInit(npfListOpt);
-      // setSelectListOpt(data.options.select);
-      // setHgaListOpt(data.options.hga);
-      // setNpfListOpt(data.options.npf);
       setSelectOpts(new Map());
       setHgaOpts(new Map());
       setNpfOpts(new Map());

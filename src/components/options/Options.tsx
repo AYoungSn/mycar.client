@@ -18,13 +18,14 @@ import { carsApi } from '../../utils/Api';
 import MakeOptionCodeList from '../../utils/makeOptionCodeList';
 import { useFetchSelectList, useFetchTuixList } from '../../hooks/useFetchOptions';
 import { modalState } from '../../utils/recoil/modal';
+import { MouseEvent } from 'react';
 
 type Props = {
   name: string;
   options: Map<string, OptionChoiceType>;
   curOptions: Map<string, boolean>;
   onChange: any;
-	disableOnChange: any;
+	disableOnChange?: any;
 };
 function OptionItemList(props: Props) {
   return (
@@ -69,7 +70,6 @@ export function Options() {
 	useFetchSelectList(modelId, selectOpts, setSelectListOpts, selectListInit);
 	useFetchTuixList(modelId, hgaOpts, setHgaListOpts, hgaListInit);
 
-	console.log(modelId)
   return (
     <div>
       <OptionHead>옵션</OptionHead>
@@ -100,8 +100,8 @@ export function Options() {
             // 해당 옵션 선택시 가격 변경
             optionUpdate(key, hgaOpts.get(key) || false, setHgaOpts);
           }}
-					disableOnChange={(key:string) => {
-						disableOnChange(key, modelId, selectOpts, setModal);
+					disableOnChange={(e: React.MouseEvent<HTMLButtonElement>) => {
+						e.preventDefault();
 					}}
         />
       )}
@@ -115,8 +115,8 @@ export function Options() {
             // 옵션 선택 시 선택 불가한 다른 항목 조회
             optionUpdate(key, npfOpts.get(key) || false, setNpfOpts);
           }}
-					disableOnChange={(key: string) => {
-						disableOnChange(key, modelId, selectOpts, setModal);
+					disableOnChange={(e: React.MouseEvent<HTMLButtonElement>) => {
+						e.preventDefault();
 					}}
         />
       )}
