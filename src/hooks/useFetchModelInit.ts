@@ -17,18 +17,18 @@ import {
 } from '../utils/recoil/options';
 import { ModelInfo } from '../type/ApiResponseType';
 import { ExteriorType } from '../type/optionType';
-import { optionListUpdate, optionUpdate } from '../utils/optionUpdate';
+import { optionListUpdate } from '../utils/optionUpdate';
 
 export default function useFetchModelInit(modelId: number, setModel: any) {
   const setExteriorList = useSetRecoilState(exteriorListState);
   const setInteriorList = useSetRecoilState(interiorListState);
-  const [selectListOpt, setSelectListOpt] = useRecoilState(detailOptListState);
-  const [hgaListOpt, setHgaListOpt] = useRecoilState(hgaOptListState);
-  const [npfListOpt, setNpfListOpt] = useRecoilState(npfOptListState);
-	const setSelectListInit = useSetRecoilState(detailInitListState);
+  const setDetailListOpt = useSetRecoilState(detailOptListState);
+  const setHgaListOpt = useSetRecoilState(hgaOptListState);
+  const setNpfListOpt = useSetRecoilState(npfOptListState);
+	const setDetailListInit = useSetRecoilState(detailInitListState);
 	const setHgaListInit = useSetRecoilState(hgaInitListState);
 	const setNpfListInit = useSetRecoilState(npfInitListState);
-  const setSelectOpts = useSetRecoilState(detailOptState);
+  const setDetailOpts = useSetRecoilState(detailOptState);
   const setHgaOpts = useSetRecoilState(hgaOptState);
   const setNpfOpts = useSetRecoilState(npfOptState);
   const setPrice = useSetRecoilState(priceState);
@@ -60,31 +60,25 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
             : 1,
         ),
       );
-			// setSelectDisableOpts(new Map());
-			// data.options.select.map((item) => {
-			// 	if (item.choiceYN === false) {
-			// 		optionUpdate(item.code, false, setSelectDisableOpts);
-			// 	}
-			// })
-			setSelectListInit(new Map());
-			setSelectListOpt(new Map());
+			setDetailListInit(new Map());
+			setDetailListOpt(new Map());
 			data.options.detail.map((item) => {
-				// select.set(item.code, item);
-				optionListUpdate(item.code, item, setSelectListOpt);
-				optionListUpdate(item.code, item, setSelectListInit);
+				optionListUpdate(item.code, item, setDetailListOpt);
+				optionListUpdate(item.code, item, setDetailListInit);
 			})
 			setHgaListInit(new Map());
 			setHgaListOpt(new Map());
 			data.options.hga.map((item) => {
 				optionListUpdate(item.code, item, setHgaListOpt);
+				optionListUpdate(item.code, item, setHgaListInit);
 			})
 			setNpfListInit(new Map());
 			setNpfListOpt(new Map());
 			data.options.npf.map((item) => {
 				optionListUpdate(item.code, item, setNpfListOpt);
+				optionListUpdate(item.code, item, setNpfListInit);
 			})
-			setNpfListInit(npfListOpt);
-      setSelectOpts(new Map());
+      setDetailOpts(new Map());
       setHgaOpts(new Map());
       setNpfOpts(new Map());
     }

@@ -18,7 +18,6 @@ import { carsApi } from '../../utils/Api';
 import MakeOptionCodeList from '../../utils/makeOptionCodeList';
 import { useFetchSelectList, useFetchTuixList } from '../../hooks/useFetchOptions';
 import { modalState } from '../../utils/recoil/modal';
-import { MouseEvent } from 'react';
 
 type Props = {
   name: string;
@@ -48,18 +47,18 @@ async function disableOnChange(key: string, modelId: number, detailOpts: Map<str
 	if (data.addOptions.length + data.delOptions.length >= 2) {
 		setModal({
 			modalName: 'CHANGE-OPTION',
-			selectOption: key,
+			detail: key,
 			changeOptionData: data
 		})
 	}
 }
 
 export function Options() {
-  const [selectListOpts, setSelectListOpts] =
+  const [detailListOpts, setDetailListOpts] =
     useRecoilState<Map<string, OptionChoiceType>>(detailOptListState);
-	const selectListInit = useRecoilValue(detailInitListState);
+	const detailListInit = useRecoilValue(detailInitListState);
 	const hgaListInit = useRecoilValue(hgaInitListState);
-  const [selectOpts, setSelectOpts] = useRecoilState(detailOptState);
+  const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
   const [hgaListOpts, setHgaListOpts] = useRecoilState(hgaOptListState);
   const [hgaOpts, setHgaOpts] = useRecoilState(hgaOptState);
   const [npfListOpts, setNpfListOpts] = useRecoilState(npfOptListState);
@@ -67,27 +66,22 @@ export function Options() {
 	const [searchParams] = useSearchParams();
 	const modelId = Number(searchParams.get('modelId'));
 	const setModal = useSetRecoilState(modalState);
-	useFetchSelectList(modelId, selectOpts, setSelectListOpts, selectListInit);
+	useFetchSelectList(modelId, detailOpts, setDetailListOpts, detailListInit);
 	useFetchTuixList(modelId, hgaOpts, setHgaListOpts, hgaListInit);
 
   return (
     <div>
       <OptionHead>옵션</OptionHead>
-			{ selectListOpts.size > 0 && 
+			{ detailListOpts.size > 0 && 
       <OptionItemList
-        options={selectListOpts}
-        curOptions={selectOpts}
+        options={detailListOpts}
+        curOptions={detailOpts}
         name="상세 품목" 
 				disableOnChange={(key:string) => {
-					disableOnChange(key, modelId, selectOpts, setModal);
+					disableOnChange(key, modelId, detailOpts, setModal);
 				}} 
         onChange={(key: string) => {
-          // 현재 선택된 옵션들을 바탕으로 선택 가능한 항목인지 조회
-          // 선택 시 중복 선택 불가한 다른 상세품목이 있는지 조회
-          // 현재 옵션 선택 시 같이 선택되어야 하는 옵션이 있는지
-          // 옵션 선택 시 hga 옵션 목록 재요청
-					// selectedOptionChange(key, modelId, selectOpts, setSelectOpts);
-          optionUpdate(key, selectOpts.get(key) || false, setSelectOpts);
+          optionUpdate(key, detailOpts.get(key) || false, setDetailOpts);
         }}
       />
 			}
@@ -97,7 +91,6 @@ export function Options() {
           curOptions={hgaOpts}
           name="H Genuine Accessories"
           onChange={(key: string) => {
-            // 해당 옵션 선택시 가격 변경
             optionUpdate(key, hgaOpts.get(key) || false, setHgaOpts);
           }}
 					disableOnChange={(e: React.MouseEvent<HTMLButtonElement>) => {

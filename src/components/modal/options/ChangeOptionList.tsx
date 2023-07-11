@@ -14,7 +14,7 @@ function ChangeOptionList({change, optionList}:{change: 'add' | 'del', optionLis
 		<ul>
 			{optionList?.map((item) => {
 				return(
-					<OptionList>
+					<OptionList key={item.code}>
 						<p>{item.name}</p>
 						<p>{item.price}</p>
 					</OptionList>

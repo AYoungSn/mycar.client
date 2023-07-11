@@ -33,7 +33,7 @@ export default function Exterior() {
   const setInteriorList = useSetRecoilState(interiorListState);
   const interior = useRecoilValue(interiorState);
   const exteriorList = useRecoilValue<ExteriorType[]>(exteriorListState);
-  const selectOpts = useRecoilValue(detailOptState);
+  const detailOpts = useRecoilValue(detailOptState);
   const carCode = searchParams.get('carCode') || 'undefined';
   const trimCode = searchParams.get('trimCode') || 'undefined';
   const modelId = Number(searchParams.get('modelId') || '0');
@@ -124,7 +124,7 @@ export default function Exterior() {
                 active={ext.id === exterior.id ? true : false}
                 onClick={() => {
                   async function changeColor() {
-                    const optionCodes = MakeOptionCodeList(selectOpts);
+                    const optionCodes = MakeOptionCodeList(detailOpts);
                     const data = (
                       await carsApi.changeColor({
                         beforeExteriorCode: exterior.code,

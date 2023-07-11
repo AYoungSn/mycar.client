@@ -39,7 +39,7 @@ export default function Interior() {
   const [interior, setInterior] = useRecoilState(interiorState);
   const interiorList = useRecoilValue<InteriorType[]>(interiorListState);
   const setExteriorList = useSetRecoilState(exteriorListState);
-  const [selectOpts, setSelectOpts] = useRecoilState(detailOptState);
+  const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
   const exterior = useRecoilValue(exteriorState);
   // modal 창을 위한 state
   const [{ modalName, colorName, trimChangeData }, setModal] =
@@ -138,7 +138,7 @@ export default function Interior() {
                       setInterior(item);
                     }
                     async function checkedOptionList() {
-                      const optionCodes = MakeOptionCodeList(selectOpts);
+                      const optionCodes = MakeOptionCodeList(detailOpts);
                       const data = (
                         await carsApi.checkedOptions(
                           item.code,
@@ -147,7 +147,7 @@ export default function Interior() {
                         )
                       ).data;
                       if (data.available === false) {
-                        allOptionUpdate(data.optionCode, setSelectOpts);
+                        allOptionUpdate(data.optionCode, setDetailOpts);
                       }
                     }
                     fetchExteriorList();
@@ -167,7 +167,7 @@ export default function Interior() {
                   active={item.id === interior.id}
                   onClick={() => {
                     async function changeColor() {
-                      const optionCodes = MakeOptionCodeList(selectOpts);
+                      const optionCodes = MakeOptionCodeList(detailOpts);
                       const data: TrimChangeModalDataType = (
                         await carsApi.changeColor({
                           beforeExteriorCode: exterior.code,

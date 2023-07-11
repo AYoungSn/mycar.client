@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { carsApi } from "../utils/Api";
 import { OptionChoiceType, OptionType } from "../type/optionType";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { hgaOptListState, npfOptListState } from "../utils/recoil/options";
 
 export function useFetchSelectList(modelId: number, selectOpts: Map<string, boolean>, setSelectListOpts: any, selectListInit: Map<string, OptionChoiceType>) {

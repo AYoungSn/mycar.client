@@ -81,7 +81,6 @@ function Tool({ tools, toolId, onChange, name }: Props) {
               type="radio"
               value={tool.id}
               onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-                console.log(e.target);
                 onChange(Number(e.target.value));
               }}
               disabled=""
@@ -92,7 +91,6 @@ function Tool({ tools, toolId, onChange, name }: Props) {
               type="radio"
               value={tool.id}
               onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-                console.log(e.target);
                 onChange(Number(e.target.value));
               }}
               disabled=""
@@ -116,7 +114,7 @@ function Tool({ tools, toolId, onChange, name }: Props) {
     );
   });
   return (
-    <Item>
+    <Item key={toolId}>
       <div>
         <b>{name}</b>
       </div>

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import { FlexDiv } from '../../components/styled/Flex';
+import { FlexDiv, FlexItem } from '../../components/styled/Flex';
 import Header from '../../components/header/Header';
 import { useSearchParams } from 'react-router-dom';
 import { ModelPreview } from '../../components/ModelPreview';
 import useFetchModelInit from '../../hooks/useFetchModelInit';
-import { OptionArea } from '../../components/options/OptionArea';
-import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailOptListState } from '../../utils/recoil/options';
 import { Model } from '../../type/ApiResponseType';
 import { modelState } from '../../utils/recoil/carInfo';
+import { Color } from '../../components/options/color/Color';
+import { Options } from '../../components/options/Options';
+import { FlexDivItemType } from '../../type/styledType';
 
 const ContentWrap = styled(FlexDiv)`
   position: relative;
@@ -20,21 +21,27 @@ const ContentWrap = styled(FlexDiv)`
   justify-content: space-between;
 `;
 
+const OptionAreaWrap = styled(FlexItem)<FlexDivItemType>`
+  width: 660px;
+  padding: 100px 72px 120px 80px;
+`;
+
 export function MakeCar() {
   const [searchParams] = useSearchParams();
   const [model, setModel] = useRecoilState<Model>(modelState);
-  const selectList = useRecoilValue(detailOptListState);
+  const detailList = useRecoilValue(detailOptListState);
   useFetchModelInit(Number(searchParams.get('modelId')), setModel);
-  // if (model) {
-  // 	searchParams.set('carCode', model.carCode);
-  // 	searchParams.set('trimCode', model.trimCode);
-  // }
   return (
     <div>
       <Header carCode={searchParams.get('carCode') || ''}></Header>
       <ContentWrap>
-        {model && <ModelPreview model={model}></ModelPreview>}
-        {selectList && <OptionArea />}
+        {model && <ModelPreview model={model} />}
+        {detailList && 
+					<OptionAreaWrap marginTop="10px" textAlign="none">
+						<Color />
+						<Options />
+					</OptionAreaWrap>
+				}
       </ContentWrap>
     </div>
   );

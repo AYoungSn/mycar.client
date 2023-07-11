@@ -39,7 +39,6 @@ function OptionItem({
   curOptions: Map<string, boolean>;
   onChange: any;
 }) {
-	// useEffect(() => {}, [option?.choiceYN]);
   return ( option &&
     <Item
       active={curOptions?.get(option.code) === true}
