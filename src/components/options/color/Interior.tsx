@@ -44,31 +44,8 @@ export default function Interior() {
   // modal 창을 위한 state
   const [{ modalName, colorName, trimChangeData }, setModal] =
     useRecoilState(modalState);
-  const [isColorChange, setIsColorChange] = useState(false);
-  const [isTrimChange, setIsTrimChange] = useState(false);
-  const [disableColor, setDisableColor] = useState('');
-  const [modalData, setModalData] = useState<TrimChangeModalDataType>({
-    interiorChangeColorYn: false,
-    exteriorChangeColorYn: false,
-    changeOptionInfo: {
-      addOptions: [],
-      delOptions: [],
-    },
-    changeTrimInfo: {
-      beforeTrimName: 'NAME',
-      beforeCarPrice: 0,
-      changeTrimName: 'NAME',
-      changeCarPrice: 0,
-      changeModelId: 0,
-      changeCarCode: 'CODE',
-      changeTrimCode: 'CODE',
-      interiorCode: 'CODE',
-      interiorName: 'NAME',
-      optionCode: 'CODE',
-    },
-  });
   useEffect(() => {
-    async function initInterior() {
+    function updateInterior(){
       for (let i = 0; i < interiorList.length; i++) {
         if (
           interiorList[i].id === interior.id &&
@@ -83,32 +60,39 @@ export default function Interior() {
           break;
         }
       }
-      if (interiorList[0] && interior.choiceYN === false) {
-        setInterior({
-          ...interiorList[0],
-        });
-        const data = (
-          await carsApi.enableExteriorList(
-            carCode,
-            trimCode,
-            interiorList[0].code,
-          )
-        ).data;
-        setExteriorList(
-          data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-            a.choiceYN === true
-              ? -1
-              : b.choiceYN === true
-              ? a.id > b.id
-                ? 1
-                : 0
-              : 1,
-          ),
-        );
+			if (interiorList[0] && interior.choiceYN === false) {
+				setInterior({
+					...interiorList[0],
+				});
       }
+		}
+		updateInterior();
+	}, [interiorList]);
+	useEffect(() => {
+		async function initInterior() {
+			if (interior.code) {
+				const data = (
+					await carsApi.enableExteriorList(
+						carCode,
+						trimCode,
+						interior.code,
+					)
+				).data;
+				setExteriorList(
+					data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
+						a.choiceYN === true
+							? -1
+							: b.choiceYN === true
+							? a.id > b.id
+								? 1
+								: 0
+							: 1,
+					),
+				);
+			}
     }
     initInterior();
-  }, [interiorList]);
+  }, [interior]);
   return (
     <section>
       <OptionTitle>

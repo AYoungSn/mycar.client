@@ -23,21 +23,21 @@ export default function useUpdatePrice() {
   const npfListOpt = useRecoilValue(npfOptListState);
   useEffect(() => {
     let tmp = price + exterior.price;
-    for (let i = 0; i < selectListOpt.length; i++) {
-      if (selectOpt.get(selectListOpt[i].code) === true) {
-        tmp += selectListOpt[i].price;
-      }
-    }
-    for (let i = 0; i < hgaListOpt.length; i++) {
-      if (hgaOpt.get(hgaListOpt[i].code) === true) {
-        tmp += hgaListOpt[i].price;
-      }
-    }
-    for (let i = 0; i < npfListOpt.length; i++) {
-      if (npfOpt.get(npfListOpt[i].code) === true) {
-        tmp += npfListOpt[i].price;
-      }
-    }
+		[...selectListOpt].map(([key, value], id) => {
+			if (selectOpt.get(value.code || '') === true) {
+				tmp += value.price || 0;
+			}
+		});
+		[...hgaListOpt].map(([key, value], id) => {
+			if (hgaOpt.get(hgaListOpt.get(key)?.code || '') === true) {
+				tmp += value.price || 0;
+			}
+		});
+		[...npfListOpt].map(([key, value], id) => {
+			if (npfOpt.get(value.code || '') === true) {
+				tmp += value.price || 0;
+			}
+		})
     setTotalPrice(tmp);
   }, [
     price,

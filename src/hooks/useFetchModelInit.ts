@@ -1,34 +1,37 @@
 import { useEffect } from 'react';
 import { carsApi } from '../utils/Api';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { priceState } from '../utils/recoil/price';
 import {
   exteriorListState,
-  exteriorState,
+  hgaInitListState,
   hgaOptListState,
   hgaOptState,
   interiorListState,
-  interiorState,
+  npfInitListState,
   npfOptListState,
   npfOptState,
+  selectInitListState,
   selectOptListState,
   selectOptState,
 } from '../utils/recoil/options';
 import { ModelInfo } from '../type/ApiResponseType';
 import { ExteriorType } from '../type/optionType';
+import { optionListUpdate, optionUpdate } from '../utils/optionUpdate';
 
 export default function useFetchModelInit(modelId: number, setModel: any) {
   const setExteriorList = useSetRecoilState(exteriorListState);
   const setInteriorList = useSetRecoilState(interiorListState);
-  const setSelectListOpt = useSetRecoilState(selectOptListState);
-  const setHgaListOpt = useSetRecoilState(hgaOptListState);
-  const setNpfListOpt = useSetRecoilState(npfOptListState);
+  const [selectListOpt, setSelectListOpt] = useRecoilState(selectOptListState);
+  const [hgaListOpt, setHgaListOpt] = useRecoilState(hgaOptListState);
+  const [npfListOpt, setNpfListOpt] = useRecoilState(npfOptListState);
+	const setSelectListInit = useSetRecoilState(selectInitListState);
+	const setHgaListInit = useSetRecoilState(hgaInitListState);
+	const setNpfListInit = useSetRecoilState(npfInitListState);
   const setSelectOpts = useSetRecoilState(selectOptState);
   const setHgaOpts = useSetRecoilState(hgaOptState);
   const setNpfOpts = useSetRecoilState(npfOptState);
   const setPrice = useSetRecoilState(priceState);
-  const setInterior = useSetRecoilState(interiorState);
-  const setExterior = useSetRecoilState(exteriorState);
 
   useEffect(() => {
     async function fetchData() {
@@ -57,9 +60,31 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
             : 1,
         ),
       );
-      setSelectListOpt(data.options.select);
-      setHgaListOpt(data.options.hga);
-      setNpfListOpt(data.options.npf);
+			// setSelectDisableOpts(new Map());
+			// data.options.select.map((item) => {
+			// 	if (item.choiceYN === false) {
+			// 		optionUpdate(item.code, false, setSelectDisableOpts);
+			// 	}
+			// })
+			// const select = new Map();
+			data.options.select.map((item) => {
+				// select.set(item.code, item);
+				optionListUpdate(item.code, item, setSelectListOpt);
+				optionListUpdate(item.code, item, setSelectListInit);
+			})
+			// setSelectListInit();
+			// setSelectListOpt
+			data.options.hga.map((item) => {
+				optionListUpdate(item.code, item, setHgaListOpt);
+			})
+			setHgaListInit(hgaListOpt);
+			data.options.npf.map((item) => {
+				optionListUpdate(item.code, item, setNpfListOpt);
+			})
+			setNpfListInit(npfListOpt);
+      // setSelectListOpt(data.options.select);
+      // setHgaListOpt(data.options.hga);
+      // setNpfListOpt(data.options.npf);
       setSelectOpts(new Map());
       setHgaOpts(new Map());
       setNpfOpts(new Map());

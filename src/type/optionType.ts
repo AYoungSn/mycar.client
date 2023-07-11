@@ -16,7 +16,6 @@ export type InteriorType = {
 };
 
 export type OptionChoiceType = {
-  id: number;
   name: string;
   imgUri: string;
   choiceYN: boolean;

@@ -8,7 +8,7 @@ const OptionList = styled(FlexLi)`
 `;
 function ChangeOptionList({change, optionList}:{change: 'add' | 'del', optionList: OptionType[] | null}) {
 	return (<div>
-		<p style={{ marginBottom: '20px' }}>
+		<p style={{ marginBottom: '20px', marginTop: '20px' }}>
       변경 시 선택 {change === 'add' ? '추가' : '해제'}되는 품목
     </p>
 		<ul>

@@ -56,6 +56,7 @@ export default function Exterior() {
         }
       }
       if (exteriorList[0] && exterior.choiceYN === false) {
+				console.log(exteriorList[0]);
         // 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
         setExterior({
           ...exteriorList[0],
@@ -64,6 +65,32 @@ export default function Exterior() {
     }
     initExterior();
   }, [exteriorList]);
+
+	useEffect(() => {
+		async function fetchInteriorList() {
+			if (exterior.code) {
+				const data = (
+					await carsApi.enableInteriorList(
+						carCode,
+						trimCode,
+						exterior.code,
+					)
+				).data;
+				setInteriorList(
+					data.interior.sort((a: InteriorType, b: InteriorType) =>
+						a.choiceYN === true
+							? -1
+							: b.choiceYN === true
+							? a.id > b.id
+								? 1
+								: -1
+							: 1,
+					),
+				);
+				}
+		}
+		fetchInteriorList();
+	}, [exterior]);
   return (
     <section>
       <OptionTitle>
@@ -84,33 +111,7 @@ export default function Exterior() {
                 style={{ backgroundImage: `url(${ext.imgUri})` }}
                 active={ext.id === exterior.id ? true : false}
                 onClick={() => {
-                  // 현재 선택된 내장색상 기반으로 선택 가능한 외장색상인지
-                  async function fetchInteriorList() {
-                    const data = (
-                      await carsApi.enableInteriorList(
-                        carCode,
-                        trimCode,
-                        ext.code,
-                      )
-                    ).data;
-                    setInteriorList(
-                      data.interior.sort((a: InteriorType, b: InteriorType) =>
-                        a.choiceYN === true
-                          ? -1
-                          : b.choiceYN === true
-                          ? a.id > b.id
-                            ? 1
-                            : -1
-                          : 1,
-                      ),
-                    );
-                    setExterior(ext);
-                  }
-                  fetchInteriorList();
-                  // 선택된 외장색상의 가격을 priceState 에 추가
-                  // 선택한 외장색상 기반으로 내장 색상 목록 재요청
-
-                  // -> 기존 내장 색상이 선택 불가한 경우 선택가능한 색상으로 변경
+									setExterior(ext);
                 }}
               />
             </ExteriorItem>
@@ -135,7 +136,6 @@ export default function Exterior() {
                         optionCode: optionCodes,
                       })
                     ).data;
-                    console.log(data);
                     if (data.interiorChangeColorYn === true) {
                       setModal({
                         modalName: 'CHANGE-INTERIOR',
@@ -158,7 +158,6 @@ export default function Exterior() {
             </ExteriorItem>
           );
         })}
-        {/* {isColorChange && <ColorChangeModal colorChange='interior' colorName={disableColor} setModal={setIsColorChange}/>} */}
       </FlexUl>
     </section>
   );

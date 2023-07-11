@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FlexLi, FlexUl } from '../styled/Flex';
 import { FlexLiType } from '../../type/styledType';
 import { OptionChoiceType } from '../../type/optionType';
+import { useEffect } from 'react';
 
 const OptionWrap = styled(FlexUl)`
   flex: flex-wrap;
@@ -34,11 +35,12 @@ function OptionItem({
   curOptions,
   onChange,
 }: {
-  option: OptionChoiceType;
+  option: OptionChoiceType | null;
   curOptions: Map<string, boolean>;
   onChange: any;
 }) {
-  return (
+	// useEffect(() => {}, [option?.choiceYN]);
+  return ( option &&
     <Item
       active={curOptions?.get(option.code) === true}
       choiceYN={option.choiceYN}
@@ -66,23 +68,26 @@ export function OptionList({
   options,
   curOptions,
   onChange,
+	disableOnChange,
 }: {
-  options: OptionChoiceType[];
+  options: Map<string, OptionChoiceType>;
   curOptions: Map<string, boolean>;
   onChange: any;
+	disableOnChange: any;
 }) {
   return (
     <OptionWrap>
-      {options?.length > 0 &&
-        options.map((opt) => {
+      {
+				[...options].map(([key, value]) => {
           return (
             <OptionItem
-              option={opt}
+              option={value}
               curOptions={curOptions}
-              onChange={onChange}
+              onChange={value.choiceYN === true ? onChange : disableOnChange}
             />
           );
-        })}
+        })
+			}
     </OptionWrap>
   );
 }

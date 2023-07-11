@@ -38,4 +38,14 @@ export const carsApi = {
     Api.get(
       `/cars/color-change?beforeInteriorCode=${req.beforeInteriorCode}&beforeExteriorCode=${req.beforeExteriorCode}&interiorCode=${req.interiorCode}&exteriorCode=${req.exteriorCode}&modelId=${req.modelId}&carCode=${req.carCode}&optionCode=${req.optionCode}`,
     ),
+	disableOptions: (modelId:number, optionCode:string) => 
+		Api.get(
+			`/cars/options/disable?modelId=${modelId}&optionCode=${optionCode}`
+		),
+	enableOptions: (modelId:number, optionCode:string) => 
+		Api.get(
+			`/cars/options/enable?modelId=${modelId}&optionCode=${optionCode}`
+		),
+	optionsChange: (modelId: number, optionCodes: string, addOption: string) => 
+		Api.get(`/cars/options/change?modelId=${modelId}&optionCode=${optionCodes}&addOption=${addOption}`),
 };

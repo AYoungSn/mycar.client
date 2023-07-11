@@ -1,3 +1,5 @@
+import { OptionChoiceType, OptionType } from "../type/optionType";
+
 export function optionUpdate(key: string, value: boolean, setOptions: any) {
   function btnUpdate() {
     setOptions(
@@ -5,6 +7,10 @@ export function optionUpdate(key: string, value: boolean, setOptions: any) {
     );
   }
   btnUpdate();
+}
+
+export function optionListUpdate(key: string, value: OptionChoiceType, setOptions: any) {
+	setOptions((prev: Map<string, OptionType>) => new Map([...prev, [key, value]]));
 }
 
 export function allOptionUpdate(selectedList: string[], setOptions: any) {

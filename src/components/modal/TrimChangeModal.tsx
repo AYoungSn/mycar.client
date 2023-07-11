@@ -3,10 +3,8 @@ import Modal from './Modal';
 import { FlexDiv, FlexLiItem, FlexUl } from '../styled/Flex';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
 import ChangeOptionList from './options/ChangeOptionList';
-
-const PopupHeader = styled.div`
-  margin-bottom: 30px;
-`;
+import { PopupHeader } from '../styled/Modal';
+import ChangePrice from './options/ChangePrice';
 
 const TrimWrap = styled.div`
   overflow: hidden;
@@ -44,11 +42,9 @@ function TrimBox({ title, trimName, price }: { title: string; trimName: string; 
 
 export default function TrimChangeModal({
   colorName,
-  setModal,
   data,
 }: {
   colorName: string;
-  setModal: any;
   data: TrimChangeModalDataType;
 }) {
   let addPrice = 0;
@@ -78,18 +74,11 @@ export default function TrimChangeModal({
             {(data.changeOptionInfo?.delOptions.length || 0) > 0 && (
 							<ChangeOptionList change='del' optionList={data.changeOptionInfo?.delOptions || null} />
             )}
-            <FlexDiv
-              style={{ justifyContent: 'space-between', marginTop: '40px' }}
-            >
-              <p>변경 금액</p>
-              <p>
-                {data.changeTrimInfo?.changeCarPrice &&
-                  data.changeTrimInfo?.changeCarPrice -
-                    data.changeTrimInfo.beforeCarPrice +
-                    addPrice -
-                    delPrice}
-              </p>
-            </FlexDiv>
+            <ChangePrice changePrice={(data.changeTrimInfo?.changeCarPrice &&
+							data.changeTrimInfo?.changeCarPrice -
+								data.changeTrimInfo.beforeCarPrice +
+								addPrice -
+								delPrice) || 0}/>
 						<a href={`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`}>
 							<button>확인</button>
 						</a>
