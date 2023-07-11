@@ -10,6 +10,11 @@ export const carsApi = {
   tooltips: (query: string) => Api.get(`/cars/model-filter?${query}`),
   trims: (query: string) => Api.get(`/cars/trims?${query}`),
   init: (modelId: number) => Api.get(`/cars/models/${modelId}/details`),
+	modelNames: (carCode: string) => Api.get(`/cars/${carCode}/models`),
+	trimList: (carCode: string, modelName: string) => Api.get(`/cars/${carCode}/trims?modelBasicName=${modelName}`),
+};
+
+export const optionsApi = {
   enableInteriorList: (
     carCode: string,
     trimCode: string,

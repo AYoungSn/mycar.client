@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
-import { carsApi } from "../utils/Api";
+import { carsApi, optionsApi } from "../utils/Api";
 import { OptionChoiceType, OptionType } from "../type/optionType";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { detailOptState, hgaOptListState, npfOptListState, npfOptState } from "../utils/recoil/options";
@@ -13,16 +13,16 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 		const optionCodes = MakeOptionCodeList(selectOpts);
 		const tmp = new Map(selectListInit);
 		async function fetchData() {
-			const data = (await carsApi.disableOptions(modelId, optionCodes)).data;
+			const data = (await optionsApi.disableOptions(modelId, optionCodes)).data;
 			data.delOptions.map((item: OptionType) => {
 				tmp.set(item.code, {...item, choiceYN: false});
 			});
-			const addData = (await carsApi.enableOptions(modelId, optionCodes)).data;
+			const addData = (await optionsApi.enableOptions(modelId, optionCodes)).data;
 			addData.addOptions.map((item: OptionType) => {
 				tmp.set(item.code, {...item, choiceYN: true});
 			});
 			setSelectListOpts(tmp);
-			const tuixList = (await carsApi.tuixList(modelId, optionCodes)).data;
+			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
 			const hga = new Map();
 			tuixList.hga.map((item: OptionType) => {
 				hga.set(item.code, {...item, choiceYN: true});
@@ -49,7 +49,7 @@ export function useFetchTuixList(modelId: number) {
 				npf.set(key, {...value, choiceYN: true})
 			})
 			if (optionCodes.length > 0){
-				const data = (await carsApi.disableTuix(modelId, optionCodes)).data;
+				const data = (await optionsApi.disableTuix(modelId, optionCodes)).data;
 				data.delOptions.map((item: OptionType) => {
 					npf.set(item.code, {...item, choiceYN: false});
 				});

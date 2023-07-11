@@ -2,7 +2,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { OptionHead, OptionName } from '../styled/Option';
 import { OptionList } from './OptionList';
 import {
-	hgaInitListState,
   hgaOptListState,
   hgaOptState,
   npfOptListState,
@@ -14,7 +13,7 @@ import {
 import { optionUpdate } from '../../utils/optionUpdate';
 import { OptionChoiceType } from '../../type/optionType';
 import { useSearchParams } from 'react-router-dom';
-import { carsApi } from '../../utils/Api';
+import { carsApi, optionsApi } from '../../utils/Api';
 import MakeOptionCodeList from '../../utils/makeOptionCodeList';
 import { useFetchSelectList, useFetchTuixList } from '../../hooks/useFetchOptions';
 import { modalState } from '../../utils/recoil/modal';
@@ -43,7 +42,7 @@ function OptionItemList(props: Props) {
 }
 
 async function disableOnChange(key: string, modelId: number, detailOpts: Map<string, boolean>, setModal: any) {
-	const data = (await carsApi.optionsChange(modelId, MakeOptionCodeList(detailOpts), key)).data;
+	const data = (await optionsApi.optionsChange(modelId, MakeOptionCodeList(detailOpts), key)).data;
 	if (data.addOptions.length + data.delOptions.length >= 2) {
 		setModal({
 			modalName: 'CHANGE-OPTION',

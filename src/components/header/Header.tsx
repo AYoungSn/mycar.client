@@ -3,32 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { carsApi } from '../../utils/Api';
 import CarMenuBox from '../CarMenuBox';
-import { Head, HeaderWrap } from '../styled/Head';
+import { Head, HeaderWrap, MenuBtn, Triangle } from '../styled/Head';
 import Logo from '../styled/Logo';
 import { CarItem } from '../../type/ApiResponseType';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../utils/recoil/modal';
 
-const MenuBtn = styled.button`
-  position: relative;
-  cursor: pointer;
-  background: transparent;
-  color: #000000;
-  font-family: 'HyundaiSansHeadKRR';
-  font-size: 16px;
-  margin: 32px 0 0 20px;
-  border: 0;
-  vertical-align: top;
-`;
-const Triangle = styled.div<{ isOpen: boolean }>`
-  border-top: ${(props) => (!props.isOpen ? '7px solid #000' : 0)}; // 위
-  border-bottom: ${(props) => (props.isOpen ? '7px solid #000' : 0)}; // 아래
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  margin-left: 18px;
-  display: inline-block;
-  vertical-align: middle;
-`;
 const Section = styled.section`
   background: #fff;
   position: absolute;
@@ -70,9 +50,7 @@ function Menu({ carCode }: { carCode: string }) {
     }
     fetchData();
   }, [data.length, carCode, data]);
-	// useEffect(() => {
-	// 	if ()
-	// })
+
   return (
     <>
       <MenuBtn

@@ -17,7 +17,7 @@ import {
 } from '../../../utils/recoil/options';
 import { useEffect, useState } from 'react';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
-import { carsApi } from '../../../utils/Api';
+import { carsApi, optionsApi } from '../../../utils/Api';
 import { useSearchParams } from 'react-router-dom';
 import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
 import { allOptionUpdate } from '../../../utils/optionUpdate';
@@ -72,7 +72,7 @@ export default function Interior() {
 		async function initInterior() {
 			if (interior.code) {
 				const data = (
-					await carsApi.enableExteriorList(
+					await optionsApi.enableExteriorList(
 						carCode,
 						trimCode,
 						interior.code,
@@ -117,7 +117,7 @@ export default function Interior() {
                     // 현재 선택된 내장색상 기반으로 선택 가능한 외장색상 목록 update
                     async function fetchExteriorList() {
                       const data = (
-                        await carsApi.enableExteriorList(
+                        await optionsApi.enableExteriorList(
                           carCode,
                           trimCode,
                           item.code,
@@ -140,7 +140,7 @@ export default function Interior() {
                     async function checkedOptionList() {
                       const optionCodes = MakeOptionCodeList(detailOpts);
                       const data = (
-                        await carsApi.checkedOptions(
+                        await optionsApi.checkedOptions(
                           item.code,
                           optionCodes,
                           modelId,
@@ -169,7 +169,7 @@ export default function Interior() {
                     async function changeColor() {
                       const optionCodes = MakeOptionCodeList(detailOpts);
                       const data: TrimChangeModalDataType = (
-                        await carsApi.changeColor({
+                        await optionsApi.changeColor({
                           beforeExteriorCode: exterior.code,
                           beforeInteriorCode: interior.code,
                           interiorCode: item.code,

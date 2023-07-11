@@ -5,6 +5,7 @@ import TrimChangeModal from './TrimChangeModal';
 import { styled } from 'styled-components';
 import OptionChangeModal from './OptionChangeModal';
 import SummaryViewModal from './SummaryViewModal';
+import ModelChangeModal from './ModelChangeModal';
 
 const ModalWrap = styled.div`
   display: flex;
@@ -47,7 +48,8 @@ function ModalProvider() {
 		),
 		'SUMMARY': (
 			<SummaryViewModal />
-		)
+		),
+		'CHANGE-MODEL': (<ModelChangeModal />)
   };
   return <ModalWrap>{modalName && content[modalName]}</ModalWrap>;
 }

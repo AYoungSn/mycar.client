@@ -8,7 +8,7 @@ export type ColorModalPropsType = {
 export type OptionModalPropsType = {
 	// after
 }
-type ChangeModal = 'INTERIOR' | 'EXTERIOR' | 'TRIM';
+type ChangeModal = 'INTERIOR' | 'EXTERIOR' | 'TRIM' | 'MODEL';
 
 type ModalName = null | `CHANGE-${ChangeModal}` | `SUMMARY`;
 

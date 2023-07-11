@@ -15,10 +15,10 @@ import {
   detailOptState,
 } from '../../../utils/recoil/options';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
-import { carsApi } from '../../../utils/Api';
+import { carsApi, optionsApi } from '../../../utils/Api';
 import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
 import { modalState } from '../../../utils/recoil/modal';
 
@@ -70,7 +70,7 @@ export default function Exterior() {
 		async function fetchInteriorList() {
 			if (exterior.code) {
 				const data = (
-					await carsApi.enableInteriorList(
+					await optionsApi.enableInteriorList(
 						carCode,
 						trimCode,
 						exterior.code,
@@ -126,7 +126,7 @@ export default function Exterior() {
                   async function changeColor() {
                     const optionCodes = MakeOptionCodeList(detailOpts);
                     const data = (
-                      await carsApi.changeColor({
+                      await optionsApi.changeColor({
                         beforeExteriorCode: exterior.code,
                         beforeInteriorCode: interior.code,
                         interiorCode: interior.code,

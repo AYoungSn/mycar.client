@@ -47,3 +47,14 @@ export const CloseBtn = styled.button`
 export const PopupHeader = styled.div`
   margin-bottom: 30px;
 `;
+
+export const ConfirmBtn = styled.button`
+	width: 120px;
+	height: 40px;
+	font-size: 15px;
+	font-family: "HyundaiSansHeadKRR";
+	border: 0;
+	background: #002c5f;
+	color: #fff;
+	margin-top: 20px;
+`;

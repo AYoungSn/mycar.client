@@ -3,6 +3,8 @@ import { FlexItem } from './styled/Flex';
 import useUpdatePrice from '../hooks/useUpdatePrice';
 import { Model } from '../type/ApiResponseType';
 import { FlexDivItemType } from '../type/styledType';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../utils/recoil/modal';
 
 const PreviewWrap = styled.div`
   position: relative;
@@ -32,9 +34,23 @@ const Price = styled.b`
   display: inline-block;
   font-size: 30px;
 `;
+const ModelChangeBtn = styled.button`
+	width: auto;
+	height: auto;
+	color: #002c5f;
+	background-color: transparent;
+	border: 1px #002c5f solid;
+	padding: 5px;
+	font-family: "HyundaiSansTextKR";
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -.4px;
+	cursor: pointer;
+`;
 
 export function ModelPreview({ model }: { model: Model }) {
   const price = useUpdatePrice();
+	const setModal = useSetRecoilState(modalState);
   return (
     <PreviewWrap>
       <Preview marginTop="0" textAlign="none">
@@ -42,6 +58,7 @@ export function ModelPreview({ model }: { model: Model }) {
           {model.carName} - {model.trimName}
         </h2>
         <ModelName>{model.modelName}</ModelName>
+				<ModelChangeBtn onClick={() => setModal({modalName: 'CHANGE-MODEL'})}><span>모델 변경</span></ModelChangeBtn>
         <PriceDiv>
           <PLabel>총 차량 가격</PLabel>
           <Price>{price}</Price>
