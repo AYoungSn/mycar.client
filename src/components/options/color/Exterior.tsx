@@ -12,7 +12,7 @@ import {
   exteriorState,
   interiorListState,
   interiorState,
-  selectOptState,
+  detailOptState,
 } from '../../../utils/recoil/options';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ export default function Exterior() {
   const setInteriorList = useSetRecoilState(interiorListState);
   const interior = useRecoilValue(interiorState);
   const exteriorList = useRecoilValue<ExteriorType[]>(exteriorListState);
-  const selectOpts = useRecoilValue(selectOptState);
+  const selectOpts = useRecoilValue(detailOptState);
   const carCode = searchParams.get('carCode') || 'undefined';
   const trimCode = searchParams.get('trimCode') || 'undefined';
   const modelId = Number(searchParams.get('modelId') || '0');

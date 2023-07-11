@@ -7,9 +7,9 @@ import {
   hgaOptState,
   npfOptListState,
   npfOptState,
-  selectInitListState,
-  selectOptListState,
-  selectOptState,
+  detailInitListState,
+  detailOptListState,
+  detailOptState,
 } from '../../utils/recoil/options';
 import { optionUpdate } from '../../utils/optionUpdate';
 import { OptionChoiceType } from '../../type/optionType';
@@ -43,8 +43,8 @@ function OptionItemList(props: Props) {
   );
 }
 
-async function disableOnChange(key: string, modelId: number, selectOpts: Map<string, boolean>, setModal: any) {
-	const data = (await carsApi.optionsChange(modelId, MakeOptionCodeList(selectOpts), key)).data;
+async function disableOnChange(key: string, modelId: number, detailOpts: Map<string, boolean>, setModal: any) {
+	const data = (await carsApi.optionsChange(modelId, MakeOptionCodeList(detailOpts), key)).data;
 	if (data.addOptions.length + data.delOptions.length >= 2) {
 		setModal({
 			modalName: 'CHANGE-OPTION',
@@ -56,10 +56,10 @@ async function disableOnChange(key: string, modelId: number, selectOpts: Map<str
 
 export function Options() {
   const [selectListOpts, setSelectListOpts] =
-    useRecoilState<Map<string, OptionChoiceType>>(selectOptListState);
-	const selectListInit = useRecoilValue(selectInitListState);
+    useRecoilState<Map<string, OptionChoiceType>>(detailOptListState);
+	const selectListInit = useRecoilValue(detailInitListState);
 	const hgaListInit = useRecoilValue(hgaInitListState);
-  const [selectOpts, setSelectOpts] = useRecoilState(selectOptState);
+  const [selectOpts, setSelectOpts] = useRecoilState(detailOptState);
   const [hgaListOpts, setHgaListOpts] = useRecoilState(hgaOptListState);
   const [hgaOpts, setHgaOpts] = useRecoilState(hgaOptState);
   const [npfListOpts, setNpfListOpts] = useRecoilState(npfOptListState);

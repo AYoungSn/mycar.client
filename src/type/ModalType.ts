@@ -10,13 +10,13 @@ export type OptionModalPropsType = {
 }
 type ChangeModal = 'INTERIOR' | 'EXTERIOR' | 'TRIM';
 
-type ModalName = null | `CHANGE-${ChangeModal}` | ``;
+type ModalName = null | `CHANGE-${ChangeModal}` | `SUMMARY`;
 
 export type ModalStateType = {
   modalName: ModalName;
   colorName?: string | null;
   isOpen?: boolean;
   trimChangeData?: TrimChangeModalDataType;
-	selectOption?: string;
+	detailOption?: string;
 	changeOptionData?: ChangeOptionType;
 };

@@ -8,9 +8,9 @@ type ModalContainerType = {
 export const ModalContainer = styled.div<ModalContainerType>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  margin-top: 200px;
+  margin-top: 50px;
   top: 0;
-  position: absolute;
+  position: fixed;
   background-color: white;
   border: 1px solid black;
   padding: 80px 60px;
@@ -20,7 +20,7 @@ export const ModalContainer = styled.div<ModalContainerType>`
 `;
 
 export const ModalBackground = styled.div`
-  z-index: 10 !important;
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;

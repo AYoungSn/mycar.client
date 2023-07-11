@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 export const Head = styled.header`
   width: 100%;
-  height: 80px;
-  background-color: #cdcdcd;
+  height: 100px;
+  background-color: #DDD;
   position: fixed;
   left: 0;
   top: 0;

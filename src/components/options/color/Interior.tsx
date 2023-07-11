@@ -13,7 +13,7 @@ import {
   exteriorState,
   interiorListState,
   interiorState,
-  selectOptState,
+  detailOptState,
 } from '../../../utils/recoil/options';
 import { useEffect, useState } from 'react';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
@@ -39,7 +39,7 @@ export default function Interior() {
   const [interior, setInterior] = useRecoilState(interiorState);
   const interiorList = useRecoilValue<InteriorType[]>(interiorListState);
   const setExteriorList = useSetRecoilState(exteriorListState);
-  const [selectOpts, setSelectOpts] = useRecoilState(selectOptState);
+  const [selectOpts, setSelectOpts] = useRecoilState(detailOptState);
   const exterior = useRecoilValue(exteriorState);
   // modal 창을 위한 state
   const [{ modalName, colorName, trimChangeData }, setModal] =

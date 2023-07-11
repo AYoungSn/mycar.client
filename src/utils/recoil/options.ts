@@ -38,7 +38,7 @@ export const interiorListState = atom<InteriorType[]>({
   default: [],
 });
 
-export const selectInitListState = atom<Map<string, OptionChoiceType>>({
+export const detailInitListState = atom<Map<string, OptionChoiceType>>({
 	key: 'selectListinit',
 	default: new Map()
 });
@@ -53,7 +53,7 @@ export const npfInitListState = atom<Map<string, OptionChoiceType>>({
 	default: new Map()
 });
 
-export const selectOptListState = atom<Map<string, OptionChoiceType>>({
+export const detailOptListState = atom<Map<string, OptionChoiceType>>({
   key: 'selectListOpt',
   default: new Map(),
 });
@@ -68,7 +68,7 @@ export const npfOptListState = atom<Map<string, OptionChoiceType>>({
   default: new Map(),
 });
 
-export const selectOptState = atom<Map<string, boolean>>({
+export const detailOptState = atom<Map<string, boolean>>({
   key: 'selectOpt',
   default: new Map(),
 });

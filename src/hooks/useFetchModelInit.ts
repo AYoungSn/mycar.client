@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { carsApi } from '../utils/Api';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { priceState } from '../utils/recoil/price';
+import { priceState } from '../utils/recoil/carInfo';
 import {
   exteriorListState,
   hgaInitListState,
@@ -11,9 +11,9 @@ import {
   npfInitListState,
   npfOptListState,
   npfOptState,
-  selectInitListState,
-  selectOptListState,
-  selectOptState,
+  detailInitListState,
+  detailOptListState,
+  detailOptState,
 } from '../utils/recoil/options';
 import { ModelInfo } from '../type/ApiResponseType';
 import { ExteriorType } from '../type/optionType';
@@ -22,13 +22,13 @@ import { optionListUpdate, optionUpdate } from '../utils/optionUpdate';
 export default function useFetchModelInit(modelId: number, setModel: any) {
   const setExteriorList = useSetRecoilState(exteriorListState);
   const setInteriorList = useSetRecoilState(interiorListState);
-  const [selectListOpt, setSelectListOpt] = useRecoilState(selectOptListState);
+  const [selectListOpt, setSelectListOpt] = useRecoilState(detailOptListState);
   const [hgaListOpt, setHgaListOpt] = useRecoilState(hgaOptListState);
   const [npfListOpt, setNpfListOpt] = useRecoilState(npfOptListState);
-	const setSelectListInit = useSetRecoilState(selectInitListState);
+	const setSelectListInit = useSetRecoilState(detailInitListState);
 	const setHgaListInit = useSetRecoilState(hgaInitListState);
 	const setNpfListInit = useSetRecoilState(npfInitListState);
-  const setSelectOpts = useSetRecoilState(selectOptState);
+  const setSelectOpts = useSetRecoilState(detailOptState);
   const setHgaOpts = useSetRecoilState(hgaOptState);
   const setNpfOpts = useSetRecoilState(npfOptState);
   const setPrice = useSetRecoilState(priceState);
@@ -68,7 +68,7 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 			// })
 			setSelectListInit(new Map());
 			setSelectListOpt(new Map());
-			data.options.select.map((item) => {
+			data.options.detail.map((item) => {
 				// select.set(item.code, item);
 				optionListUpdate(item.code, item, setSelectListOpt);
 				optionListUpdate(item.code, item, setSelectListInit);

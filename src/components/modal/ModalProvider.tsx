@@ -4,6 +4,7 @@ import { modalState } from '../../utils/recoil/modal';
 import TrimChangeModal from './TrimChangeModal';
 import { styled } from 'styled-components';
 import OptionChangeModal from './OptionChangeModal';
+import SummaryViewModal from './SummaryViewModal';
 
 const ModalWrap = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ function ModalProvider() {
 		modalName, 
 		colorName, 
 		trimChangeData,
-		selectOption,
+		detailOption,
 		changeOptionData,
 	}, setModal] =
     useRecoilState(modalState);
@@ -40,9 +41,12 @@ function ModalProvider() {
     ),
 		'CHANGE-OPTION': (
 			<OptionChangeModal 
-				selectOption={selectOption || ''} 
+				detailOption={detailOption || ''} 
 				changeOptionData={changeOptionData || {delOptions: [], addOptions: []}} 
 			/>
+		),
+		'SUMMARY': (
+			<SummaryViewModal />
 		)
   };
   return <ModalWrap>{modalName && content[modalName]}</ModalWrap>;

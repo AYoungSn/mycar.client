@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { carsApi } from '../../utils/Api';
 import CarMenuBox from '../CarMenuBox';
 import { Head, HeaderWrap } from '../styled/Head';
 import Logo from '../styled/Logo';
 import { CarItem } from '../../type/ApiResponseType';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../../utils/recoil/modal';
 
 const MenuBtn = styled.button`
   position: relative;
@@ -39,10 +41,24 @@ const Section = styled.section`
   grid-gap: 30px;
 `;
 
+const SummaryBtn = styled.button`
+	background: transparent;
+	padding: 0 15px;
+	width: 100px;
+	height: 33px;
+	border: 1px solid black;
+	cursor: pointer;
+	position: absolute;
+	right: 40px;
+	top: 40px;
+`;
+
 function Menu({ carCode }: { carCode: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [carName, setCarName] = useState('');
   const [data, setData] = useState<CarItem[]>([]);
+	const location = useLocation();
+	const setModal = useSetRecoilState(modalState);
   useEffect(() => {
     async function fetchData() {
       setData((await carsApi.carList).data);
@@ -54,6 +70,9 @@ function Menu({ carCode }: { carCode: string }) {
     }
     fetchData();
   }, [data.length, carCode, data]);
+	// useEffect(() => {
+	// 	if ()
+	// })
   return (
     <>
       <MenuBtn
@@ -71,6 +90,11 @@ function Menu({ carCode }: { carCode: string }) {
           })}
         </Section>
       )}
+			{ location.pathname === '/cars/estimation/models/making' && 
+				<SummaryBtn onClick={() => setModal({modalName: 'SUMMARY'})}>
+					<span>요약 보기</span>
+				</SummaryBtn>
+			}
     </>
   );
 }

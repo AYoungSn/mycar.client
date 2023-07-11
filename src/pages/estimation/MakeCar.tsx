@@ -6,9 +6,10 @@ import { ModelPreview } from '../../components/ModelPreview';
 import useFetchModelInit from '../../hooks/useFetchModelInit';
 import { OptionArea } from '../../components/options/OptionArea';
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { selectOptListState } from '../../utils/recoil/options';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { detailOptListState } from '../../utils/recoil/options';
 import { Model } from '../../type/ApiResponseType';
+import { modelState } from '../../utils/recoil/carInfo';
 
 const ContentWrap = styled(FlexDiv)`
   position: relative;
@@ -21,8 +22,8 @@ const ContentWrap = styled(FlexDiv)`
 
 export function MakeCar() {
   const [searchParams] = useSearchParams();
-  const [model, setModel] = useState<Model | null>(null);
-  const selectList = useRecoilValue(selectOptListState);
+  const [model, setModel] = useRecoilState<Model>(modelState);
+  const selectList = useRecoilValue(detailOptListState);
   useFetchModelInit(Number(searchParams.get('modelId')), setModel);
   // if (model) {
   // 	searchParams.set('carCode', model.carCode);

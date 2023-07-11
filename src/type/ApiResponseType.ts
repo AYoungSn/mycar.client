@@ -41,7 +41,7 @@ export type Tooltips = {
 };
 
 export type Options = {
-  select: OptionChoiceType[];
+  detail: OptionChoiceType[];
   hga: OptionChoiceType[];
   npf: OptionChoiceType[];
 };
