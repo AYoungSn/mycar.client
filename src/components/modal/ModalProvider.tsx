@@ -17,7 +17,7 @@ function ModalProvider() {
 		modalName, 
 		colorName, 
 		trimChangeData,
-		detailOption,
+		detail,
 		changeOptionData,
 	}, setModal] =
     useRecoilState(modalState);
@@ -42,7 +42,7 @@ function ModalProvider() {
     ),
 		'CHANGE-OPTION': (
 			<OptionChangeModal 
-				detailOption={detailOption || ''} 
+				detail={detail || ''} 
 				changeOptionData={changeOptionData || {delOptions: [], addOptions: []}} 
 			/>
 		),

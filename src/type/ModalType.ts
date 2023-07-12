@@ -17,6 +17,6 @@ export type ModalStateType = {
   colorName?: string | null;
   isOpen?: boolean;
   trimChangeData?: TrimChangeModalDataType;
-	detailOption?: string;
+	detail?: string;
 	changeOptionData?: ChangeOptionType;
 };

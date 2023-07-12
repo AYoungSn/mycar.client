@@ -56,7 +56,6 @@ export default function Exterior() {
         }
       }
       if (exteriorList[0] && exterior.choiceYN === false) {
-				console.log(exteriorList[0]);
         // 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
         setExterior({
           ...exteriorList[0],

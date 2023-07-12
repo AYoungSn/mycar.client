@@ -5,7 +5,6 @@ import { modalState } from '../../utils/recoil/modal';
 
 function Modal({ children }: { children: ReactNode }) {
 	const setModal = useSetRecoilState(modalState);
-	console.log(children)
   return (
     <>
       <ModalBackground />
