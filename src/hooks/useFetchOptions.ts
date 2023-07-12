@@ -3,9 +3,11 @@ import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { optionsApi } from "../utils/Api";
 import { OptionChoiceType, OptionType } from "../type/optionType";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { hgaOptListState, npfOptListState, npfOptState } from "../utils/recoil/options";
+import { detailOptState, hgaOptListState, npfOptListState, npfOptState } from "../utils/recoil/options";
+import { optionUpdate } from "../utils/optionUpdate";
 
 export function useFetchSelectList(modelId: number, selectOpts: Map<string, boolean>, setSelectListOpts: any, selectListInit: Map<string, OptionChoiceType>) {
+	const [detailOpt, setDetailOpt] = useRecoilState(detailOptState);
 	const setHgaList = useSetRecoilState(hgaOptListState);
 	const setNpfList = useSetRecoilState(npfOptListState);
 	useEffect(() => {
@@ -14,6 +16,9 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 		async function fetchData() {
 			const data = (await optionsApi.disableOptions(modelId, optionCodes)).data;
 			data.delOptions.map((item: OptionType) => {
+				if (detailOpt.get(item.code)) {
+					optionUpdate(item.code, true, setDetailOpt);
+				}
 				tmp.set(item.code, {...item, choiceYN: false});
 			});
 			const addData = (await optionsApi.enableOptions(modelId, optionCodes)).data;
