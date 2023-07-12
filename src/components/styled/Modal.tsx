@@ -10,7 +10,7 @@ export const ModalContainer = styled.div<ModalContainerType>`
   height: ${(props) => props.height};
   margin-top: 50px;
   top: 0;
-  position: fixed;
+  position: absolute;
   background-color: white;
   border: 1px solid black;
   padding: 80px 60px;

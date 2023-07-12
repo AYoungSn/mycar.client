@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { modalState } from "../../utils/recoil/modal";
-import { CloseBtn, ModalBackground, ModalContainer } from "../styled/Modal";
+import { CloseBtn, ConfirmBtn, ModalBackground, ModalContainer } from "../styled/Modal";
 import { styled } from "styled-components";
 import { modelState } from "../../utils/recoil/carInfo";
 import { exteriorState, interiorState, detailOptState, hgaOptState, npfOptState, detailOptListState, hgaOptListState, npfOptListState } from "../../utils/recoil/options";
@@ -124,9 +124,9 @@ export default function SummaryViewModal() {
 					</Grid>
 				</PopDropDown>
 				<a>
-					<button>
+					<ConfirmBtn>
 						내 차 만들기 완료
-					</button>
+					</ConfirmBtn>
 				</a>
 			</PopDropDown>
 		</MiniModalContainer>
