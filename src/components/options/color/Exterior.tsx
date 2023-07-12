@@ -78,12 +78,12 @@ export default function Exterior() {
 				setInteriorList(
 					data.interior.sort((a: InteriorType, b: InteriorType) =>
 						a.choiceYN === true
-							? -1
+							? 1
 							: b.choiceYN === true
 							? a.id > b.id
 								? 1
 								: -1
-							: 1,
+							: -1,
 					),
 				);
 				}

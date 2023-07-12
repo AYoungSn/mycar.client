@@ -41,23 +41,23 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
       setExteriorList(
         data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
           a.choiceYN === true
-            ? -1
+            ? 1
             : b.choiceYN === true
             ? a.id > b.id
               ? 1
-              : 0
-            : 1,
+              : -1
+            : -1,
         ),
       );
       setInteriorList(
         data.interior.sort((a, b) =>
           a.choiceYN === true
-            ? -1
+            ? 1
             : b.choiceYN === true
             ? a.id > b.id
               ? 1
               : -1
-            : 1,
+            : -1,
         ),
       );
 			setDetailListInit(new Map());

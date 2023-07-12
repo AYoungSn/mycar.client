@@ -81,12 +81,12 @@ export default function Interior() {
 				setExteriorList(
 					data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
 						a.choiceYN === true
-							? -1
+							? 1
 							: b.choiceYN === true
 							? a.id > b.id
 								? 1
-								: 0
-							: 1,
+								: -1
+							: -1,
 					),
 				);
 			}
@@ -127,12 +127,12 @@ export default function Interior() {
                         data.exterior.sort(
                           (a: ExteriorType, b: ExteriorType) =>
                             a.choiceYN === true
-                              ? -1
+                              ? 1
                               : b.choiceYN === true
                               ? a.id > b.id
                                 ? 1
-                                : 0
-                              : 1,
+                                : -1
+                              : -1,
                         ),
                       );
                       setInterior(item);
