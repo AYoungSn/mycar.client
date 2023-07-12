@@ -17,7 +17,7 @@ function ChangeOptionList({change, optionList}:{change: 'add' | 'del', optionLis
 				return(
 					<OptionList key={item.code}>
 						<p>{item.name}</p>
-						<p>{item.price}</p>
+						<p>{item.price} 원</p>
 					</OptionList>
 				)
 			})}

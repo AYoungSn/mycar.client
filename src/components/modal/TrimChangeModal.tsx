@@ -33,10 +33,9 @@ function TrimBox({ title, trimName, price }: { title: string; trimName: string; 
 			<b>{title}</b>
 			<div>
 				<p>{trimName}</p>
-				<p>{price}</p>
+				<p>{price} 원</p>
     	</div>
     </FlexLiItem>
-    
   );
 }
 
@@ -49,7 +48,7 @@ export default function TrimChangeModal({
 }) {
   let addPrice = 0;
   let delPrice = 0;
-  data.changeOptionInfo?.addOptions.map((item, id) => addPrice += item.price);
+  data.changeOptionInfo?.addOptions.map((item) => addPrice += item.price);
   data.changeOptionInfo?.delOptions.map((item) => delPrice += item.price);
   return (
     <Modal>

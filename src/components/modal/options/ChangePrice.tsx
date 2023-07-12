@@ -6,7 +6,7 @@ export default function ChangePrice({changePrice}:{changePrice: number}) {
 	>
 		<p>변경 금액</p>
 		<p>
-			{changePrice}
+			{changePrice} 원
 		</p>
 	</FlexDiv>)
 }
