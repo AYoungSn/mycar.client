@@ -11,7 +11,7 @@ export const Head = styled.header`
 
 export const HeaderWrap = styled.div`
   position: relative;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 `;
 
 export const Triangle = styled.div<{ isOpen: boolean }>`

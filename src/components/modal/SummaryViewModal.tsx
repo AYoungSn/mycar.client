@@ -20,13 +20,17 @@ export default function SummaryViewModal() {
 	const npfList = useRecoilValue(npfOptListState);
 	const price = useUpdatePrice();
 	const navigate = useNavigate();
+	const closeModal = () => {
+		setModal({ modalName: null })
+	}
 	const goEstimate = () => {
+		closeModal();
 		navigate(`/cars/estimation/models/estimate`);
 	}
 	return <>
 		<ModalBackground style={{zIndex: 0}}/>
 		<MiniModalContainer width="700px" height="">
-			<CloseBtn onClick={() => setModal({ modalName: null })}>X</CloseBtn>
+			<CloseBtn onClick={closeModal}>X</CloseBtn>
 			<PopDropDown>
 				<div style={{marginBottom: "30px", textAlign: "left"}}>나의 {model.carName}</div>
 				<h3 style={{fontSize: "16px", textAlign: "center"}}>요약 보기</h3>
