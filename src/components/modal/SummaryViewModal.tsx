@@ -5,59 +5,7 @@ import { styled } from "styled-components";
 import { modelState } from "../../utils/recoil/carInfo";
 import { exteriorState, interiorState, detailOptState, hgaOptState, npfOptState, detailOptListState, hgaOptListState, npfOptListState } from "../../utils/recoil/options";
 import useUpdatePrice from "../../hooks/useUpdatePrice";
-
-const MiniModalContainer = styled(ModalContainer)`
-	position: fixed;
-	top: 100px;
-	left: unset;
-	right: 73px;
-	margin-top: 0!important;
-	padding: 50px 70px;
-	-webkit-transform: none;
-	transform: none;
-	width: 520px;
-`;
-
-const PopDropDown = styled.div`
-	background-color: #fff;
-	text-align: left;
-	display: flex;
-	flex-direction: column;
-	font-size: 16px;
-`;
-const Grid = styled.div`
-	display: grid;
-	grid-template-columns: 60px auto;
-	border-top: 1px solid #ccc;
-	font-family: "HyundaiSansHeadKR";
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 34px;
-	letter-spacing: -.4px;
-	& > div {
-		font-weight: 700;
-	}
-`;
-const Name = styled.div`
-	color: #666;
-	text-align: left;
-	font-size: 14px;
-	line-height: 18px;
-	font-weight: 400px;
-`;
-const Price = styled.div<{fontSize: string}>`
-	text-align: right;
-	font-size: ${props => props.fontSize};
-	line-height: 18px;
-	font-weight: 400px;
-`;
-
-function TableInner({name, price}:{name: string, price: number}) {
-	return (<>
-		<Name>{name}</Name>
-		<Price fontSize="16px">{price <= 0 ? '-' : price} 원</Price>
-	</>)
-}
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function SummaryViewModal() {
 	const setModal = useSetRecoilState(modalState);
@@ -71,6 +19,10 @@ export default function SummaryViewModal() {
 	const npfOpt = useRecoilValue(npfOptState);
 	const npfList = useRecoilValue(npfOptListState);
 	const price = useUpdatePrice();
+	const navigate = useNavigate();
+	const goEstimate = () => {
+		navigate(`/cars/estimation/models/estimate`);
+	}
 	return <>
 		<ModalBackground style={{zIndex: 0}}/>
 		<MiniModalContainer width="700px" height="">
@@ -123,12 +75,63 @@ export default function SummaryViewModal() {
 						<Price fontSize="20px" style={{lineHeight: "34px"}}>{price} 원</Price>
 					</Grid>
 				</PopDropDown>
-				<a>
-					<ConfirmBtn>
-						내 차 만들기 완료
-					</ConfirmBtn>
-				</a>
+				<ConfirmBtn onClick={goEstimate}>
+					내 차 만들기 완료
+				</ConfirmBtn>
 			</PopDropDown>
 		</MiniModalContainer>
 </>
 }
+
+function TableInner({name, price}:{name: string, price: number}) {
+	return (<>
+		<Name>{name}</Name>
+		<Price fontSize="16px">{price <= 0 ? '-' : price} 원</Price>
+	</>)
+}
+
+const MiniModalContainer = styled(ModalContainer)`
+	position: fixed;
+	top: 100px;
+	left: unset;
+	right: 73px;
+	margin-top: 0!important;
+	padding: 50px 70px;
+	-webkit-transform: none;
+	transform: none;
+	width: 520px;
+`;
+
+const PopDropDown = styled.div`
+	background-color: #fff;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+`;
+const Grid = styled.div`
+	display: grid;
+	grid-template-columns: 60px auto;
+	border-top: 1px solid #ccc;
+	font-family: "HyundaiSansHeadKR";
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 34px;
+	letter-spacing: -.4px;
+	& > div {
+		font-weight: 700;
+	}
+`;
+const Name = styled.div`
+	color: #666;
+	text-align: left;
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 400px;
+`;
+const Price = styled.div<{fontSize: string}>`
+	text-align: right;
+	font-size: ${props => props.fontSize};
+	line-height: 18px;
+	font-weight: 400px;
+`;

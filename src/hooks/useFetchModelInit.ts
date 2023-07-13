@@ -61,9 +61,7 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
         ),
       );
 			setDetailListInit(new Map());
-			if (!detailOpts) {
-				setDetailListOpt(new Map());
-			}
+			setDetailListOpt(new Map());
 			data.options.detail.map((item) => {
 				optionListUpdate(item.code, item, setDetailListOpt);
 				optionListUpdate(item.code, item, setDetailListInit);
@@ -80,7 +78,9 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 				optionListUpdate(item.code, item, setNpfListOpt);
 				optionListUpdate(item.code, item, setNpfListInit);
 			})
-      setDetailOpts(new Map());
+			if (!detailOpts) {
+      	setDetailOpts(new Map());
+			}
       setHgaOpts(new Map());
       setNpfOpts(new Map());
     }

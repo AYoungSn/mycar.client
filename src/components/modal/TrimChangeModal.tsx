@@ -1,10 +1,15 @@
 import { styled } from 'styled-components';
 import Modal from './Modal';
-import { FlexDiv, FlexLiItem, FlexUl } from '../styled/Flex';
+import { FlexLiItem, FlexUl } from '../styled/Flex';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
 import ChangeOptionList from './options/ChangeOptionList';
 import { ConfirmBtn, PopupHeader } from '../styled/Modal';
 import ChangePrice from './options/ChangePrice';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../../utils/recoil/modal';
+import { detailOptState } from '../../utils/recoil/options';
+import { optionUpdate } from '../../utils/optionUpdate';
 
 const TrimWrap = styled.div`
   overflow: hidden;
@@ -46,6 +51,19 @@ export default function TrimChangeModal({
   colorName: string;
   data: TrimChangeModalDataType;
 }) {
+	const navigate = useNavigate();
+	const setModal = useSetRecoilState(modalState);
+	const setDetailOpts = useSetRecoilState(detailOptState);
+	const trimChange = () => {
+		setModal({modalName: null});
+		data.changeOptionInfo?.addOptions.map((item) => {
+			optionUpdate(item.code, false, setDetailOpts);
+		})
+		data.changeOptionInfo?.delOptions.map((item) => {
+			optionUpdate(item.code, true, setDetailOpts);
+		})
+		navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
+	}
   let addPrice = 0;
   let delPrice = 0;
   data.changeOptionInfo?.addOptions.map((item) => addPrice += item.price);
@@ -78,9 +96,7 @@ export default function TrimChangeModal({
 								data.changeTrimInfo.beforeCarPrice +
 								addPrice -
 								delPrice) || 0}/>
-						<a href={`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`}>
-							<ConfirmBtn>확인</ConfirmBtn>
-						</a>
+						<ConfirmBtn onClick={trimChange}>확인</ConfirmBtn>
           </TrimWrap>
         </div>
       </div>

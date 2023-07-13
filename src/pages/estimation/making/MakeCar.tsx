@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { FlexDiv, FlexItem } from '../../components/styled/Flex';
-import Header from '../../components/header/Header';
+import { FlexDiv, FlexItem } from '../../../components/styled/Flex';
+import Header from '../../../components/header/Header';
 import { useSearchParams } from 'react-router-dom';
-import { ModelPreview } from '../../components/ModelPreview';
-import useFetchModelInit from '../../hooks/useFetchModelInit';
+import { ModelPreview } from '../../../components/ModelPreview';
+import useFetchModelInit from '../../../hooks/useFetchModelInit';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { detailOptListState } from '../../utils/recoil/options';
-import { Model } from '../../type/ApiResponseType';
-import { modelState } from '../../utils/recoil/carInfo';
-import { Color } from '../../components/options/color/Color';
-import { Options } from '../../components/options/Options';
-import { FlexDivItemType } from '../../type/styledType';
+import { detailOptListState } from '../../../utils/recoil/options';
+import { Model } from '../../../type/ApiResponseType';
+import { modelState } from '../../../utils/recoil/carInfo';
+import { Color } from '../../../components/options/color/Color';
+import { Options } from '../../../components/options/Options';
+import { FlexDivItemType } from '../../../type/styledType';
 
 const ContentWrap = styled(FlexDiv)`
   position: relative;

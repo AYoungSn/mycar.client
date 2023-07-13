@@ -23,7 +23,7 @@ const TrimWrap = styled(FlexDiv)`
   display: flex;
 `;
 
-function EstimationModel() {
+function TrimModelList() {
   const [searchParams] = useSearchParams();
   const [engineId, setEngineId] = useState(0);
   const [gearboxId, setGearboxId] = useState(0);
@@ -72,4 +72,4 @@ function EstimationModel() {
     </div>
   );
 }
-export default EstimationModel;
+export default TrimModelList;
