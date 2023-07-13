@@ -80,7 +80,7 @@ function ChoiceOptionList({name, optList, selectOpts}: {name:string, optList:Map
 			{
 				[...selectOpts].map(([key, value]) => {
 					return <FlexLi style={{justifyContent: "space-between", }}>
-						<p>{optList.get(key)?.name}</p>
+						<p style={{color: "#666"}}>{optList.get(key)?.name}</p>
 						<div style={{margin: "10px"}}></div>
 						<Price price={optList.get(key)?.price || 0} textAlign="right"/>
 					</FlexLi>
