@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { optionsApi } from "../utils/Api";
-import { OptionChoiceType, OptionType } from "../type/optionType";
+import { InteriorType, OptionChoiceType, OptionType } from "../type/optionType";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { detailOptState, hgaOptListState, npfOptListState, npfOptState } from "../utils/recoil/options";
+import { detailOptState, hgaOptListState, interiorListState, interiorState, npfOptListState, npfOptState } from "../utils/recoil/options";
 import { optionUpdate } from "../utils/optionUpdate";
 
 export function useFetchSelectList(modelId: number, selectOpts: Map<string, boolean>, setSelectListOpts: any, selectListInit: Map<string, OptionChoiceType>) {
 	const [detailOpt, setDetailOpt] = useRecoilState(detailOptState);
 	const setHgaList = useSetRecoilState(hgaOptListState);
 	const setNpfList = useSetRecoilState(npfOptListState);
+	const [interior, setInterior] = useRecoilState(interiorState);
+	const interiorList = useRecoilValue(interiorListState);
 	useEffect(() => {
 		const optionCodes = MakeOptionCodeList(selectOpts);
 		const tmp = new Map(selectListInit);
@@ -26,6 +28,14 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 				tmp.set(item.code, {...item, choiceYN: true});
 			});
 			setSelectListOpts(tmp);
+			const {available, interiorCodes}:{available: boolean, interiorCodes: string[]} = (await optionsApi.checkedInterior(modelId, optionCodes)).data;
+			if (available === true) {
+				console.log(interiorCodes[0]);
+				const changeExterior = interiorList.filter((element, id, array) => {
+					return element.code === interiorCodes[0];
+				})
+				setInterior(changeExterior[0]);
+			}
 			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
 			const hga = new Map();
 			tuixList.hga.map((item: OptionType) => {

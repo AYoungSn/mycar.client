@@ -57,4 +57,6 @@ export const optionsApi = {
 		Api.get(`/cars/options/tuix?modelId=${modelId}&optionCode=${optionCode}`),
 	disableTuix: (modelId: number, optionCode: string) => 
 		Api.get(`/cars/options/tuix/disable?modelId=${modelId}&optionCode=${optionCode}`),
+	checkedInterior: (modelId: number, optionCode: string) =>
+		Api.get(`/cars/options/checked-interior?modelId=${modelId}&optionCode=${optionCode}`),
 };
