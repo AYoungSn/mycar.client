@@ -15,14 +15,13 @@ import {
   interiorState,
   detailOptState,
 } from '../../../utils/recoil/options';
-import { useEffect } from 'react';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
 import { optionsApi } from '../../../utils/Api';
 import { useSearchParams } from 'react-router-dom';
 import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
-import { allOptionUpdate } from '../../../utils/optionUpdate';
 import { TrimChangeModalDataType } from '../../../type/ApiResponseType';
 import { modalState } from '../../../utils/recoil/modal';
+import { useInitInterior, useUpdateInterior } from '../../../hooks/useInteriorUpdate';
 
 export default function Interior() {
   const [searchParams] = useSearchParams();
@@ -32,59 +31,12 @@ export default function Interior() {
   const [interior, setInterior] = useRecoilState(interiorState);
   const interiorList = useRecoilValue<InteriorType[]>(interiorListState);
   const setExteriorList = useSetRecoilState(exteriorListState);
-  const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
+  const detailOpts = useRecoilValue(detailOptState);
   const exterior = useRecoilValue(exteriorState);
   // modal 창을 위한 state
   const setModal = useSetRecoilState(modalState);
-  useEffect(() => {
-    function updateInterior(){
-      for (let i = 0; i < interiorList.length; i++) {
-        if (
-          interiorList[i].id === interior.id &&
-          interiorList[i].choiceYN === false
-        ) {
-          for (let j = 0; j < interiorList.length; j++) {
-            if (interiorList[j].choiceYN === true) {
-              setInterior({ ...interiorList[j] });
-              break;
-            }
-          }
-          break;
-        }
-      }
-			if (interiorList[0] && interior.choiceYN === false) {
-				setInterior({
-					...interiorList[0],
-				});
-      }
-		}
-		updateInterior();
-	}, [interiorList]);
-	useEffect(() => {
-		async function initInterior() {
-			if (interior.code) {
-				const data = (
-					await optionsApi.enableExteriorList(
-						carCode,
-						trimCode,
-						interior.code,
-					)
-				).data;
-				setExteriorList(
-					data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-						a.choiceYN === true
-							? 1
-							: b.choiceYN === true
-							? a.id > b.id
-								? 1
-								: -1
-							: -1,
-					),
-				);
-			}
-    }
-    initInterior();
-  }, [interior]);
+  useUpdateInterior(modelId);
+	useInitInterior(carCode, trimCode);
   return (
     <section>
       <OptionTitle>
@@ -120,41 +72,24 @@ export default function Interior() {
                           (a: ExteriorType, b: ExteriorType) =>
                             a.choiceYN === true
                               ? 1
-                              : b.choiceYN === true
-                              ? a.id > b.id
+                              : (b.choiceYN === true
+                              ? (a.id > b.id
                                 ? 1
-                                : -1
-                              : -1,
+                                : -1)
+															: -1),
                         ),
                       );
                       setInterior(item);
                     }
-                    async function checkedOptionList() {
-                      const optionCodes = MakeOptionCodeList(detailOpts);
-                      const data = (
-                        await optionsApi.checkedOptions(
-                          item.code,
-                          optionCodes,
-                          modelId,
-                        )
-                      ).data;
-                      if (data.available === false) {
-                        allOptionUpdate(data.optionCode, setDetailOpts);
-                      }
-                    }
                     fetchExteriorList();
-                    checkedOptionList();
-                    // price 변경
-                    // 외장색상 목록 재요청
-                    // -> 기존 외장 색상이 선택 불가한 경우 선택가능한 색상으로 변경
                   }}
                 />
               </InteriorItem>
             ) : (
               <InteriorItem key={item.code}>
                 <ColorBtn
-                  width={'496px'}
-                  height={'75px'}
+                  width='496px'
+                  height='75px'
                   style={{ backgroundImage: `url(${item.imgUri})` }}
                   active={item.id === interior.id}
                   onClick={() => {

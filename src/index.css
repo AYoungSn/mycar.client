@@ -36,10 +36,12 @@ textarea,
 ul {
   box-sizing: border-box;
 }
+label, button, a {
+	cursor: pointer;
+}
 
 button {
 	border: none;
 	background: transparent;
-	cursor: pointer;
 	padding: 5px;
 }

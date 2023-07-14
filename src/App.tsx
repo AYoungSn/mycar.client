@@ -6,29 +6,9 @@ import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } fro
 import ModalProvider from './components/modal/ModalProvider';
 import Estimate from './pages/estimation/making/estimate/Estimate';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/cars/estimation/models',
-    element: <TrimModelList />,
-  },
-  {
-    path: '/cars/estimation/models/making',
-    element: <MakeCar />,
-  },
-	{
-		path: '/cars/estimation/models/estimate',
-		element: <Estimate />
-	}
-]);
-
 function App() {
   return (
     <RecoilRoot>
-      {/* <RouterProvider router={router} /> */}
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home/>}/>

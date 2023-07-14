@@ -21,16 +21,11 @@ import { ExteriorType, InteriorType } from '../../../type/optionType';
 import { optionsApi } from '../../../utils/Api';
 import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
 import { modalState } from '../../../utils/recoil/modal';
-
-const ExteriorItem = styled.li`
-  margin: 8px;
-  position: relative;
-`;
+import { useExteriorListState, useUpdateInteriorList } from '../../../hooks/useColorUpdate';
 
 export default function Exterior() {
   const [searchParams] = useSearchParams();
   const [exterior, setExterior] = useRecoilState(exteriorState);
-  const setInteriorList = useSetRecoilState(interiorListState);
   const interior = useRecoilValue(interiorState);
   const exteriorList = useRecoilValue<ExteriorType[]>(exteriorListState);
   const detailOpts = useRecoilValue(detailOptState);
@@ -39,56 +34,9 @@ export default function Exterior() {
   const modelId = Number(searchParams.get('modelId') || '0');
   // modal
   const setModal = useSetRecoilState(modalState);
-
-  useEffect(() => {
-    function initExterior() {
-      for (let i = 0; i < exteriorList.length; i++) {
-        if (
-          exteriorList[i].id === exterior.id &&
-          exteriorList[i].choiceYN === false
-        ) {
-          for (let j = 0; j < exteriorList.length; j++) {
-            if (exteriorList[j].choiceYN === true) {
-              setExterior({ ...exteriorList[j] });
-            }
-          }
-        }
-      }
-      if (exteriorList[0] && exterior.choiceYN === false) {
-        // 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
-        setExterior({
-          ...exteriorList[0],
-        });
-      }
-    }
-    initExterior();
-  }, [exteriorList]);
-
-	useEffect(() => {
-		async function fetchInteriorList() {
-			if (exterior.code) {
-				const data = (
-					await optionsApi.enableInteriorList(
-						carCode,
-						trimCode,
-						exterior.code,
-					)
-				).data;
-				setInteriorList(
-					data.interior.sort((a: InteriorType, b: InteriorType) =>
-						a.choiceYN === true
-							? 1
-							: b.choiceYN === true
-							? a.id > b.id
-								? 1
-								: -1
-							: -1,
-					),
-				);
-				}
-		}
-		fetchInteriorList();
-	}, [exterior]);
+	useExteriorListState();
+	useUpdateInteriorList(carCode, trimCode);
+	
   return (
     <section>
       <OptionTitle>
@@ -160,3 +108,8 @@ export default function Exterior() {
     </section>
   );
 }
+
+const ExteriorItem = styled.li`
+  margin: 8px;
+  position: relative;
+`;

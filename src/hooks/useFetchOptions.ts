@@ -30,11 +30,18 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 			setSelectListOpts(tmp);
 			const {available, interiorCodes}:{available: boolean, interiorCodes: string[]} = (await optionsApi.checkedInterior(modelId, optionCodes)).data;
 			if (available === true) {
-				console.log(interiorCodes[0]);
-				const changeExterior = interiorList.filter((element, id, array) => {
-					return element.code === interiorCodes[0];
-				})
-				setInterior(changeExterior[0]);
+				let exist = false;
+				for(let i = 0; i < interiorCodes.length;i++) {
+					if (interiorCodes[i] === interior.code) {
+						exist = true;
+					}
+				}
+				if(exist === false) {
+					const changeInterior = interiorList.filter((element, id, array) => {
+						return element.code === interiorCodes[0];
+					})
+					setInterior(changeInterior[0]);
+				}
 			}
 			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
 			const hga = new Map();
