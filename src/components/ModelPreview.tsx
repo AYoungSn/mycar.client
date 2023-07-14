@@ -6,6 +6,25 @@ import { FlexDivItemType } from '../type/styledType';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../utils/recoil/modal';
 
+export default function ModelPreview({ model }: { model: Model }) {
+  const price = useUpdatePrice();
+	const setModal = useSetRecoilState(modalState);
+  return (
+    <PreviewWrap>
+      <Preview marginTop="0" textAlign="none">
+        <h2>
+          {model.carName} - {model.trimName}
+        </h2>
+        <ModelName>{model.modelName}</ModelName>
+				<ModelChangeBtn onClick={() => setModal({modalName: 'CHANGE-MODEL'})}><span>모델 변경</span></ModelChangeBtn>
+        <PriceDiv>
+          <PLabel>총 차량 가격</PLabel>
+          <Price>{price}</Price>
+        </PriceDiv>
+      </Preview>
+    </PreviewWrap>
+  );
+}
 const PreviewWrap = styled.div`
   position: relative;
 `;
@@ -47,23 +66,3 @@ const ModelChangeBtn = styled.button`
 	letter-spacing: -.4px;
 	cursor: pointer;
 `;
-
-export function ModelPreview({ model }: { model: Model }) {
-  const price = useUpdatePrice();
-	const setModal = useSetRecoilState(modalState);
-  return (
-    <PreviewWrap>
-      <Preview marginTop="0" textAlign="none">
-        <h2>
-          {model.carName} - {model.trimName}
-        </h2>
-        <ModelName>{model.modelName}</ModelName>
-				<ModelChangeBtn onClick={() => setModal({modalName: 'CHANGE-MODEL'})}><span>모델 변경</span></ModelChangeBtn>
-        <PriceDiv>
-          <PLabel>총 차량 가격</PLabel>
-          <Price>{price}</Price>
-        </PriceDiv>
-      </Preview>
-    </PreviewWrap>
-  );
-}

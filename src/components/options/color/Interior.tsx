@@ -15,21 +15,14 @@ import {
   interiorState,
   detailOptState,
 } from '../../../utils/recoil/options';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
-import { carsApi, optionsApi } from '../../../utils/Api';
+import { optionsApi } from '../../../utils/Api';
 import { useSearchParams } from 'react-router-dom';
 import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
 import { allOptionUpdate } from '../../../utils/optionUpdate';
-import ColorChangeModal from '../../modal/ColorChangeModal';
-import TrimChangeModal from '../../modal/TrimChangeModal';
 import { TrimChangeModalDataType } from '../../../type/ApiResponseType';
 import { modalState } from '../../../utils/recoil/modal';
-
-const InteriorItem = styled.li`
-  margin-bottom: 25px;
-  position: relative;
-`;
 
 export default function Interior() {
   const [searchParams] = useSearchParams();
@@ -42,8 +35,7 @@ export default function Interior() {
   const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
   const exterior = useRecoilValue(exteriorState);
   // modal 창을 위한 state
-  const [{ modalName, colorName, trimChangeData }, setModal] =
-    useRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
   useEffect(() => {
     function updateInterior(){
       for (let i = 0; i < interiorList.length; i++) {
@@ -199,9 +191,11 @@ export default function Interior() {
               </InteriorItem>
             );
           })}
-        {/* {isColorChange && <ColorChangeModal colorChange='exterior' colorName={disableColor} setModal={setIsColorChange}/>} */}
-        {/* {isTrimChange && <TrimChangeModal colorName={disableColor} setModal={setIsTrimChange} data={modalData}/>} */}
       </FlexUl>
     </section>
   );
 }
+const InteriorItem = styled.li`
+  margin-bottom: 25px;
+  position: relative;
+`;

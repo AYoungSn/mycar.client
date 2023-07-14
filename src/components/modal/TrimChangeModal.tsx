@@ -11,39 +11,6 @@ import { modalState } from '../../utils/recoil/modal';
 import { detailOptState } from '../../utils/recoil/options';
 import { optionUpdate } from '../../utils/optionUpdate';
 
-const TrimWrap = styled.div`
-  overflow: hidden;
-  margin-bottom: 30px;
-  & > ul > li > div {
-    padding: 25px 40px;
-    background: #f6f3f2;
-  }
-  & > ul > li > b {
-    display: inline-block;
-    margin: 30px 0;
-  }
-`;
-
-const FlexTrim = styled(FlexUl)`
-  justify-content: space-between;
-  font-family: 'HyundaiSansTextKR';
-  font-size: 16px;
-  margin-bottom: 20px;
-`;
-
-
-function TrimBox({ title, trimName, price }: { title: string; trimName: string; price: number }) {
-  return (
-		<FlexLiItem>
-			<b>{title}</b>
-			<div>
-				<p>{trimName}</p>
-				<p>{price} 원</p>
-    	</div>
-    </FlexLiItem>
-  );
-}
-
 export default function TrimChangeModal({
   colorName,
   data,
@@ -101,5 +68,37 @@ export default function TrimChangeModal({
         </div>
       </div>
     </Modal>
+  );
+}
+const TrimWrap = styled.div`
+  overflow: hidden;
+  margin-bottom: 30px;
+  & > ul > li > div {
+    padding: 25px 40px;
+    background: #f6f3f2;
+  }
+  & > ul > li > b {
+    display: inline-block;
+    margin: 30px 0;
+  }
+`;
+
+const FlexTrim = styled(FlexUl)`
+  justify-content: space-between;
+  font-family: 'HyundaiSansTextKR';
+  font-size: 16px;
+  margin-bottom: 20px;
+`;
+
+
+function TrimBox({ title, trimName, price }: { title: string; trimName: string; price: number }) {
+  return (
+		<FlexLiItem>
+			<b>{title}</b>
+			<div>
+				<p>{trimName}</p>
+				<p>{price} 원</p>
+    	</div>
+    </FlexLiItem>
   );
 }

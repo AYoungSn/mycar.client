@@ -7,18 +7,6 @@ import OptionChangeModal from './OptionChangeModal';
 import SummaryViewModal from './SummaryViewModal';
 import ModelChangeModal from './ModelChangeModal';
 
-const ModalWrap = styled.div<{isOpen:boolean}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-	position: ${props => props.isOpen ? "fixed" : "relative"};
-	left: ${props => props.isOpen ? "0" : ""};
-	right: 0;
-	top: 0;
-	bottom: 0;
-	z-index: ${props => props.isOpen ? "10" : ""};
-	overflow: auto;
-`;
 function ModalProvider() {
   const [{ 
 		modalName, 
@@ -62,3 +50,16 @@ function ModalProvider() {
 }
 
 export default ModalProvider;
+
+const ModalWrap = styled.div<{isOpen:boolean}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	position: ${props => props.isOpen ? "fixed" : "relative"};
+	left: ${props => props.isOpen ? "0" : ""};
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: ${props => props.isOpen ? "10" : ""};
+	overflow: auto;
+`;

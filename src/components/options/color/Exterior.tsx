@@ -18,7 +18,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
-import { carsApi, optionsApi } from '../../../utils/Api';
+import { optionsApi } from '../../../utils/Api';
 import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
 import { modalState } from '../../../utils/recoil/modal';
 
@@ -38,8 +38,7 @@ export default function Exterior() {
   const trimCode = searchParams.get('trimCode') || 'undefined';
   const modelId = Number(searchParams.get('modelId') || '0');
   // modal
-  const [{ modalName, colorName, trimChangeData }, setModal] =
-    useRecoilState(modalState);
+  const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
     function initExterior() {

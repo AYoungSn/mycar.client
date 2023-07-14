@@ -9,6 +9,23 @@ import { CarItem } from '../../type/ApiResponseType';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../utils/recoil/modal';
 
+function Header({ carCode }: { carCode: string }) {
+  return (
+    <HeaderWrap>
+      <Head>
+        <div>
+          <Link to="/">
+            <Logo type="button" name="hyundai" />
+          </Link>
+          <Menu carCode={carCode} />
+        </div>
+      </Head>
+    </HeaderWrap>
+  );
+}
+
+export default Header;
+
 const Section = styled.section`
   background: #fff;
   position: absolute;
@@ -76,20 +93,3 @@ function Menu({ carCode }: { carCode: string }) {
     </>
   );
 }
-
-function Header({ carCode }: { carCode: string }) {
-  return (
-    <HeaderWrap>
-      <Head>
-        <div>
-          <Link to="/">
-            <Logo type="button" name="hyundai" />
-          </Link>
-          <Menu carCode={carCode} />
-        </div>
-      </Head>
-    </HeaderWrap>
-  );
-}
-
-export default Header;

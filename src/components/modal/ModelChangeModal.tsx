@@ -15,61 +15,6 @@ import MakeOptionCodeList from "../../utils/makeOptionCodeList";
 import { detailOptState } from "../../utils/recoil/options";
 import ChangePrice from "./options/ChangePrice";
 
-const MenuWrap = styled.div`
-	margin-top: 10px;
-	border: 1px #AAA solid;
-	min-width: 320px;
-	background-color: #fff;
-	box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-	box-sizing: border-box;
-	width: auto;
-	z-index: 200 !important;
-`;
-
-const BoxLi = styled.li`
-	margin: 10px;
-`;
-const BoxBtn = styled.button<{active: boolean}>`
-	width: 100%;
-	border: ${props => props.active ? "2px solid #007fa8" : "1px #DDD solid" };
-	padding: 10px;
-	font-size: 16px;
-	& > b {
-		line-height: 20px;
-	}
-	& > p {
-		margin-top: 10px;
-	}
-`;
-function DropDown({carName, modelNames, setName}:{carName: string, modelNames: string[], setName: any}) {
-	return (<MenuWrap>
-		<ul>
-			{modelNames.map((name) => {
-				return (<li>
-					<button style={{width: "100%"}} onClick={() => {setName(name)}}>
-						{carName} {name}
-					</button>
-				</li>)
-			})}
-		</ul>
-	</MenuWrap>)
-}
-
-function TrimBox({trimList, selectModel, setModel}:{trimList: Trim[], selectModel: Trim, setModel: any}) {
-	return (<FlexUl style={{justifyContent: "center"}}>
-		{
-			trimList && trimList.map((item) => {
-				return (<BoxLi key={item.modelId}>
-					<BoxBtn active={selectModel.modelId === item.modelId} onClick={() => setModel(item)}>
-						<b>{item.trimName}</b>
-						<p>{item.price}</p>
-					</BoxBtn>
-				</BoxLi>)
-			})
-		}
-	</FlexUl>)
-}
-
 export default function ModelChangeModal() {
 	const [dropDown, setDropDown] = useState(false);
 	const [selectName, setSelectName] = useState('');
@@ -140,4 +85,59 @@ export default function ModelChangeModal() {
 			</ConfirmBtn>
 		</a>
 	</Modal>)	
+}
+
+const MenuWrap = styled.div`
+	margin-top: 10px;
+	border: 1px #AAA solid;
+	min-width: 320px;
+	background-color: #fff;
+	box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+	box-sizing: border-box;
+	width: auto;
+	z-index: 200 !important;
+`;
+
+const BoxLi = styled.li`
+	margin: 10px;
+`;
+const BoxBtn = styled.button<{active: boolean}>`
+	width: 100%;
+	border: ${props => props.active ? "2px solid #007fa8" : "1px #DDD solid" };
+	padding: 10px;
+	font-size: 16px;
+	& > b {
+		line-height: 20px;
+	}
+	& > p {
+		margin-top: 10px;
+	}
+`;
+function DropDown({carName, modelNames, setName}:{carName: string, modelNames: string[], setName: any}) {
+	return (<MenuWrap>
+		<ul>
+			{modelNames.map((name) => {
+				return (<li>
+					<button style={{width: "100%"}} onClick={() => {setName(name)}}>
+						{carName} {name}
+					</button>
+				</li>)
+			})}
+		</ul>
+	</MenuWrap>)
+}
+
+function TrimBox({trimList, selectModel, setModel}:{trimList: Trim[], selectModel: Trim, setModel: any}) {
+	return (<FlexUl style={{justifyContent: "center"}}>
+		{
+			trimList && trimList.map((item) => {
+				return (<BoxLi key={item.modelId}>
+					<BoxBtn active={selectModel.modelId === item.modelId} onClick={() => setModel(item)}>
+						<b>{item.trimName}</b>
+						<p>{item.price}</p>
+					</BoxBtn>
+				</BoxLi>)
+			})
+		}
+	</FlexUl>)
 }

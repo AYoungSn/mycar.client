@@ -4,6 +4,25 @@ import { FlexItem } from './styled/Flex';
 import { Trim } from '../type/ApiResponseType';
 import { FlexDivItemType } from '../type/styledType';
 
+export default function TrimBox({ trim, carCode }: { trim: Trim; carCode: string }) {
+  return (
+    <Item textAlign="" marginTop="">
+      <TrimName>{trim.trimName}</TrimName>
+      <Price>{trim.price}원</Price>
+      <div style={{ marginTop: '30px' }}>
+        <Info>{trim.basicInfo}</Info>
+      </div>
+      <Link
+        to={`/cars/estimation/models/making?modelId=${trim.modelId}&carCode=${carCode}&trimCode=${trim.trimCode}`}
+      >
+        <MakeCarBtn>
+          <span>내 차 만들기</span>
+        </MakeCarBtn>
+      </Link>
+    </Item>
+  );
+}
+
 const Item = styled(FlexItem)<FlexDivItemType>`
   background: #f6f3f2;
 	min-width: 200px;
@@ -46,22 +65,3 @@ const MakeCarBtn = styled.button`
   color: #fff;
   margin-top: 20px;
 `;
-
-export function TrimBox({ trim, carCode }: { trim: Trim; carCode: string }) {
-  return (
-    <Item textAlign="" marginTop="">
-      <TrimName>{trim.trimName}</TrimName>
-      <Price>{trim.price}원</Price>
-      <div style={{ marginTop: '30px' }}>
-        <Info>{trim.basicInfo}</Info>
-      </div>
-      <Link
-        to={`/cars/estimation/models/making?modelId=${trim.modelId}&carCode=${carCode}&trimCode=${trim.trimCode}`}
-      >
-        <MakeCarBtn>
-          <span>내 차 만들기</span>
-        </MakeCarBtn>
-      </Link>
-    </Item>
-  );
-}

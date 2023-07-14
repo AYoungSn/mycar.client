@@ -8,15 +8,6 @@ import ChangePrice from "./options/ChangePrice";
 import { optionUpdate } from "../../utils/optionUpdate";
 import { modalState } from "../../utils/recoil/modal";
 
-function onChangeOptions(changeOptionData: ChangeOptionType, setDetailOpts: any) {
-	for(let i = 0; i < changeOptionData.addOptions.length;i++) {
-		optionUpdate(changeOptionData.addOptions[i].code, false, setDetailOpts);
-	}
-	for(let i = 0; i < changeOptionData.delOptions.length;i++) {
-		optionUpdate(changeOptionData.delOptions[i].code, true, setDetailOpts)
-	}
-}
-
 export default function OptionChangeModal({
 	detail, 
 	changeOptionData
@@ -60,4 +51,13 @@ export default function OptionChangeModal({
 			</ConfirmBtn>
 		</div>
 	</Modal>)
+}
+
+function onChangeOptions(changeOptionData: ChangeOptionType, setDetailOpts: any) {
+	for(let i = 0; i < changeOptionData.addOptions.length;i++) {
+		optionUpdate(changeOptionData.addOptions[i].code, false, setDetailOpts);
+	}
+	for(let i = 0; i < changeOptionData.delOptions.length;i++) {
+		optionUpdate(changeOptionData.delOptions[i].code, true, setDetailOpts)
+	}
 }

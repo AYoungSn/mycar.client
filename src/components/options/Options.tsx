@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { OptionHead, OptionName } from '../styled/Option';
-import { OptionList } from './OptionList';
+import OptionList from './OptionList';
 import {
   hgaOptListState,
   hgaOptState,
@@ -13,46 +13,12 @@ import {
 import { optionUpdate } from '../../utils/optionUpdate';
 import { OptionChoiceType } from '../../type/optionType';
 import { useSearchParams } from 'react-router-dom';
-import { carsApi, optionsApi } from '../../utils/Api';
+import { optionsApi } from '../../utils/Api';
 import MakeOptionCodeList from '../../utils/makeOptionCodeList';
 import { useFetchSelectList, useFetchTuixList } from '../../hooks/useFetchOptions';
 import { modalState } from '../../utils/recoil/modal';
 
-type Props = {
-  name: string;
-  options: Map<string, OptionChoiceType>;
-  curOptions: Map<string, boolean>;
-  onChange: any;
-	disableOnChange?: any;
-};
-function OptionItemList(props: Props) {
-  return (
-    <div>
-      <OptionName marginTop="0" textAlign="left">
-        {props.name}
-      </OptionName>
-      <OptionList
-        options={props.options}
-        curOptions={props.curOptions}
-        onChange={props.onChange}
-				disableOnChange={props.disableOnChange}
-      />
-    </div>
-  );
-}
-
-async function disableOnChange(key: string, modelId: number, detailOpts: Map<string, boolean>, setModal: any) {
-	const data = (await optionsApi.optionsChange(modelId, MakeOptionCodeList(detailOpts), key)).data;
-	if (data.addOptions.length + data.delOptions.length >= 2) {
-		setModal({
-			modalName: 'CHANGE-OPTION',
-			detail: key,
-			changeOptionData: data
-		})
-	}
-}
-
-export function Options() {
+export default function Options() {
   const [detailListOpts, setDetailListOpts] =
     useRecoilState<Map<string, OptionChoiceType>>(detailOptListState);
 	const detailListInit = useRecoilValue(detailInitListState);
@@ -66,7 +32,6 @@ export function Options() {
 	const setModal = useSetRecoilState(modalState);
 	useFetchSelectList(modelId, detailOpts, setDetailListOpts, detailListInit);
 	useFetchTuixList(modelId);
-	console.log('detailList', detailListOpts);
   return (
     <div>
       <OptionHead>옵션</OptionHead>
@@ -102,8 +67,6 @@ export function Options() {
           curOptions={npfOpts}
           name="N Performance Parts"
           onChange={(e: React.MouseEvent<HTMLButtonElement>, key: string) => {
-            // 현재 선택된 옵션을 기반으로 선택 가능한 항목인지 조회
-            // 옵션 선택 시 선택 불가한 다른 항목 조회
             optionUpdate(key, npfOpts.get(key) || false, setNpfOpts);
           }}
 					disableOnChange={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -113,4 +76,38 @@ export function Options() {
       )}
     </div>
   );
+}
+
+type Props = {
+  name: string;
+  options: Map<string, OptionChoiceType>;
+  curOptions: Map<string, boolean>;
+  onChange: any;
+	disableOnChange?: any;
+};
+function OptionItemList(props: Props) {
+  return (
+    <div>
+      <OptionName marginTop="0" textAlign="left">
+        {props.name}
+      </OptionName>
+      <OptionList
+        options={props.options}
+        curOptions={props.curOptions}
+        onChange={props.onChange}
+				disableOnChange={props.disableOnChange}
+      />
+    </div>
+  );
+}
+
+async function disableOnChange(key: string, modelId: number, detailOpts: Map<string, boolean>, setModal: any) {
+	const data = (await optionsApi.optionsChange(modelId, MakeOptionCodeList(detailOpts), key)).data;
+	if (data.addOptions.length + data.delOptions.length >= 2) {
+		setModal({
+			modalName: 'CHANGE-OPTION',
+			detail: key,
+			changeOptionData: data
+		})
+	}
 }

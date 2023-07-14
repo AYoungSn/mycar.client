@@ -5,7 +5,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import useFetchToolTips from '../../hooks/useFetchToolTips';
 import useFetchTrims from '../../hooks/useFetchTrims';
-import { TrimBox } from '../../components/TrimBox';
+import TrimBox from '../../components/TrimBox';
 import { FlexDiv } from '../../components/styled/Flex';
 import { Trim } from '../../type/ApiResponseType';
 
