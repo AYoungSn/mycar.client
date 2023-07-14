@@ -35,7 +35,6 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 
   useEffect(() => {
     async function fetchData() {
-			console.log('model init');
       const data: ModelInfo = (await carsApi.init(modelId)).data;
       setModel(data.model);
       setPrice(data.model.price);

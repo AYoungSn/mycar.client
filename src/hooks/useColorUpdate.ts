@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { ExteriorType, InteriorType } from "../type/optionType";
-import { exteriorListState, exteriorState, interiorListState, interiorState } from "../utils/recoil/options";
+import { exteriorListState, exteriorState, interiorListState } from "../utils/recoil/options";
 import { optionsApi } from "../utils/Api";
 
 export function useExteriorListState() {

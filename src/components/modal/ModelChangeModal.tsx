@@ -1,19 +1,19 @@
 import { styled } from "styled-components";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import { MenuBtn, Triangle } from "../styled/Head";
 import { ConfirmBtn, PopupHeader } from "../styled/Modal";
 import Modal from "./Modal";
-import { useEffect, useState } from "react";
 import { carsApi, optionsApi } from "../../utils/Api";
-import { useRecoilValue } from "recoil";
 import { modelState } from "../../utils/recoil/carInfo";
-import { Trim } from "../../type/ApiResponseType";
 import useFetchTrimList from "../../hooks/useFetchTrimList";
 import { FlexUl } from "../styled/Flex";
 import ChangeOptionList from "./options/ChangeOptionList";
-import { OptionType } from "../../type/optionType";
 import MakeOptionCodeList from "../../utils/makeOptionCodeList";
 import { detailOptState } from "../../utils/recoil/options";
 import ChangePrice from "./options/ChangePrice";
+import { OptionType } from "../../type/optionType";
+import { Trim } from "../../type/ApiResponseType";
 
 export default function ModelChangeModal() {
 	const [dropDown, setDropDown] = useState(false);

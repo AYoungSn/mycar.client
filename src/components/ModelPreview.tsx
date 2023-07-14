@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 import { FlexItem } from './styled/Flex';
 import useUpdatePrice from '../hooks/useUpdatePrice';
 import { Model } from '../type/ApiResponseType';
 import { FlexDivItemType } from '../type/styledType';
-import { useSetRecoilState } from 'recoil';
 import { modalState } from '../utils/recoil/modal';
 
 export default function ModelPreview({ model }: { model: Model }) {

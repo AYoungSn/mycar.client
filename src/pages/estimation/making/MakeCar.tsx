@@ -1,10 +1,10 @@
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { FlexDiv, FlexItem } from '../../../components/styled/Flex';
 import Header from '../../../components/header/Header';
-import { useSearchParams } from 'react-router-dom';
 import ModelPreview from '../../../components/ModelPreview';
 import useFetchModelInit from '../../../hooks/useFetchModelInit';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailOptListState } from '../../../utils/recoil/options';
 import { Model } from '../../../type/ApiResponseType';
 import { modelState } from '../../../utils/recoil/carInfo';

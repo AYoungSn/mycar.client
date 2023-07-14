@@ -1,11 +1,11 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { modalState } from "../../utils/recoil/modal";
 import { CloseBtn, ConfirmBtn, ModalBackground, ModalContainer } from "../styled/Modal";
-import { styled } from "styled-components";
 import { modelState } from "../../utils/recoil/carInfo";
 import { exteriorState, interiorState, detailOptState, hgaOptState, npfOptState, detailOptListState, hgaOptListState, npfOptListState } from "../../utils/recoil/options";
 import useUpdatePrice from "../../hooks/useUpdatePrice";
-import { useNavigate } from "react-router-dom";
 
 export default function SummaryViewModal() {
 	const setModal = useSetRecoilState(modalState);

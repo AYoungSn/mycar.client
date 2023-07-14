@@ -1,9 +1,9 @@
 import { useRecoilValue } from "recoil";
+import { ReactNode } from "react";
+import { styled } from "styled-components";
 import SimpleHeader from "../../../../components/header/SimpleHeader";
 import { modelState, priceState } from "../../../../utils/recoil/carInfo";
-import { styled } from "styled-components";
 import { FlexDiv, FlexLi } from "../../../../components/styled/Flex";
-import { ReactNode } from "react";
 import { detailOptListState, detailOptState, exteriorState, hgaOptListState, hgaOptState, interiorState, npfOptListState, npfOptState } from "../../../../utils/recoil/options";
 import { OptionChoiceType } from "../../../../type/optionType";
 import useUpdatePrice from "../../../../hooks/useUpdatePrice";

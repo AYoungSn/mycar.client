@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { FlexUl } from '../../styled/Flex';
 import {
   ColorBtn,
@@ -7,7 +9,6 @@ import {
   OptionName,
   OptionTitle,
 } from '../../styled/Option';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   exteriorListState,
   exteriorState,
@@ -17,9 +18,6 @@ import {
 } from '../../../utils/recoil/options';
 import { ExteriorType, InteriorType } from '../../../type/optionType';
 import { optionsApi } from '../../../utils/Api';
-import { useSearchParams } from 'react-router-dom';
-import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
-import { TrimChangeModalDataType } from '../../../type/ApiResponseType';
 import { modalState } from '../../../utils/recoil/modal';
 import { useInitInterior, useUpdateInterior } from '../../../hooks/useInteriorUpdate';
 import { disableColor } from '../../../utils/OnClickFunc';

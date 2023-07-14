@@ -1,4 +1,5 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSearchParams } from 'react-router-dom';
 import { OptionHead, OptionName } from '../styled/Option';
 import OptionList from './OptionList';
 import {
@@ -12,7 +13,6 @@ import {
 } from '../../utils/recoil/options';
 import { optionUpdate } from '../../utils/optionUpdate';
 import { OptionChoiceType } from '../../type/optionType';
-import { useSearchParams } from 'react-router-dom';
 import { optionsApi } from '../../utils/Api';
 import MakeOptionCodeList from '../../utils/makeOptionCodeList';
 import { useFetchSelectList, useFetchTuixList } from '../../hooks/useFetchOptions';

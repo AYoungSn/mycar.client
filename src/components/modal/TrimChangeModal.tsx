@@ -1,12 +1,12 @@
 import { styled } from 'styled-components';
 import Modal from './Modal';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import { FlexLiItem, FlexUl } from '../styled/Flex';
+import { ConfirmBtn, PopupHeader } from '../styled/Modal';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
 import ChangeOptionList from './options/ChangeOptionList';
-import { ConfirmBtn, PopupHeader } from '../styled/Modal';
 import ChangePrice from './options/ChangePrice';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../utils/recoil/modal';
 import { detailOptState } from '../../utils/recoil/options';
 import { optionUpdate } from '../../utils/optionUpdate';

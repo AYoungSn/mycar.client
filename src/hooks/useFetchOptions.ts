@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { optionsApi } from "../utils/Api";
-import { InteriorType, OptionChoiceType, OptionType } from "../type/optionType";
+import { OptionChoiceType, OptionType } from "../type/optionType";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { detailOptState, hgaOptListState, interiorListState, interiorState, npfOptListState, npfOptState } from "../utils/recoil/options";
 import { optionUpdate } from "../utils/optionUpdate";

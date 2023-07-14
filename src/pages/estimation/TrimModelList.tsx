@@ -1,8 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
-import Header from '../../components/header/Header';
-import ToolTips from '../../components/ToolTips';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Header from '../../components/header/Header';
+import ToolTips from '../../components/ToolTips';
 import useFetchToolTips from '../../hooks/useFetchToolTips';
 import useFetchTrims from '../../hooks/useFetchTrims';
 import TrimBox from '../../components/TrimBox';
