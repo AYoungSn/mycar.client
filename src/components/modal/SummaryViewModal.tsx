@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import { modelState } from "../../utils/recoil/carInfo";
 import { exteriorState, interiorState, detailOptState, hgaOptState, npfOptState, detailOptListState, hgaOptListState, npfOptListState } from "../../utils/recoil/options";
 import useUpdatePrice from "../../hooks/useUpdatePrice";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SummaryViewModal() {
 	const setModal = useSetRecoilState(modalState);

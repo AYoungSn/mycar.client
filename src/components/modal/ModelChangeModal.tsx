@@ -3,12 +3,17 @@ import { MenuBtn, Triangle } from "../styled/Head";
 import { ConfirmBtn, PopupHeader } from "../styled/Modal";
 import Modal from "./Modal";
 import { useEffect, useState } from "react";
-import { carsApi } from "../../utils/Api";
+import { carsApi, optionsApi } from "../../utils/Api";
 import { useRecoilValue } from "recoil";
 import { modelState } from "../../utils/recoil/carInfo";
 import { Trim } from "../../type/ApiResponseType";
 import useFetchTrimList from "../../hooks/useFetchTrimList";
 import { FlexUl } from "../styled/Flex";
+import ChangeOptionList from "./options/ChangeOptionList";
+import { OptionType } from "../../type/optionType";
+import MakeOptionCodeList from "../../utils/makeOptionCodeList";
+import { detailOptState } from "../../utils/recoil/options";
+import ChangePrice from "./options/ChangePrice";
 
 const MenuWrap = styled.div`
 	margin-top: 10px;
@@ -70,7 +75,10 @@ export default function ModelChangeModal() {
 	const [selectName, setSelectName] = useState('');
 	const [basicName, setBasicName] = useState<string[]>([]);
 	const model = useRecoilValue(modelState);
-	const [selectModel, setModel] = useState<Trim>({
+	const detailOpts = useRecoilValue(detailOptState);
+	const [delOptions, setDelOptions] = useState<OptionType[]>([]);
+	const [delPrice, setDelPrice] = useState(0);
+	const [selectModel, setSelectModel] = useState<Trim>({
 		trimCode: '',
 		trimName: '',
 		basicInfo: '',
@@ -87,7 +95,20 @@ export default function ModelChangeModal() {
 		}
 		fetchBasicName();
 	}, [model.carCode]);
-	const trimList = useFetchTrimList(model.carCode, selectName, basicName, setModel);
+	useEffect(() => {
+		const optionCodes = MakeOptionCodeList(detailOpts);
+		async function fetchDelOptions() {
+			const data = (await optionsApi.trimChange(model.modelId, selectModel.modelId, optionCodes)).data;
+			setDelOptions(data.delOptions);
+			let price = 0;
+			data.delOptions.map((item: OptionType) => {
+				price += item.price;
+			})
+			setDelPrice(price);
+		}
+		fetchDelOptions();
+	}, [selectModel, selectName]);
+	const trimList = useFetchTrimList(model.carCode, selectName, basicName, setSelectModel);
 	return (<Modal>
 		<PopupHeader>
 			<h3>변경할 모델을 선택해 주세요.</h3>
@@ -103,7 +124,16 @@ export default function ModelChangeModal() {
 				<DropDown carName={model.carName} modelNames={basicName} setName={setSelectName}/>
 			}
 		</div>
-		<TrimBox trimList={trimList} selectModel={selectModel} setModel={setModel}/>
+		<TrimBox trimList={trimList} selectModel={selectModel} setModel={setSelectModel}/>
+		{(delOptions.length || 0) > 0 && (
+			<ChangeOptionList change='del' optionList={delOptions || null} />
+		)}
+		{selectModel.modelId !== 0 && selectModel.modelId !== model.modelId && (
+			<ChangePrice changePrice={(selectModel.price &&
+				selectModel.price -
+					model.price -
+					delPrice) || 0}/>
+		)}
 		<a href={`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`}>
 			<ConfirmBtn>
 				확인

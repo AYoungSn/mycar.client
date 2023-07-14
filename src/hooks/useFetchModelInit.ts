@@ -35,6 +35,7 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 
   useEffect(() => {
     async function fetchData() {
+			console.log('model init');
       const data: ModelInfo = (await carsApi.init(modelId)).data;
       setModel(data.model);
       setPrice(data.model.price);
@@ -78,9 +79,7 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 				optionListUpdate(item.code, item, setNpfListOpt);
 				optionListUpdate(item.code, item, setNpfListInit);
 			})
-			if (!detailOpts) {
-      	setDetailOpts(new Map());
-			}
+			setDetailOpts(new Map());
       setHgaOpts(new Map());
       setNpfOpts(new Map());
     }

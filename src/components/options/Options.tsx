@@ -66,6 +66,7 @@ export function Options() {
 	const setModal = useSetRecoilState(modalState);
 	useFetchSelectList(modelId, detailOpts, setDetailListOpts, detailListInit);
 	useFetchTuixList(modelId);
+	console.log('detailList', detailListOpts);
   return (
     <div>
       <OptionHead>옵션</OptionHead>
