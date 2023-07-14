@@ -22,6 +22,7 @@ import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
 import { TrimChangeModalDataType } from '../../../type/ApiResponseType';
 import { modalState } from '../../../utils/recoil/modal';
 import { useInitInterior, useUpdateInterior } from '../../../hooks/useInteriorUpdate';
+import { disableColor } from '../../../utils/OnClickFunc';
 
 export default function Interior() {
   const [searchParams] = useSearchParams();
@@ -57,32 +58,7 @@ export default function Interior() {
                   height="75px"
                   style={{ backgroundImage: `url(${item.imgUri})` }}
                   active={item.id === interior.id}
-                  onClick={() => {
-                    // 현재 선택된 내장색상 기반으로 선택 가능한 외장색상 목록 update
-                    async function fetchExteriorList() {
-                      const data = (
-                        await optionsApi.enableExteriorList(
-                          carCode,
-                          trimCode,
-                          item.code,
-                        )
-                      ).data;
-                      setExteriorList(
-                        data.exterior.sort(
-                          (a: ExteriorType, b: ExteriorType) =>
-                            a.choiceYN === true
-                              ? 1
-                              : (b.choiceYN === true
-                              ? (a.id > b.id
-                                ? 1
-                                : -1)
-															: -1),
-                        ),
-                      );
-                      setInterior(item);
-                    }
-                    fetchExteriorList();
-                  }}
+                  onClick={() => fetchExteriorList(carCode, trimCode, item, setExteriorList, setInterior)}
                 />
               </InteriorItem>
             ) : (
@@ -92,35 +68,7 @@ export default function Interior() {
                   height='75px'
                   style={{ backgroundImage: `url(${item.imgUri})` }}
                   active={item.id === interior.id}
-                  onClick={() => {
-                    async function changeColor() {
-                      const optionCodes = MakeOptionCodeList(detailOpts);
-                      const data: TrimChangeModalDataType = (
-                        await optionsApi.changeColor({
-                          beforeExteriorCode: exterior.code,
-                          beforeInteriorCode: interior.code,
-                          interiorCode: item.code,
-                          exteriorCode: exterior.code,
-                          modelId: modelId,
-                          carCode: carCode,
-                          optionCode: optionCodes,
-                        })
-                      ).data;
-                      if (data.exteriorChangeColorYn === true) {
-                        setModal({
-                          modalName: 'CHANGE-EXTERIOR',
-                          colorName: item.name,
-                        });
-                      } else {
-                        setModal({
-                          modalName: 'CHANGE-TRIM',
-                          colorName: item.name,
-                          trimChangeData: data,
-                        });
-                      }
-                    }
-                    changeColor();
-                  }}
+                  onClick={() => disableColor(detailOpts, exterior, interior, modelId, carCode, item, exterior, setModal)}
                 />
                 <DisabledBtn />
               </InteriorItem>
@@ -130,6 +78,29 @@ export default function Interior() {
     </section>
   );
 }
+async function fetchExteriorList(carCode: string, trimCode: string, item: InteriorType, setExteriorList: any, setInterior: any) {
+	const data = (
+		await optionsApi.enableExteriorList(
+			carCode,
+			trimCode,
+			item.code,
+		)
+	).data;
+	setExteriorList(
+		data.exterior.sort(
+			(a: ExteriorType, b: ExteriorType) =>
+				a.choiceYN === true
+					? 1
+					: (b.choiceYN === true
+					? (a.id > b.id
+						? 1
+						: -1)
+					: -1),
+		),
+	);
+	setInterior(item);
+}
+
 const InteriorItem = styled.li`
   margin-bottom: 25px;
   position: relative;

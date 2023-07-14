@@ -10,18 +10,15 @@ import { FlexUl } from '../../styled/Flex';
 import {
   exteriorListState,
   exteriorState,
-  interiorListState,
   interiorState,
   detailOptState,
 } from '../../../utils/recoil/options';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ExteriorType, InteriorType } from '../../../type/optionType';
-import { optionsApi } from '../../../utils/Api';
-import MakeOptionCodeList from '../../../utils/makeOptionCodeList';
+import { ExteriorType } from '../../../type/optionType';
 import { modalState } from '../../../utils/recoil/modal';
 import { useExteriorListState, useUpdateInteriorList } from '../../../hooks/useColorUpdate';
+import { disableColor } from '../../../utils/OnClickFunc';
 
 export default function Exterior() {
   const [searchParams] = useSearchParams();
@@ -56,9 +53,7 @@ export default function Exterior() {
                 height={'85px'}
                 style={{ backgroundImage: `url(${ext.imgUri})` }}
                 active={ext.id === exterior.id ? true : false}
-                onClick={() => {
-									setExterior(ext);
-                }}
+                onClick={() => setExterior(ext)}
               />
             </ExteriorItem>
           ) : (
@@ -68,37 +63,7 @@ export default function Exterior() {
                 height={'85px'}
                 style={{ backgroundImage: `url(${ext.imgUri})` }}
                 active={ext.id === exterior.id ? true : false}
-                onClick={() => {
-                  async function changeColor() {
-                    const optionCodes = MakeOptionCodeList(detailOpts);
-                    const data = (
-                      await optionsApi.changeColor({
-                        beforeExteriorCode: exterior.code,
-                        beforeInteriorCode: interior.code,
-                        interiorCode: interior.code,
-                        exteriorCode: ext.code,
-                        modelId: modelId,
-                        carCode: carCode,
-                        optionCode: optionCodes,
-                      })
-                    ).data;
-                    if (data.interiorChangeColorYn === true) {
-                      setModal({
-                        modalName: 'CHANGE-INTERIOR',
-                        colorName: ext.name,
-                      });
-                    } else {
-                      setModal({
-                        modalName: 'CHANGE-TRIM',
-                        colorName: ext.name,
-                        trimChangeData: data,
-                      });
-                    }
-                  }
-                  changeColor();
-                  // 선택한 외장색상 기반으로 내장 색상 목록 재요청
-                  // -> 기존 내장 색상이 선택 불가한 경우 선택가능한 색상으로 변경
-                }}
+                onClick={() => disableColor(detailOpts, exterior, interior, modelId, carCode, interior, ext, setModal)}
               />
               <DisabledBtn />
             </ExteriorItem>
