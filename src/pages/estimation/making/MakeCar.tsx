@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FlexDiv, FlexItem } from '../../../components/styled/Flex';
 import Header from '../../../components/header/Header';
@@ -13,9 +13,11 @@ import { FlexDivItemType } from '../../../type/styledType';
 import { OptionHead } from '../../../components/styled/Option';
 import Exterior from '../../../components/options/color/Exterior';
 import Interior from '../../../components/options/color/Interior';
+import { ConfirmBtn } from '../../../components/styled/Modal';
 
 export default function MakeCar() {
   const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
   const [model, setModel] = useRecoilState<Model>(modelState);
   const detailList = useRecoilValue(detailOptListState);
   useFetchModelInit(Number(searchParams.get('modelId')), setModel);
@@ -32,6 +34,11 @@ export default function MakeCar() {
 							<Interior />
 						</div>
 						<Options />
+						<ConfirmBtn onClick={() => {
+							navigate(`/cars/estimation/models/estimate`);
+						}}>
+							내 차 만들기 완료
+						</ConfirmBtn>
 					</OptionAreaWrap>
 				}
       </ContentWrap>
