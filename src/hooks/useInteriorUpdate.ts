@@ -15,10 +15,10 @@ export function useUpdateInterior(modelId: number) {
       for (let i = 0; i < interiorList.length; i++) {
         if (
           interiorList[i].id === interior.id &&
-          interiorList[i].choiceYN === false
+          interiorList[i].choiceYn === false
         ) {
           for (let j = 0; j < interiorList.length; j++) {
-            if (interiorList[j].choiceYN === true) {
+            if (interiorList[j].choiceYn === true) {
               setInterior({ ...interiorList[j] });
               break;
             }
@@ -26,7 +26,7 @@ export function useUpdateInterior(modelId: number) {
           break;
         }
       }
-			if (interiorList[0] && interior.choiceYN === false) {
+			if (interiorList[0] && interior.choiceYn === false) {
 				setInterior({
 					...interiorList[0],
 				});
@@ -67,9 +67,9 @@ export function useInitInterior(carCode: string, trimCode: string) {
 				).data;
 				setExteriorList(
 					data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-						a.choiceYN === true
+						a.choiceYn === true
 							? 1
-							: b.choiceYN === true
+							: b.choiceYn === true
 							? a.id > b.id
 								? 1
 								: -1

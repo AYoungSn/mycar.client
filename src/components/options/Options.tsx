@@ -32,6 +32,7 @@ export default function Options() {
 	const setModal = useSetRecoilState(modalState);
 	useFetchSelectList(modelId, detailOpts, setDetailListOpts, detailListInit);
 	useFetchTuixList(modelId);
+	console.log('hgalist', hgaListOpts);
   return (
     <div>
       <OptionHead>옵션</OptionHead>

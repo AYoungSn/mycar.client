@@ -12,16 +12,16 @@ export function useExteriorListState() {
       for (let i = 0; i < exteriorList.length; i++) {
         if (
           exteriorList[i].id === exterior.id &&
-          exteriorList[i].choiceYN === false
+          exteriorList[i].choiceYn === false
         ) {
           for (let j = 0; j < exteriorList.length; j++) {
-            if (exteriorList[j].choiceYN === true) {
+            if (exteriorList[j].choiceYn === true) {
               setExterior({ ...exteriorList[j] });
             }
           }
         }
       }
-      if (exteriorList[0] && exterior.choiceYN === false) {
+      if (exteriorList[0] && exterior.choiceYn === false) {
         // 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
         setExterior({
           ...exteriorList[0],
@@ -47,9 +47,9 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 				).data;
 				setInteriorList(
 					data.interior.sort((a: InteriorType, b: InteriorType) =>
-						a.choiceYN === true
+						a.choiceYn === true
 							? 1
-							: b.choiceYN === true
+							: b.choiceYn === true
 							? a.id > b.id
 								? 1
 								: -1

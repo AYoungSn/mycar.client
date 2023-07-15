@@ -21,11 +21,11 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 				if (detailOpt.get(item.code)) {
 					optionUpdate(item.code, true, setDetailOpt);
 				}
-				tmp.set(item.code, {...item, choiceYN: false});
+				tmp.set(item.code, {...item, choiceYn: false});
 			});
 			const addData = (await optionsApi.enableOptions(modelId, optionCodes)).data;
 			addData.addOptions.map((item: OptionType) => {
-				tmp.set(item.code, {...item, choiceYN: true});
+				tmp.set(item.code, {...item, choiceYn: true});
 			});
 			setSelectListOpts(tmp);
 			const {available, interiorCodes}:{available: boolean, interiorCodes: string[]} = (await optionsApi.checkedInterior(modelId, optionCodes)).data;
@@ -46,12 +46,12 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
 			const hga = new Map();
 			tuixList.hga.map((item: OptionType) => {
-				hga.set(item.code, {...item, choiceYN: true});
+				hga.set(item.code, {...item, choiceYn: true});
 			})
 			setHgaList(hga);
 			const npf = new Map();
 			tuixList.npf.map((item: OptionType) => {
-				npf.set(item.code, {...item, choiceYN: true});
+				npf.set(item.code, {...item, choiceYn: true});
 			})
 			setNpfList(npf);
 		}
@@ -67,12 +67,12 @@ export function useFetchTuixList(modelId: number) {
 		async function fetchData() {
 			const npf = new Map();
 			[...npfList].map(([key, value]) => {
-				npf.set(key, {...value, choiceYN: true})
+				npf.set(key, {...value, choiceYn: true})
 			})
 			if (optionCodes.length > 0){
 				const data = (await optionsApi.disableTuix(modelId, optionCodes)).data;
 				data.delOptions.map((item: OptionType) => {
-					npf.set(item.code, {...item, choiceYN: false});
+					npf.set(item.code, {...item, choiceYn: false});
 				});
 			}
 			setNpfList(npf);

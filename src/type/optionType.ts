@@ -2,7 +2,7 @@ export type ExteriorType = {
   id: number;
   name: string;
   imgUri: string;
-  choiceYN: boolean;
+  choiceYn: boolean;
   code: string;
   price: number;
 };
@@ -11,14 +11,14 @@ export type InteriorType = {
   id: number;
   name: string;
   imgUri: string;
-  choiceYN: boolean;
+  choiceYn: boolean;
   code: string;
 };
 
 export type OptionChoiceType = {
   name: string;
   imgUri: string;
-  choiceYN: boolean;
+  choiceYn: boolean;
   code: string;
   price: number;
 };

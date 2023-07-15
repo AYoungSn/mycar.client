@@ -49,7 +49,7 @@ export default function Interior() {
       <FlexUl>
         {interiorList.length > 0 &&
           interiorList.map((item, id) => {
-            return item.choiceYN === true ? (
+            return item.choiceYn === true ? (
               <InteriorItem key={item.code}>
                 <ColorBtn
                   width="496px"
@@ -87,9 +87,9 @@ async function fetchExteriorList(carCode: string, trimCode: string, item: Interi
 	setExteriorList(
 		data.exterior.sort(
 			(a: ExteriorType, b: ExteriorType) =>
-				a.choiceYN === true
+				a.choiceYn === true
 					? 1
-					: (b.choiceYN === true
+					: (b.choiceYn === true
 					? (a.id > b.id
 						? 1
 						: -1)

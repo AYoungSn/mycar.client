@@ -46,7 +46,7 @@ export default function Exterior() {
       </OptionTitle>
       <FlexUl>
         {exteriorList?.map((ext: ExteriorType, id: number) => {
-          return ext.choiceYN === true ? (
+          return ext.choiceYn === true ? (
             <ExteriorItem key={ext.code}>
               <ColorBtn
                 width={'85px'}

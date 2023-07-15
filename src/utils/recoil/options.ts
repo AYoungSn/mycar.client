@@ -13,7 +13,7 @@ export const exteriorState = atom<ExteriorType>({
     code: '',
     price: 0,
     imgUri: '',
-    choiceYN: false,
+    choiceYn: false,
   },
 });
 
@@ -29,7 +29,7 @@ export const interiorState = atom<InteriorType>({
     name: '',
     code: '',
     imgUri: '',
-    choiceYN: false,
+    choiceYn: false,
   },
 });
 

@@ -40,9 +40,9 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
       setPrice(data.model.price);
       setExteriorList(
         data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-          a.choiceYN === true
+          a.choiceYn === true
             ? 1
-            : b.choiceYN === true
+            : b.choiceYn === true
             ? a.id > b.id
               ? 1
               : -1
@@ -51,9 +51,9 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
       );
       setInteriorList(
         data.interior.sort((a, b) =>
-          a.choiceYN === true
+          a.choiceYn === true
             ? 1
-            : b.choiceYN === true
+            : b.choiceYn === true
             ? a.id > b.id
               ? 1
               : -1

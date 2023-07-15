@@ -22,7 +22,7 @@ export default function OptionList({
             <OptionItem
               option={value}
               curOptions={curOptions}
-              onChange={value.choiceYN === true ? onChange : disableOnChange}
+              onChange={value.choiceYn === true ? onChange : disableOnChange}
             />
           );
         })
@@ -43,7 +43,7 @@ function OptionItem({
   return ( option &&
     <Item
       active={curOptions?.get(option.code) === true}
-      choiceYN={option.choiceYN}
+      choiceYn={option.choiceYn}
       key={option.code}
     >
       <OptionBtn
@@ -80,7 +80,7 @@ const Item = styled(FlexLi)<FlexLiType>`
   margin-right: 10px;
   margin-bottom: 30px;
   overflow: hidden;
-  background: ${(props) => (props.choiceYN === true ? '#FFF' : '#AAA')};
+  background: ${(props) => (props.choiceYn === true ? '#FFF' : '#AAA')};
 `;
 const OptionBtn = styled.button`
   height: 100%;
