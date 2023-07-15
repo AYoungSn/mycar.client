@@ -48,12 +48,8 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 				setInteriorList(
 					data.interior.sort((a: InteriorType, b: InteriorType) =>
 						a.choiceYn === true
-							? 1
-							: b.choiceYn === true
-							? a.id > b.id
-								? 1
-								: -1
-							: -1,
+							? -1
+							: 1
 					),
 				);
 				}
