@@ -3,7 +3,8 @@ import { ExteriorType, InteriorType } from "../type/optionType";
 import { optionsApi } from "./Api";
 import MakeOptionCodeList from "./makeOptionCodeList";
 
-export async function disableColor(detailOpts: Map<string, boolean>, 
+export async function disableColor(
+	detailOpts: Map<string, boolean>, 
 	exterior: ExteriorType, 
 	interior: InteriorType, 
 	modelId: number, 
@@ -17,7 +18,7 @@ export async function disableColor(detailOpts: Map<string, boolean>,
 			beforeExteriorCode: exterior.code,
 			beforeInteriorCode: interior.code,
 			interiorCode: int.code,
-			exteriorCode: exterior.code,
+			exteriorCode: ext.code,
 			modelId: modelId,
 			carCode: carCode,
 			optionCode: optionCodes,

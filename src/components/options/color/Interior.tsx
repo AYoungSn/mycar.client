@@ -88,12 +88,12 @@ async function fetchExteriorList(carCode: string, trimCode: string, item: Interi
 		data.exterior.sort(
 			(a: ExteriorType, b: ExteriorType) =>
 				a.choiceYn === true
-					? 1
+					? -1
 					: (b.choiceYn === true
 					? (a.id > b.id
 						? 1
 						: -1)
-					: -1),
+					: 1),
 		),
 	);
 	setInterior(item);
