@@ -78,7 +78,9 @@ function ChoiceOptionList({name, optList, selectOpts}: {name:string, optList:Map
 		</div>
 		<ul style={{width: "100%"}}>
 			{
-				[...selectOpts].map(([key, value]) => {
+				[...selectOpts]
+				.filter(([key, value]) => value === true)
+				.map(([key, value]) => {
 					return <FlexLi style={{justifyContent: "space-between", }}>
 						<p style={{color: "#666"}}>{optList.get(key)?.name}</p>
 						<div style={{margin: "10px"}}></div>

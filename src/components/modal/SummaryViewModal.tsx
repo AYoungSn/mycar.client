@@ -52,24 +52,24 @@ export default function SummaryViewModal() {
 						<div>옵션</div>
 						<Grid style={{gridTemplateColumns: "auto 140px", borderTop: "none"}}>
 							{
-								[...detailOpt].map(([key, value]) => {
-									if (value === true) {
-										return (<TableInner name={detailList.get(key)?.name || ''} price={detailList.get(key)?.price || 0}/>)
-									}
+								[...detailOpt]
+								.filter(([key, value]) => value === true)
+								.map(([key, value]) => {
+									return (<TableInner name={detailList.get(key)?.name || ''} price={detailList.get(key)?.price || 0}/>)
 								})
 							}
 							{
-								[...hgaOpt].map(([key, value]) => {
-									if (value === true) {
-										return (<TableInner name={hgaList.get(key)?.name || ''} price={hgaList.get(key)?.price || 0}/>)
-									}
+								[...hgaOpt]
+								.filter(([key, value]) => value === true)
+								.map(([key, value]) => {
+									return (<TableInner name={hgaList.get(key)?.name || ''} price={hgaList.get(key)?.price || 0}/>)
 								})
 							}
 							{
-								[...npfOpt].map(([key, value]) => {
-									if (value === true) {
-										return (<TableInner name={npfList.get(key)?.name || ''} price={npfList.get(key)?.price || 0}/>)
-									}
+								[...npfOpt]
+								.filter(([key, value]) => value === true)
+								.map(([key, value]) => {
+									return (<TableInner name={npfList.get(key)?.name || ''} price={npfList.get(key)?.price || 0}/>)
 								})
 							}
 						</Grid>
