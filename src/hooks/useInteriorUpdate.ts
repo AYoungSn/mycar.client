@@ -27,9 +27,8 @@ export function useUpdateInterior(modelId: number) {
 				}
 			}
 			if (interiorList[0] && interior.choiceYn === false) {
-				interiorList.forEach((item) => {
-					setInterior(item);
-				});
+				const enableList = [...interiorList].filter((value) => value.choiceYn === true).sort((a, b) => a.id > b.id ? 1 : -1);
+				setInterior(enableList[0]);
 			}
 		}
 		async function checkedOptionList() {
