@@ -28,56 +28,61 @@ export default function SummaryViewModal() {
 		closeModal();
 		navigate(`/cars/estimation/models/estimate`);
 	}
+	const closeModalHandler = (e: React.MouseEvent) => {
+		if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutSide') {
+			setModal({ modalName: null });
+		}
+	}
 	return <>
-		<ModalBackground style={{zIndex: 0}}/>
+		<ModalBackground style={{ zIndex: 0 }} id='modalOutSide' onClick={closeModalHandler} />
 		<MiniModalContainer width="700px" height="">
 			<CloseBtn onClick={closeModal}>X</CloseBtn>
 			<PopDropDown>
-				<div style={{marginBottom: "30px", textAlign: "left"}}>나의 {model.carName}</div>
-				<h3 style={{fontSize: "16px", textAlign: "center"}}>요약 보기</h3>
-				<PopDropDown style={{borderTop: "2px solid #7c8191"}}>
-					<Grid style={{borderTop: "none", padding: "10px 0"}}>
+				<div style={{ marginBottom: "30px", textAlign: "left" }}>나의 {model.carName}</div>
+				<h3 style={{ fontSize: "16px", textAlign: "center" }}>요약 보기</h3>
+				<PopDropDown style={{ borderTop: "2px solid #7c8191" }}>
+					<Grid style={{ borderTop: "none", padding: "10px 0" }}>
 						<div>모델</div>
-						<Grid style={{gridTemplateColumns: "auto 140px", borderTop: "none"}}>
+						<Grid style={{ gridTemplateColumns: "auto 140px", borderTop: "none" }}>
 							<TableInner name={model.modelName} price={model.price} />
 						</Grid>
 					</Grid>
-					<Grid style={{padding: "10px 0"}}>
+					<Grid style={{ padding: "10px 0" }}>
 						<div>색상</div>
-						<Grid style={{gridTemplateColumns: "auto 140px", borderTop: "none"}}>
+						<Grid style={{ gridTemplateColumns: "auto 140px", borderTop: "none" }}>
 							<TableInner name={'외장 - ' + exterior.name} price={exterior.price} />
 							<TableInner name={'내장 - ' + interior.name} price={0} />
 						</Grid>
 					</Grid>
-					<Grid style={{padding: "10px 0"}}>
+					<Grid style={{ padding: "10px 0" }}>
 						<div>옵션</div>
-						<Grid style={{gridTemplateColumns: "auto 140px", borderTop: "none"}}>
+						<Grid style={{ gridTemplateColumns: "auto 140px", borderTop: "none" }}>
 							{
 								[...detailOpt]
-								.filter(([key, value]) => value === true)
-								.map(([key, value]) => {
-									return (<TableInner name={detailList.get(key)?.name || ''} price={detailList.get(key)?.price || 0}/>)
-								})
+									.filter(([key, value]) => value === true)
+									.map(([key, value]) => {
+										return (<TableInner name={detailList.get(key)?.name || ''} price={detailList.get(key)?.price || 0} />)
+									})
 							}
 							{
 								[...hgaOpt]
-								.filter(([key, value]) => value === true)
-								.map(([key, value]) => {
-									return (<TableInner name={hgaList.get(key)?.name || ''} price={hgaList.get(key)?.price || 0}/>)
-								})
+									.filter(([key, value]) => value === true)
+									.map(([key, value]) => {
+										return (<TableInner name={hgaList.get(key)?.name || ''} price={hgaList.get(key)?.price || 0} />)
+									})
 							}
 							{
 								[...npfOpt]
-								.filter(([key, value]) => value === true)
-								.map(([key, value]) => {
-									return (<TableInner name={npfList.get(key)?.name || ''} price={npfList.get(key)?.price || 0}/>)
-								})
+									.filter(([key, value]) => value === true)
+									.map(([key, value]) => {
+										return (<TableInner name={npfList.get(key)?.name || ''} price={npfList.get(key)?.price || 0} />)
+									})
 							}
 						</Grid>
 					</Grid>
-					<Grid style={{gridTemplateColumns: "auto auto", borderTop: "2px solid #7c8191"}}>
+					<Grid style={{ gridTemplateColumns: "auto auto", borderTop: "2px solid #7c8191" }}>
 						<h3>총 차량 가격</h3>
-						<Price fontSize="20px" style={{lineHeight: "34px"}}>{PricePrint(price)}</Price>
+						<Price fontSize="20px" style={{ lineHeight: "34px" }}>{PricePrint(price)}</Price>
 					</Grid>
 				</PopDropDown>
 				<ConfirmBtn onClick={goEstimate}>
@@ -85,10 +90,10 @@ export default function SummaryViewModal() {
 				</ConfirmBtn>
 			</PopDropDown>
 		</MiniModalContainer>
-</>
+	</>
 }
 
-function TableInner({name, price}:{name: string, price: number}) {
+function TableInner({ name, price }: { name: string, price: number }) {
 	return (<>
 		<Name>{name}</Name>
 		<Price fontSize="16px">{price <= 0 ? '- 원' : PricePrint(price)}</Price>
@@ -134,7 +139,7 @@ const Name = styled.div`
 	line-height: 18px;
 	font-weight: 400px;
 `;
-const Price = styled.div<{fontSize: string}>`
+const Price = styled.div<{ fontSize: string }>`
 	text-align: right;
 	font-size: ${props => props.fontSize};
 	line-height: 18px;

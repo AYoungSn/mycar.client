@@ -5,15 +5,20 @@ import { modalState } from '../../utils/recoil/modal';
 
 function Modal({ children }: { children: ReactNode }) {
 	const setModal = useSetRecoilState(modalState);
-  return (
-    <>
-      <ModalBackground />
-      <ModalContainer width="700px" height="">
-        <CloseBtn onClick={() => setModal({ modalName: null })}>X</CloseBtn>
-        {children}
-      </ModalContainer>
-    </>
-  );
+	const closeModalHandler = (e: React.MouseEvent) => {
+		if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutSide') {
+			setModal({ modalName: null });
+		}
+	}
+	return (
+		<>
+			<ModalBackground id='modalOutSide' onClick={closeModalHandler} />
+			<ModalContainer width="700px" height="">
+				<CloseBtn onClick={() => setModal({ modalName: null })}>X</CloseBtn>
+				{children}
+			</ModalContainer>
+		</>
+	);
 }
 
 export default Modal;
