@@ -12,10 +12,10 @@ export const OptionTitle = styled(FlexDiv)`
   justify-content: space-between;
 `;
 
-export const OptionName = styled(FlexItem)<FlexDivItemType>`
+export const OptionName = styled(FlexItem) <FlexDivItemType>`
   font-size: 20px;
   padding: 0px;
-  margin-top: ${(props) => props.marginTop};
+  margin-top: ${(props) => props.$marginTop};
 `;
 export const OptionColor = styled(FlexItem)`
   font-size: 14px;
@@ -23,13 +23,13 @@ export const OptionColor = styled(FlexItem)`
 `;
 
 export const ColorBtn = styled.button<{
-  width: string;
-  height: string;
-  active: boolean;
+	width: string;
+	height: string;
+	$active: string;
 }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  border: ${(props) => (props.active === true ? '4px solid #007fa8;' : 0)};
+  border: ${(props) => (props.$active === 'true' ? '4px solid #007fa8;' : 0)};
   cursor: pointer;
 `;
 

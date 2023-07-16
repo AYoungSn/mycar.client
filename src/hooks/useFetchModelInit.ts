@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { carsApi } from '../utils/Api';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { priceState } from '../utils/recoil/carInfo';
 import {
 	exteriorListState,
@@ -27,7 +27,7 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 	const setDetailListInit = useSetRecoilState(detailInitListState);
 	const setHgaListInit = useSetRecoilState(hgaInitListState);
 	const setNpfListInit = useSetRecoilState(npfInitListState);
-	const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
+	const setDetailOpts = useSetRecoilState(detailOptState);
 	const setHgaOpts = useSetRecoilState(hgaOptState);
 	const setNpfOpts = useSetRecoilState(npfOptState);
 	const setPrice = useSetRecoilState(priceState);
@@ -41,19 +41,19 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 			setInteriorList(data.interior);
 			setDetailListInit(new Map());
 			setDetailListOpt(new Map());
-			data.options.detail.map((item) => {
+			data.options.detail.forEach((item) => {
 				optionListUpdate(item.code, item, setDetailListOpt);
 				optionListUpdate(item.code, item, setDetailListInit);
 			})
 			setHgaListInit(new Map());
 			setHgaListOpt(new Map());
-			data.options.hga.map((item) => {
+			data.options.hga.forEach((item) => {
 				optionListUpdate(item.code, item, setHgaListOpt);
 				optionListUpdate(item.code, item, setHgaListInit);
 			})
 			setNpfListInit(new Map());
 			setNpfListOpt(new Map());
-			data.options.npf.map((item) => {
+			data.options.npf.forEach((item) => {
 				optionListUpdate(item.code, item, setNpfListOpt);
 				optionListUpdate(item.code, item, setNpfListInit);
 			})
@@ -62,5 +62,6 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 			setNpfOpts(new Map());
 		}
 		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modelId]);
 }

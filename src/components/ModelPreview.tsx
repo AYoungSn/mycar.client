@@ -8,28 +8,28 @@ import { modalState } from '../utils/recoil/modal';
 import PricePrint from '../utils/PricePrint';
 
 export default function ModelPreview({ model }: { model: Model }) {
-  const price = useUpdatePrice();
+	const price = useUpdatePrice();
 	const setModal = useSetRecoilState(modalState);
-  return (
-    <PreviewWrap>
-      <Preview marginTop="0" textAlign="none">
-        <h2>
-          {model.carName} - {model.trimName}
-        </h2>
-        <ModelName>{model.modelName}</ModelName>
-				<ModelChangeBtn onClick={() => setModal({modalName: 'CHANGE-MODEL'})}><span>모델 변경</span></ModelChangeBtn>
-        <PriceDiv>
-          <PLabel>총 차량 가격</PLabel>
-          <Price>{PricePrint(price)}</Price>
-        </PriceDiv>
-      </Preview>
-    </PreviewWrap>
-  );
+	return (
+		<PreviewWrap>
+			<Preview $marginTop="0" $textAlign="none">
+				<h2>
+					{model.carName} - {model.trimName}
+				</h2>
+				<ModelName>{model.modelName}</ModelName>
+				<ModelChangeBtn onClick={() => setModal({ modalName: 'CHANGE-MODEL' })}><span>모델 변경</span></ModelChangeBtn>
+				<PriceDiv>
+					<PLabel>총 차량 가격</PLabel>
+					<Price>{PricePrint(price)}</Price>
+				</PriceDiv>
+			</Preview>
+		</PreviewWrap>
+	);
 }
 const PreviewWrap = styled.div`
   position: relative;
 `;
-const Preview = styled(FlexItem)<FlexDivItemType>`
+const Preview = styled(FlexItem) <FlexDivItemType>`
   width: 400px;
   position: fixed;
   left: 0;

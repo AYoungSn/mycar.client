@@ -38,10 +38,10 @@ export default function Exterior() {
 	return (
 		<section>
 			<OptionTitle>
-				<OptionName marginTop="0" textAlign="left">
+				<OptionName $marginTop="0" $textAlign="left">
 					외장색상
 				</OptionName>
-				<OptionColor marginTop="0" textAlign="right">
+				<OptionColor $marginTop="0" $textAlign="right">
 					{exterior.name}
 				</OptionColor>
 			</OptionTitle>
@@ -53,7 +53,7 @@ export default function Exterior() {
 								width={'85px'}
 								height={'85px'}
 								style={{ backgroundImage: `url(${ext.imgUri})` }}
-								active={ext.id === exterior.id ? true : false}
+								$active={String(ext.id === exterior.id ? true : false)}
 								onClick={() => setExterior(ext)}
 							/>
 						</ExteriorItem>
@@ -63,7 +63,7 @@ export default function Exterior() {
 								width={'85px'}
 								height={'85px'}
 								style={{ backgroundImage: `url(${ext.imgUri})` }}
-								active={ext.id === exterior.id ? true : false}
+								$active={String(ext.id === exterior.id ? true : false)}
 								onClick={() => disableColor(detailOpts, exterior, interior, modelId, carCode, interior, ext, setModal)}
 							/>
 							<DisabledBtn />

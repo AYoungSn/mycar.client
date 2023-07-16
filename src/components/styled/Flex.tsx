@@ -12,7 +12,7 @@ export const FlexDiv = styled.div`
 
 export const FlexItem = styled.div<FlexDivItemType>`
   position: relative;
-  text-align: ${(props) => props.textAlign};
+  text-align: ${(props) => props.$textAlign};
   padding: 30px;
   height: 100%;
 `;

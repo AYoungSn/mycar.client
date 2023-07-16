@@ -13,63 +13,63 @@ import { optionUpdate } from '../../utils/optionUpdate';
 import PricePrint from '../../utils/PricePrint';
 
 export default function TrimChangeModal({
-  colorName,
-  data,
+	colorName,
+	data,
 }: {
-  colorName: string;
-  data: TrimChangeModalDataType;
+	colorName: string;
+	data: TrimChangeModalDataType;
 }) {
 	const navigate = useNavigate();
 	const setModal = useSetRecoilState(modalState);
 	const setDetailOpts = useSetRecoilState(detailOptState);
 	const trimChange = () => {
-		setModal({modalName: null});
-		data.changeOptionInfo?.addOptions.map((item) => {
+		setModal({ modalName: null });
+		data.changeOptionInfo?.addOptions.forEach((item) => {
 			optionUpdate(item.code, false, setDetailOpts);
 		})
-		data.changeOptionInfo?.delOptions.map((item) => {
+		data.changeOptionInfo?.delOptions.forEach((item) => {
 			optionUpdate(item.code, true, setDetailOpts);
 		})
 		navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
 	}
-  let addPrice = 0;
-  let delPrice = 0;
-  data.changeOptionInfo?.addOptions.map((item) => addPrice += item.price);
-  data.changeOptionInfo?.delOptions.map((item) => delPrice += item.price);
-  return (
-    <Modal>
-      <div>
-        <PopupHeader>
-          <h3>{colorName}색상은 트림 변경 후 선택 가능합니다.</h3>
-        </PopupHeader>
-        <div>
-          <p>트림을 변경하시겠습니까?</p>
-          <TrimWrap>
-            <FlexTrim>
-              <TrimBox title='현재 트림' 
+	let addPrice = 0;
+	let delPrice = 0;
+	data.changeOptionInfo?.addOptions.map((item) => addPrice += item.price);
+	data.changeOptionInfo?.delOptions.map((item) => delPrice += item.price);
+	return (
+		<Modal>
+			<div>
+				<PopupHeader>
+					<h3>{colorName}색상은 트림 변경 후 선택 가능합니다.</h3>
+				</PopupHeader>
+				<div>
+					<p>트림을 변경하시겠습니까?</p>
+					<TrimWrap>
+						<FlexTrim>
+							<TrimBox title='현재 트림'
 								trimName={data.changeTrimInfo?.beforeTrimName || 'null'}
-								price={data.changeTrimInfo?.beforeCarPrice || 0}/>
-							<TrimBox title='변경 트림' 
+								price={data.changeTrimInfo?.beforeCarPrice || 0} />
+							<TrimBox title='변경 트림'
 								trimName={data.changeTrimInfo?.changeTrimName || 'null'}
-								price={data.changeTrimInfo?.changeCarPrice || 0}/>
-            </FlexTrim>
-            {(data.changeOptionInfo?.addOptions.length || 0) > 0 && (
-              <ChangeOptionList change='add' optionList={data.changeOptionInfo?.addOptions || null} />
-            )}
-            {(data.changeOptionInfo?.delOptions.length || 0) > 0 && (
+								price={data.changeTrimInfo?.changeCarPrice || 0} />
+						</FlexTrim>
+						{(data.changeOptionInfo?.addOptions.length || 0) > 0 && (
+							<ChangeOptionList change='add' optionList={data.changeOptionInfo?.addOptions || null} />
+						)}
+						{(data.changeOptionInfo?.delOptions.length || 0) > 0 && (
 							<ChangeOptionList change='del' optionList={data.changeOptionInfo?.delOptions || null} />
-            )}
-            <ChangePrice changePrice={(data.changeTrimInfo?.changeCarPrice &&
+						)}
+						<ChangePrice changePrice={(data.changeTrimInfo?.changeCarPrice &&
 							data.changeTrimInfo?.changeCarPrice -
-								data.changeTrimInfo.beforeCarPrice +
-								addPrice -
-								delPrice) || 0}/>
+							data.changeTrimInfo.beforeCarPrice +
+							addPrice -
+							delPrice) || 0} />
 						<ConfirmBtn onClick={trimChange}>확인</ConfirmBtn>
-          </TrimWrap>
-        </div>
-      </div>
-    </Modal>
-  );
+					</TrimWrap>
+				</div>
+			</div>
+		</Modal>
+	);
 }
 const TrimWrap = styled.div`
   overflow: hidden;
@@ -93,13 +93,13 @@ const FlexTrim = styled(FlexUl)`
 
 
 function TrimBox({ title, trimName, price }: { title: string; trimName: string; price: number }) {
-  return (
+	return (
 		<FlexLiItem>
 			<b>{title}</b>
 			<div>
 				<p>{trimName}</p>
 				<p>{PricePrint(price)}</p>
-    	</div>
-    </FlexLiItem>
-  );
+			</div>
+		</FlexLiItem>
+	);
 }

@@ -10,18 +10,18 @@ import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../utils/recoil/modal';
 
 function Header({ carCode }: { carCode: string }) {
-  return (
-    <HeaderWrap>
-      <Head>
-        <div>
-          <Link to="/">
-            <Logo type="button" name="hyundai" />
-          </Link>
-          <Menu carCode={carCode} />
-        </div>
-      </Head>
-    </HeaderWrap>
-  );
+	return (
+		<HeaderWrap>
+			<Head>
+				<div>
+					<Link to="/">
+						<Logo type="button" name="hyundai" />
+					</Link>
+					<Menu carCode={carCode} />
+				</div>
+			</Head>
+		</HeaderWrap>
+	);
 }
 
 export default Header;
@@ -51,45 +51,45 @@ const SummaryBtn = styled.button`
 `;
 
 function Menu({ carCode }: { carCode: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [carName, setCarName] = useState('');
-  const [data, setData] = useState<CarItem[]>([]);
+	const [isOpen, setIsOpen] = useState(false);
+	const [carName, setCarName] = useState('');
+	const [data, setData] = useState<CarItem[]>([]);
 	const location = useLocation();
 	const setModal = useSetRecoilState(modalState);
-  useEffect(() => {
-    async function fetchData() {
-      setData((await carsApi.carList).data);
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].carCode === carCode) {
-          setCarName(data[i].carName);
-        }
-      }
-    }
-    fetchData();
-  }, [data.length, carCode, data]);
+	useEffect(() => {
+		async function fetchData() {
+			setData((await carsApi.carList).data);
+			for (let i = 0; i < data.length; i++) {
+				if (data[i].carCode === carCode) {
+					setCarName(data[i].carName);
+				}
+			}
+		}
+		fetchData();
+	}, [data.length, carCode, data]);
 
-  return (
-    <>
-      <MenuBtn
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        <span>{carName}</span>
-        <Triangle isOpen={isOpen}></Triangle>
-      </MenuBtn>
-      {isOpen && (
-        <Section>
-          {data.map((item: CarItem, id: number) => {
-            return <CarMenuBox key={item.carCode} data={item} />;
-          })}
-        </Section>
-      )}
-			{ location.pathname === '/cars/estimation/models/making' && 
-				<SummaryBtn onClick={() => setModal({modalName: 'SUMMARY'})}>
+	return (
+		<>
+			<MenuBtn
+				onClick={() => {
+					setIsOpen(!isOpen);
+				}}
+			>
+				<span>{carName}</span>
+				<Triangle $isOpen={isOpen}></Triangle>
+			</MenuBtn>
+			{isOpen && (
+				<Section>
+					{data.map((item: CarItem, id: number) => {
+						return <CarMenuBox key={item.carCode} data={item} />;
+					})}
+				</Section>
+			)}
+			{location.pathname === '/cars/estimation/models/making' &&
+				<SummaryBtn onClick={() => setModal({ modalName: 'SUMMARY' })}>
 					<span>요약 보기</span>
 				</SummaryBtn>
 			}
-    </>
-  );
+		</>
+	);
 }

@@ -14,9 +14,9 @@ export const HeaderWrap = styled.div`
   padding-bottom: 100px;
 `;
 
-export const Triangle = styled.div<{ isOpen: boolean }>`
-  border-top: ${(props) => (!props.isOpen ? '7px solid #000' : 0)}; // 위
-  border-bottom: ${(props) => (props.isOpen ? '7px solid #000' : 0)}; // 아래
+export const Triangle = styled.div<{ $isOpen: boolean }>`
+  border-top: ${(props) => (!props.$isOpen ? '7px solid #000' : 0)}; // 위
+  border-bottom: ${(props) => (props.$isOpen ? '7px solid #000' : 0)}; // 아래
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
   margin-left: 18px;

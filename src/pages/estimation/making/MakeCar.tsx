@@ -16,18 +16,18 @@ import Interior from '../../../components/options/color/Interior';
 import { ConfirmBtn } from '../../../components/styled/Modal';
 
 export default function MakeCar() {
-  const [searchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
-  const [model, setModel] = useRecoilState<Model>(modelState);
-  const detailList = useRecoilValue(detailOptListState);
-  useFetchModelInit(Number(searchParams.get('modelId')), setModel);
-  return (
-    <div>
-      <Header carCode={searchParams.get('carCode') || ''}></Header>
-      <ContentWrap>
-        {model && <ModelPreview model={model} />}
-        {detailList && 
-					<OptionAreaWrap marginTop="10px" textAlign="none">
+	const [model, setModel] = useRecoilState<Model>(modelState);
+	const detailList = useRecoilValue(detailOptListState);
+	useFetchModelInit(Number(searchParams.get('modelId')), setModel);
+	return (
+		<div>
+			<Header carCode={searchParams.get('carCode') || ''}></Header>
+			<ContentWrap>
+				{model && <ModelPreview model={model} />}
+				{detailList &&
+					<OptionAreaWrap $marginTop="10px" $textAlign="none">
 						<div>
 							<OptionHead>색상</OptionHead>
 							<Exterior />
@@ -41,9 +41,9 @@ export default function MakeCar() {
 						</ConfirmBtn>
 					</OptionAreaWrap>
 				}
-      </ContentWrap>
-    </div>
-  );
+			</ContentWrap>
+		</div>
+	);
 }
 
 const ContentWrap = styled(FlexDiv)`
@@ -55,7 +55,7 @@ const ContentWrap = styled(FlexDiv)`
   justify-content: space-between;
 `;
 
-const OptionAreaWrap = styled(FlexItem)<FlexDivItemType>`
+const OptionAreaWrap = styled(FlexItem) <FlexDivItemType>`
   width: 660px;
   padding: 100px 72px 120px 80px;
 `;

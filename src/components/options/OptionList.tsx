@@ -5,64 +5,65 @@ import { OptionChoiceType } from '../../type/optionType';
 import PricePrint from '../../utils/PricePrint';
 
 export default function OptionList({
-  options,
-  curOptions,
-  onChange,
+	options,
+	curOptions,
+	onChange,
 	disableOnChange,
 }: {
-  options: Map<string, OptionChoiceType>;
-  curOptions: Map<string, boolean>;
-  onChange: any;
+	options: Map<string, OptionChoiceType>;
+	curOptions: Map<string, boolean>;
+	onChange: any;
 	disableOnChange: any;
 }) {
-  return (
-    <OptionWrap>
-      {
+	return (
+		<OptionWrap>
+			{
 				[...options].map(([key, value]) => {
-          return (
-            <OptionItem
-              option={value}
-              curOptions={curOptions}
-              onChange={value.choiceYn === true ? onChange : disableOnChange}
-            />
-          );
-        })
+					return (
+						<OptionItem
+							key={key}
+							option={value}
+							curOptions={curOptions}
+							onChange={value.choiceYn === true ? onChange : disableOnChange}
+						/>
+					);
+				})
 			}
-    </OptionWrap>
-  );
+		</OptionWrap>
+	);
 }
 
 function OptionItem({
-  option,
-  curOptions,
-  onChange,
+	option,
+	curOptions,
+	onChange,
 }: {
-  option: OptionChoiceType | null;
-  curOptions: Map<string, boolean>;
-  onChange: any;
+	option: OptionChoiceType | null;
+	curOptions: Map<string, boolean>;
+	onChange: any;
 }) {
-  return ( option &&
-    <Item
+	return (option &&
+		<Item
 			key={option.name}
-      active={curOptions?.get(option.code) === true}
-      choiceyn={option.choiceYn}
-    >
-      <OptionBtn
-        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-          onChange(e, option.code);
-        }}
-      >
-        <label>
-          <div>
-            <p>{option.name}</p>
-          </div>
-          <div>
-            <p>{PricePrint(option.price)}</p>
-          </div>
-        </label>
-      </OptionBtn>
-    </Item>
-  );
+			$active={String(curOptions?.get(option.code) === true)}
+			$choiceyn={String(option.choiceYn)}
+		>
+			<OptionBtn
+				onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+					onChange(e, option.code);
+				}}
+			>
+				<label>
+					<div>
+						<p>{option.name}</p>
+					</div>
+					<div>
+						<p>{PricePrint(option.price)}</p>
+					</div>
+				</label>
+			</OptionBtn>
+		</Item>
+	);
 }
 
 const OptionWrap = styled(FlexUl)`
@@ -71,17 +72,17 @@ const OptionWrap = styled(FlexUl)`
   justify-content: flex-start;
   margin-top: 30px;
 `;
-const Item = styled(FlexLi)<FlexLiType>`
+const Item = styled(FlexLi) <FlexLiType>`
   position: relative;
   width: 237px;
   height: 130px;
   flex-direction: column;
-  border: ${(props) => (props.active ? '1px solid #007fa8' : '1px solid #ccc')};
+  border: ${(props) => (props.$active === 'true' ? '1px solid #007fa8' : '1px solid #ccc')};
   color: #000;
   margin-right: 10px;
   margin-bottom: 30px;
   overflow: hidden;
-  background: ${(props) => (props.choiceyn === true ? '#FFF' : '#AAA')};
+  background: ${(props) => (props.$choiceyn === 'true' ? '#FFF' : '#AAA')};
 `;
 const OptionBtn = styled.button`
   height: 100%;

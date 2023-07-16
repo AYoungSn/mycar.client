@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { ExteriorType, InteriorType } from "../type/optionType";
+import { ExteriorType } from "../type/optionType";
 import { exteriorListState, exteriorState, interiorListState } from "../utils/recoil/options";
 import { optionsApi } from "../utils/Api";
-import { InteriorSort } from "../utils/colorSort";
 
 export function useExteriorListState() {
 	const exteriorList = useRecoilValue<ExteriorType[]>(exteriorListState);
@@ -30,6 +29,7 @@ export function useExteriorListState() {
 			}
 		}
 		initExterior();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [exteriorList]);
 }
 
@@ -50,5 +50,6 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 			}
 		}
 		fetchInteriorList();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [exterior]);
 }

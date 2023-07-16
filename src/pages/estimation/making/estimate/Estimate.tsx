@@ -91,12 +91,6 @@ function Estimate() {
 export default Estimate;
 
 function ChoiceOptionList({ name, optList, selectOpts }: { name: string, optList: Map<string, OptionChoiceType>, selectOpts: Map<string, boolean> }) {
-	let count = 0;
-	[...selectOpts].map(([key, val]) => {
-		if (val === true) {
-			count += 1;
-		}
-	})
 	return (<li style={{ borderBottom: "1px solid #e5e5e5", marginBottom: "10px", display: "flex" }}>
 		<div style={{ display: "inline-block", width: "82px", marginRight: "10px" }}>
 			{name}

@@ -2,7 +2,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { detailOptState, exteriorListState, interiorListState, interiorState } from "../utils/recoil/options";
 import { useEffect } from "react";
 import { optionsApi } from "../utils/Api";
-import { ExteriorType, InteriorType } from "../type/optionType";
+import { InteriorType } from "../type/optionType";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { allOptionUpdate } from "../utils/optionUpdate";
 
@@ -49,6 +49,7 @@ export function useUpdateInterior(modelId: number) {
 		if (interior.code !== '') {
 			checkedOptionList();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [interiorList, interior]);
 }
 
@@ -69,5 +70,6 @@ export function useInitInterior(carCode: string, trimCode: string) {
 			}
 		}
 		initInterior();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [interior]);
 }

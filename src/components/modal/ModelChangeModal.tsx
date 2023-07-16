@@ -40,6 +40,7 @@ export default function ModelChangeModal() {
 			}
 		}
 		fetchBasicName();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [model.carCode]);
 	useEffect(() => {
 		const optionCodes = MakeOptionCodeList(detailOpts);
@@ -47,12 +48,13 @@ export default function ModelChangeModal() {
 			const data = (await optionsApi.trimChange(model.modelId, selectModel.modelId, optionCodes)).data;
 			setDelOptions(data.delOptions);
 			let price = 0;
-			data.delOptions.map((item: OptionType) => {
+			data.delOptions.forEach((item: OptionType) => {
 				price += item.price;
 			})
 			setDelPrice(price);
 		}
 		fetchDelOptions();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectModel, selectName]);
 	const trimList = useFetchTrimList(model.carCode, selectName, basicName, setSelectModel);
 	return (<Modal>
@@ -63,7 +65,7 @@ export default function ModelChangeModal() {
 		<div>
 			<MenuBtn onClick={() => { setDropDown(!dropDown) }}>
 				<span>{model.carName} {selectName}</span>
-				<Triangle isOpen={dropDown}></Triangle>
+				<Triangle $isOpen={dropDown}></Triangle>
 			</MenuBtn>
 			{
 				dropDown &&

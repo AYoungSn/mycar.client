@@ -16,7 +16,7 @@ import {
 	interiorState,
 	detailOptState,
 } from '../../../utils/recoil/options';
-import { ExteriorType, InteriorType } from '../../../type/optionType';
+import { InteriorType } from '../../../type/optionType';
 import { optionsApi } from '../../../utils/Api';
 import { modalState } from '../../../utils/recoil/modal';
 import { useInitInterior, useUpdateInterior } from '../../../hooks/useInteriorUpdate';
@@ -40,10 +40,10 @@ export default function Interior() {
 	return (
 		<section>
 			<OptionTitle>
-				<OptionName marginTop="0" textAlign="left">
+				<OptionName $marginTop="0" $textAlign="left">
 					내장색상
 				</OptionName>
-				<OptionColor marginTop="0" textAlign="right">
+				<OptionColor $marginTop="0" $textAlign="right">
 					{interior.name}
 				</OptionColor>
 			</OptionTitle>
@@ -56,7 +56,7 @@ export default function Interior() {
 									width="496px"
 									height="75px"
 									style={{ backgroundImage: `url(${item.imgUri})` }}
-									active={item.id === interior.id}
+									$active={String(item.id === interior.id)}
 									onClick={() => fetchExteriorList(carCode, trimCode, item, setExteriorList, setInterior)}
 								/>
 							</InteriorItem>
@@ -66,7 +66,7 @@ export default function Interior() {
 									width='496px'
 									height='75px'
 									style={{ backgroundImage: `url(${item.imgUri})` }}
-									active={item.id === interior.id}
+									$active={String(item.id === interior.id)}
 									onClick={() => disableColor(detailOpts, exterior, interior, modelId, carCode, item, exterior, setModal)}
 								/>
 								<DisabledBtn />
