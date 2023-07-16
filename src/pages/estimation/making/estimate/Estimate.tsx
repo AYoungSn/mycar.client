@@ -100,7 +100,7 @@ function ColorItem({title, name}: {title: string, name: string}) {
 	)
 }
 function TableInner({name, price, children}: {name: string, price: number, children: ReactNode}) {
-	return (<LiItem>
+	return (<LiItem key={name}>
 		<OptionName>
 			<h3>{name}</h3>
 			<Price price={price} textAlign="left"/>

@@ -67,7 +67,7 @@ export type ChangeTrimInfoType = {
   changeCarCode: string;
   changeTrimCode: string;
   interiorCode: string;
-  interiorName: string;
+  colorName: string;
   optionCode: string;
 };
 

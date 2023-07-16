@@ -37,7 +37,7 @@ export async function disableColor(
 	} else {
 		setModal({
 			modalName: 'CHANGE-TRIM',
-			colorName: int.name,
+			colorName: data.changeTrimInfo?.colorName,
 			trimChangeData: data,
 		});
 	}

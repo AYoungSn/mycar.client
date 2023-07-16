@@ -42,9 +42,9 @@ function OptionItem({
 }) {
   return ( option &&
     <Item
+			key={option.name}
       active={curOptions?.get(option.code) === true}
-      choiceYn={option.choiceYn}
-      key={option.code}
+      choiceyn={option.choiceYn}
     >
       <OptionBtn
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -80,7 +80,7 @@ const Item = styled(FlexLi)<FlexLiType>`
   margin-right: 10px;
   margin-bottom: 30px;
   overflow: hidden;
-  background: ${(props) => (props.choiceYn === true ? '#FFF' : '#AAA')};
+  background: ${(props) => (props.choiceyn === true ? '#FFF' : '#AAA')};
 `;
 const OptionBtn = styled.button`
   height: 100%;

@@ -5,5 +5,5 @@ export type FlexDivItemType = {
 
 export type FlexLiType = {
   active: boolean;
-  choiceYn: boolean;
+  choiceyn: boolean;
 };
