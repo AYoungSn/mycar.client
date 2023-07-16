@@ -38,22 +38,8 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 			const data: ModelInfo = (await carsApi.init(modelId)).data;
 			setModel(data.model);
 			setPrice(data.model.price);
-			data.exterior.sort((a: ExteriorType, b: ExteriorType) => a.id > b.id ? -1 : 1);
-			setExteriorList(
-				data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-					a.choiceYn === true
-						? -1
-						: 1
-				)
-			);
-			data.interior.sort((a: InteriorType, b: InteriorType) => a.id > b.id ? -1 : 1);
-			setInteriorList(
-				data.interior.sort((a, b) =>
-					a.choiceYn === true
-						? -1
-						: 1
-				),
-			);
+			setExteriorList(data.exterior);
+			setInteriorList(data.interior);
 			setDetailListInit(new Map());
 			setDetailListOpt(new Map());
 			data.options.detail.map((item) => {

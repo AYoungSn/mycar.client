@@ -65,12 +65,6 @@ export function useInitInterior(carCode: string, trimCode: string) {
 						interior.code,
 					)
 				).data;
-				data.exterior.sort((a: ExteriorType, b: ExteriorType) => a.id > b.id ? -1 : 1);
-				data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-					a.choiceYn === true
-						? -1
-						: 1
-				)
 				setExteriorList(data.exterior);
 			}
 		}

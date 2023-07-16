@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { ExteriorType, InteriorType } from "../type/optionType";
 import { exteriorListState, exteriorState, interiorListState } from "../utils/recoil/options";
 import { optionsApi } from "../utils/Api";
+import { InteriorSort } from "../utils/colorSort";
 
 export function useExteriorListState() {
 	const exteriorList = useRecoilValue<ExteriorType[]>(exteriorListState);
@@ -45,12 +46,7 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 						exterior.code,
 					)
 				).data;
-				data.interior.sort((a: InteriorType, b: InteriorType) => a.id > b.id ? -1 : 1);
-				setInteriorList(
-					data.interior.sort((a: InteriorType, b: InteriorType) =>
-						a.choiceYn === true ? -1 : 1
-					)
-				);
+				setInteriorList(data.interior);
 			}
 		}
 		fetchInteriorList();

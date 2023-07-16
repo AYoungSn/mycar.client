@@ -19,6 +19,7 @@ import { ExteriorType } from '../../../type/optionType';
 import { modalState } from '../../../utils/recoil/modal';
 import { useExteriorListState, useUpdateInteriorList } from '../../../hooks/useColorUpdate';
 import { disableColor } from '../../../utils/OnClickFunc';
+import { ExteriorSort } from '../../../utils/colorSort';
 
 export default function Exterior() {
 	const [searchParams] = useSearchParams();
@@ -45,7 +46,7 @@ export default function Exterior() {
 				</OptionColor>
 			</OptionTitle>
 			<FlexUl>
-				{exteriorList?.map((ext: ExteriorType, id: number) => {
+				{ExteriorSort([...exteriorList]).map((ext: ExteriorType, id: number) => {
 					return ext.choiceYn === true ? (
 						<ExteriorItem key={ext.code}>
 							<ColorBtn
