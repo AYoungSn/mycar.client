@@ -34,7 +34,7 @@ const TrimName = styled.h4`
   letter-spacing: 0.32px;
   color: #000;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 600;
   word-break: keep-all;
 `;
 const Price = styled.span`
@@ -46,6 +46,7 @@ const Price = styled.span`
   letter-spacing: 0.32px;
   color: #000;
   line-height: 1;
+	font-weight: 600;
 `;
 const Info = styled.b`
   font-family: 'HyundaiSansTextKR';
