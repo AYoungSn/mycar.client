@@ -1,3 +1,4 @@
+import PricePrint from "../../../utils/PricePrint";
 import { FlexDiv } from "../../styled/Flex";
 
 export default function ChangePrice({changePrice}:{changePrice: number}) {
@@ -6,7 +7,7 @@ export default function ChangePrice({changePrice}:{changePrice: number}) {
 	>
 		<p>변경 금액</p>
 		<p>
-			{changePrice} 원
+			{PricePrint(changePrice)}
 		</p>
 	</FlexDiv>)
 }

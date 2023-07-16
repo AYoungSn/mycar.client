@@ -14,6 +14,7 @@ import { detailOptState } from "../../utils/recoil/options";
 import ChangePrice from "./options/ChangePrice";
 import { OptionType } from "../../type/optionType";
 import { Trim } from "../../type/ApiResponseType";
+import PricePrint from "../../utils/PricePrint";
 
 export default function ModelChangeModal() {
 	const [dropDown, setDropDown] = useState(false);
@@ -134,7 +135,7 @@ function TrimBox({trimList, selectModel, setModel}:{trimList: Trim[], selectMode
 				return (<BoxLi key={item.modelId}>
 					<BoxBtn active={selectModel.modelId === item.modelId} onClick={() => setModel(item)}>
 						<b>{item.trimName}</b>
-						<p>{item.price}</p>
+						<p>{PricePrint(item.price)}</p>
 					</BoxBtn>
 				</BoxLi>)
 			})

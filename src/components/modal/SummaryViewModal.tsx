@@ -6,6 +6,7 @@ import { CloseBtn, ConfirmBtn, ModalBackground, ModalContainer } from "../styled
 import { modelState } from "../../utils/recoil/carInfo";
 import { exteriorState, interiorState, detailOptState, hgaOptState, npfOptState, detailOptListState, hgaOptListState, npfOptListState } from "../../utils/recoil/options";
 import useUpdatePrice from "../../hooks/useUpdatePrice";
+import PricePrint from "../../utils/PricePrint";
 
 export default function SummaryViewModal() {
 	const setModal = useSetRecoilState(modalState);
@@ -76,7 +77,7 @@ export default function SummaryViewModal() {
 					</Grid>
 					<Grid style={{gridTemplateColumns: "auto auto", borderTop: "2px solid #7c8191"}}>
 						<h3>총 차량 가격</h3>
-						<Price fontSize="20px" style={{lineHeight: "34px"}}>{price} 원</Price>
+						<Price fontSize="20px" style={{lineHeight: "34px"}}>{PricePrint(price)}</Price>
 					</Grid>
 				</PopDropDown>
 				<ConfirmBtn onClick={goEstimate}>
@@ -90,7 +91,7 @@ export default function SummaryViewModal() {
 function TableInner({name, price}:{name: string, price: number}) {
 	return (<>
 		<Name>{name}</Name>
-		<Price fontSize="16px">{price <= 0 ? '-' : price} 원</Price>
+		<Price fontSize="16px">{price <= 0 ? '- 원' : PricePrint(price)}</Price>
 	</>)
 }
 

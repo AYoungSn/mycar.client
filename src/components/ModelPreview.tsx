@@ -5,6 +5,7 @@ import useUpdatePrice from '../hooks/useUpdatePrice';
 import { Model } from '../type/ApiResponseType';
 import { FlexDivItemType } from '../type/styledType';
 import { modalState } from '../utils/recoil/modal';
+import PricePrint from '../utils/PricePrint';
 
 export default function ModelPreview({ model }: { model: Model }) {
   const price = useUpdatePrice();
@@ -19,7 +20,7 @@ export default function ModelPreview({ model }: { model: Model }) {
 				<ModelChangeBtn onClick={() => setModal({modalName: 'CHANGE-MODEL'})}><span>모델 변경</span></ModelChangeBtn>
         <PriceDiv>
           <PLabel>총 차량 가격</PLabel>
-          <Price>{price}</Price>
+          <Price>{PricePrint(price)}</Price>
         </PriceDiv>
       </Preview>
     </PreviewWrap>

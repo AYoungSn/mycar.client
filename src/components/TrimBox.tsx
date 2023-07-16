@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { FlexItem } from './styled/Flex';
 import { Trim } from '../type/ApiResponseType';
 import { FlexDivItemType } from '../type/styledType';
+import PricePrint from '../utils/PricePrint';
 
 export default function TrimBox({ trim, carCode }: { trim: Trim; carCode: string }) {
   return (
     <Item textAlign="" marginTop="">
       <TrimName>{trim.trimName}</TrimName>
-      <Price>{trim.price}원</Price>
+      <Price>{PricePrint(trim.price)}</Price>
       <div style={{ marginTop: '30px' }}>
         <Info>{trim.basicInfo}</Info>
       </div>

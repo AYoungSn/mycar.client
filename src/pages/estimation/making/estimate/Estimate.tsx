@@ -7,6 +7,7 @@ import { FlexDiv, FlexLi } from "../../../../components/styled/Flex";
 import { detailOptListState, detailOptState, exteriorState, hgaOptListState, hgaOptState, interiorState, npfOptListState, npfOptState } from "../../../../utils/recoil/options";
 import { OptionChoiceType } from "../../../../type/optionType";
 import useUpdatePrice from "../../../../hooks/useUpdatePrice";
+import PricePrint from "../../../../utils/PricePrint";
 
 function Estimate() {
 	const model = useRecoilValue(modelState);
@@ -111,7 +112,7 @@ function TableInner({name, price, children}: {name: string, price: number, child
 
 function Price({price, textAlign}: {price: number, textAlign: string}) {
 	return (<p style={{display: "block", marginBottom: "15px", textAlign: textAlign === 'left' ? 'left':'right'}}>
-		{price > 0 ? price + ' 원' : '추가금액 없음'}</p>)
+		{price > 0 ? PricePrint(price) : '추가금액 없음'}</p>)
 }
 
 const Section = styled.section`

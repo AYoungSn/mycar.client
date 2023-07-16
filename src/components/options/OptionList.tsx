@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FlexLi, FlexUl } from '../styled/Flex';
 import { FlexLiType } from '../../type/styledType';
 import { OptionChoiceType } from '../../type/optionType';
+import PricePrint from '../../utils/PricePrint';
 
 export default function OptionList({
   options,
@@ -56,7 +57,7 @@ function OptionItem({
             <p>{option.name}</p>
           </div>
           <div>
-            <p>{option.price}</p>
+            <p>{PricePrint(option.price)}</p>
           </div>
         </label>
       </OptionBtn>

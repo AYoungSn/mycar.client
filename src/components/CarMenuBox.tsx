@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CarItem } from '../type/ApiResponseType';
+import PricePrint from '../utils/PricePrint';
 
 function CarMenuBox({ data }: { data: CarItem }) {
   return (
@@ -10,7 +11,7 @@ function CarMenuBox({ data }: { data: CarItem }) {
           {data.carName}
         </TrimName>
         <Price ishome={window.location.pathname === '/' ? true : false}>
-          {data.price} 원 ~
+          {PricePrint(data.price)} ~
         </Price>
       </Button>
     </a>

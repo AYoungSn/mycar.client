@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { OptionType } from "../../../type/optionType";
 import { FlexLi } from "../../styled/Flex";
+import PricePrint from "../../../utils/PricePrint";
 
 function ChangeOptionList({change, optionList}:{change: 'add' | 'del', optionList: OptionType[] | null}) {
 	return (<div>
@@ -12,7 +13,7 @@ function ChangeOptionList({change, optionList}:{change: 'add' | 'del', optionLis
 				return(
 					<OptionList key={item.code}>
 						<p>{item.name}</p>
-						<p>{item.price} 원</p>
+						<p>{PricePrint(item.price)}</p>
 					</OptionList>
 				)
 			})}

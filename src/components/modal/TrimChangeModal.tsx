@@ -10,6 +10,7 @@ import ChangePrice from './options/ChangePrice';
 import { modalState } from '../../utils/recoil/modal';
 import { detailOptState } from '../../utils/recoil/options';
 import { optionUpdate } from '../../utils/optionUpdate';
+import PricePrint from '../../utils/PricePrint';
 
 export default function TrimChangeModal({
   colorName,
@@ -97,7 +98,7 @@ function TrimBox({ title, trimName, price }: { title: string; trimName: string; 
 			<b>{title}</b>
 			<div>
 				<p>{trimName}</p>
-				<p>{price} 원</p>
+				<p>{PricePrint(price)}</p>
     	</div>
     </FlexLiItem>
   );
