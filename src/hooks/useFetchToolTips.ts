@@ -18,6 +18,7 @@ function useFetchToolTips(
 			setToolTips(data);
 		}
 		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [carCode, engineId, gearboxId, drivingId, baseQuery]);
 }
 export default useFetchToolTips;
