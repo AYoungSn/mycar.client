@@ -11,26 +11,26 @@ export function useUpdateInterior(modelId: number) {
 	const [interior, setInterior] = useRecoilState(interiorState);
 	const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
 	useEffect(() => {
-    function updateInterior(){
-      for (let i = 0; i < interiorList.length; i++) {
-        if (
-          interiorList[i].id === interior.id &&
-          interiorList[i].choiceYn === false
-        ) {
-          for (let j = 0; j < interiorList.length; j++) {
-            if (interiorList[j].choiceYn === true) {
-              setInterior({ ...interiorList[j] });
-              break;
-            }
-          }
-          break;
-        }
-      }
+		function updateInterior() {
+			for (let i = 0; i < interiorList.length; i++) {
+				if (
+					interiorList[i].id === interior.id &&
+					interiorList[i].choiceYn === false
+				) {
+					for (let j = 0; j < interiorList.length; j++) {
+						if (interiorList[j].choiceYn === true) {
+							setInterior({ ...interiorList[j] });
+							break;
+						}
+					}
+					break;
+				}
+			}
 			if (interiorList[0] && interior.choiceYn === false) {
 				setInterior({
 					...interiorList[0],
 				});
-      }
+			}
 		}
 		async function checkedOptionList() {
 			const optionCodes = MakeOptionCodeList(detailOpts);
@@ -65,14 +65,15 @@ export function useInitInterior(carCode: string, trimCode: string) {
 						interior.code,
 					)
 				).data;
+				data.exterior.sort((a: ExteriorType, b: ExteriorType) => a.id > b.id ? -1 : 1);
 				data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
-						a.choiceYn === true
-							? -1
-							: 1
-					)
+					a.choiceYn === true
+						? -1
+						: 1
+				)
 				setExteriorList(data.exterior);
 			}
-    }
-    initInterior();
-  }, [interior]);
+		}
+		initInterior();
+	}, [interior]);
 }

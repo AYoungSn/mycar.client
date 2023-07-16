@@ -84,6 +84,7 @@ async function fetchExteriorList(carCode: string, trimCode: string, item: Interi
 			item.code,
 		)
 	).data;
+	data.exterior.sort((a: ExteriorType, b: ExteriorType) => a.id > b.id ? 1 : -1);
 	setExteriorList(
 		data.exterior.sort(
 			(a: ExteriorType, b: ExteriorType) =>

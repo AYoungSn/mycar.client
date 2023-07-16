@@ -3,55 +3,57 @@ import { carsApi } from '../utils/Api';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { priceState } from '../utils/recoil/carInfo';
 import {
-  exteriorListState,
-  hgaInitListState,
-  hgaOptListState,
-  hgaOptState,
-  interiorListState,
-  npfInitListState,
-  npfOptListState,
-  npfOptState,
-  detailInitListState,
-  detailOptListState,
-  detailOptState,
+	exteriorListState,
+	hgaInitListState,
+	hgaOptListState,
+	hgaOptState,
+	interiorListState,
+	npfInitListState,
+	npfOptListState,
+	npfOptState,
+	detailInitListState,
+	detailOptListState,
+	detailOptState,
 } from '../utils/recoil/options';
 import { ModelInfo } from '../type/ApiResponseType';
-import { ExteriorType } from '../type/optionType';
+import { ExteriorType, InteriorType } from '../type/optionType';
 import { optionListUpdate } from '../utils/optionUpdate';
 
 export default function useFetchModelInit(modelId: number, setModel: any) {
-  const setExteriorList = useSetRecoilState(exteriorListState);
-  const setInteriorList = useSetRecoilState(interiorListState);
-  const setDetailListOpt = useSetRecoilState(detailOptListState);
-  const setHgaListOpt = useSetRecoilState(hgaOptListState);
-  const setNpfListOpt = useSetRecoilState(npfOptListState);
+	const setExteriorList = useSetRecoilState(exteriorListState);
+	const setInteriorList = useSetRecoilState(interiorListState);
+	const setDetailListOpt = useSetRecoilState(detailOptListState);
+	const setHgaListOpt = useSetRecoilState(hgaOptListState);
+	const setNpfListOpt = useSetRecoilState(npfOptListState);
 	const setDetailListInit = useSetRecoilState(detailInitListState);
 	const setHgaListInit = useSetRecoilState(hgaInitListState);
 	const setNpfListInit = useSetRecoilState(npfInitListState);
-  const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
-  const setHgaOpts = useSetRecoilState(hgaOptState);
-  const setNpfOpts = useSetRecoilState(npfOptState);
-  const setPrice = useSetRecoilState(priceState);
+	const [detailOpts, setDetailOpts] = useRecoilState(detailOptState);
+	const setHgaOpts = useSetRecoilState(hgaOptState);
+	const setNpfOpts = useSetRecoilState(npfOptState);
+	const setPrice = useSetRecoilState(priceState);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data: ModelInfo = (await carsApi.init(modelId)).data;
-      setModel(data.model);
-      setPrice(data.model.price);
-      setExteriorList(
-        data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
+	useEffect(() => {
+		async function fetchData() {
+			const data: ModelInfo = (await carsApi.init(modelId)).data;
+			setModel(data.model);
+			setPrice(data.model.price);
+			data.exterior.sort((a: ExteriorType, b: ExteriorType) => a.id > b.id ? -1 : 1);
+			setExteriorList(
+				data.exterior.sort((a: ExteriorType, b: ExteriorType) =>
 					a.choiceYn === true
 						? -1
 						: 1
-        )
-      );
-      setInteriorList(
-        data.interior.sort((a, b) =>
+				)
+			);
+			data.interior.sort((a: InteriorType, b: InteriorType) => a.id > b.id ? -1 : 1);
+			setInteriorList(
+				data.interior.sort((a, b) =>
 					a.choiceYn === true
 						? -1
 						: 1
-        ),
-      );
+				),
+			);
 			setDetailListInit(new Map());
 			setDetailListOpt(new Map());
 			data.options.detail.map((item) => {
@@ -71,9 +73,9 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 				optionListUpdate(item.code, item, setNpfListInit);
 			})
 			setDetailOpts(new Map());
-      setHgaOpts(new Map());
-      setNpfOpts(new Map());
-    }
-    fetchData();
-  }, [modelId]);
+			setHgaOpts(new Map());
+			setNpfOpts(new Map());
+		}
+		fetchData();
+	}, [modelId]);
 }
