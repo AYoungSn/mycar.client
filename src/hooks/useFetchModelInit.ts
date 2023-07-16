@@ -16,7 +16,6 @@ import {
 	detailOptState,
 } from '../utils/recoil/options';
 import { ModelInfo } from '../type/ApiResponseType';
-import { ExteriorType, InteriorType } from '../type/optionType';
 import { optionListUpdate } from '../utils/optionUpdate';
 
 export default function useFetchModelInit(modelId: number, setModel: any) {

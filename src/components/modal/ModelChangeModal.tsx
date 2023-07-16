@@ -61,31 +61,31 @@ export default function ModelChangeModal() {
 		</PopupHeader>
 		<p>변경되는 모델에 따라 색상 및 사양이 변경될 수 있습니다.</p>
 		<div>
-			<MenuBtn onClick={() => {setDropDown(!dropDown)}}>
+			<MenuBtn onClick={() => { setDropDown(!dropDown) }}>
 				<span>{model.carName} {selectName}</span>
 				<Triangle isOpen={dropDown}></Triangle>
 			</MenuBtn>
 			{
 				dropDown &&
-				<DropDown carName={model.carName} modelNames={basicName} setName={setSelectName}/>
+				<DropDown carName={model.carName} modelNames={basicName} setName={setSelectName} />
 			}
 		</div>
-		<TrimBox trimList={trimList} selectModel={selectModel} setModel={setSelectModel}/>
+		<TrimBox trimList={trimList} selectModel={selectModel} setModel={setSelectModel} />
 		{(delOptions.length || 0) > 0 && (
 			<ChangeOptionList change='del' optionList={delOptions || null} />
 		)}
 		{selectModel.modelId !== 0 && selectModel.modelId !== model.modelId && (
 			<ChangePrice changePrice={(selectModel.price &&
 				selectModel.price -
-					model.price -
-					delPrice) || 0}/>
+				model.price -
+				delPrice) || 0} />
 		)}
 		<a href={`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`}>
 			<ConfirmBtn>
 				확인
 			</ConfirmBtn>
 		</a>
-	</Modal>)	
+	</Modal>)
 }
 
 const MenuWrap = styled.div`
@@ -102,9 +102,9 @@ const MenuWrap = styled.div`
 const BoxLi = styled.li`
 	margin: 10px;
 `;
-const BoxBtn = styled.button<{active: boolean}>`
+const BoxBtn = styled.button<{ active: boolean }>`
 	width: 100%;
-	border: ${props => props.active ? "2px solid #007fa8" : "1px #DDD solid" };
+	border: ${props => props.active ? "2px solid #007fa8" : "1px #DDD solid"};
 	padding: 10px;
 	font-size: 16px;
 	& > b {
@@ -114,12 +114,12 @@ const BoxBtn = styled.button<{active: boolean}>`
 		margin-top: 10px;
 	}
 `;
-function DropDown({carName, modelNames, setName}:{carName: string, modelNames: string[], setName: any}) {
+function DropDown({ carName, modelNames, setName }: { carName: string, modelNames: string[], setName: any }) {
 	return (<MenuWrap>
 		<ul>
 			{modelNames.map((name) => {
 				return (<li>
-					<button style={{width: "100%"}} onClick={() => {setName(name)}}>
+					<button style={{ width: "100%" }} onClick={() => { setName(name) }}>
 						{carName} {name}
 					</button>
 				</li>)
@@ -128,8 +128,8 @@ function DropDown({carName, modelNames, setName}:{carName: string, modelNames: s
 	</MenuWrap>)
 }
 
-function TrimBox({trimList, selectModel, setModel}:{trimList: Trim[], selectModel: Trim, setModel: any}) {
-	return (<FlexUl style={{justifyContent: "center"}}>
+function TrimBox({ trimList, selectModel, setModel }: { trimList: Trim[], selectModel: Trim, setModel: any }) {
+	return (<FlexUl style={{ justifyContent: "center" }}>
 		{
 			trimList && trimList.map((item) => {
 				return (<BoxLi key={item.modelId}>
