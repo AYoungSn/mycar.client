@@ -23,8 +23,11 @@ export function useExteriorListState() {
 			}
 			if (exteriorList[0] && exterior.choiceYn === false) {
 				// 현재 옵션 선택 시 선택 가능한 내장색상 목록 조회
-				setExterior({
-					...exteriorList[0],
+				exteriorList.forEach((ext) => {
+					if (ext.choiceYn === true) {
+						setExterior(ext);
+						// break;
+					}
 				});
 			}
 		}

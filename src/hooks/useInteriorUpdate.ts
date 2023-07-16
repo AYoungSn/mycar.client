@@ -27,8 +27,8 @@ export function useUpdateInterior(modelId: number) {
 				}
 			}
 			if (interiorList[0] && interior.choiceYn === false) {
-				setInterior({
-					...interiorList[0],
+				interiorList.forEach((item) => {
+					setInterior(item);
 				});
 			}
 		}
@@ -50,7 +50,7 @@ export function useUpdateInterior(modelId: number) {
 			checkedOptionList();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [interiorList, interior]);
+	}, [interiorList]);
 }
 
 export function useInitInterior(carCode: string, trimCode: string) {
