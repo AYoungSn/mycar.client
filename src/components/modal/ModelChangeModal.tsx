@@ -104,9 +104,9 @@ const MenuWrap = styled.div`
 const BoxLi = styled.li`
 	margin: 10px;
 `;
-const BoxBtn = styled.button<{ active: boolean }>`
+const BoxBtn = styled.button<{ $active: boolean }>`
 	width: 100%;
-	border: ${props => props.active ? "2px solid #007fa8" : "1px #DDD solid"};
+	border: ${props => props.$active ? "2px solid #007fa8" : "1px #DDD solid"};
 	padding: 10px;
 	font-size: 16px;
 	& > b {
@@ -120,7 +120,7 @@ function DropDown({ carName, modelNames, setName }: { carName: string, modelName
 	return (<MenuWrap>
 		<ul>
 			{modelNames.map((name) => {
-				return (<li>
+				return (<li key={name}>
 					<button style={{ width: "100%" }} onClick={() => { setName(name) }}>
 						{carName} {name}
 					</button>
@@ -135,7 +135,7 @@ function TrimBox({ trimList, selectModel, setModel }: { trimList: Trim[], select
 		{
 			trimList && trimList.map((item) => {
 				return (<BoxLi key={item.modelId}>
-					<BoxBtn active={selectModel.modelId === item.modelId} onClick={() => setModel(item)}>
+					<BoxBtn $active={selectModel.modelId === item.modelId} onClick={() => setModel(item)}>
 						<b>{item.trimName}</b>
 						<p>{PricePrint(item.price)}</p>
 					</BoxBtn>

@@ -1,6 +1,56 @@
 import styled from 'styled-components';
 import { TooltipType } from '../../type/optionType';
 
+function Tool({ tools, toolId, onChange, name }: Props) {
+	const listItems = tools?.map((tool, i) => {
+		if (toolId === 0 && i === 0 && tool.isSelect === true) onChange(tool.id);
+		if (toolId === tool.id && tool.isSelect === false) {
+			for (let i = 0; i < tools?.length; i++) {
+				if (tools[i].isSelect === true) {
+					onChange(Number(tools[i].id));
+					break;
+				}
+			}
+		}
+		return (
+			<ToolLabel key={tool.id}>
+				{tool.isSelect === true ? (
+					<RadioInput
+						type="radio"
+						value={tool.id}
+						onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+							onChange(Number(e.target.value));
+						}}
+						aria-checked={toolId === tool.id} />
+				) : (
+					<RadioInput
+						type="radio"
+						value={tool.id}
+						onClick={() => { }}
+						disabled="disabled"
+					/>
+				)}
+				<RadioInner
+					$isSelect={tool.isSelect}
+					$choice={Number(tool.id) === Number(toolId)}
+				>
+					{tool.name}
+				</RadioInner>
+			</ToolLabel>
+		);
+	});
+	return (
+		<Item key={toolId}>
+			<div>
+				<b>{name}</b>
+			</div>
+			<RadioGroup>{listItems}</RadioGroup>
+		</Item>
+	);
+}
+
+export default Tool;
+
 const Item = styled.li`
   margin-bottom: 20px;
   margin-right: 60px;
@@ -17,10 +67,10 @@ const ToolLabel = styled.label`
   font-size: 14px;
 `;
 const RadioInput = styled.input<{
-  type: string;
-  value: number;
-  onClick: any;
-  disabled: string;
+	type: string;
+	value: number;
+	onClick: any;
+	disabled?: string;
 }>`
   opacity: 0;
   outline: none;
@@ -38,12 +88,12 @@ const RadioGroup = styled.div`
   width: 100%;
   display: inline-block;
 `;
-const RadioInner = styled.span<{ isSelect: boolean; choice: boolean }>`
+const RadioInner = styled.span<{ $isSelect: boolean; $choice: boolean }>`
   width: 100%;
-  cursor: ${(props) => (props.isSelect ? 'pointer' : 'default')};
-  background: ${(props) => (props.choice ? '#007fa8' : '#FFF')};
+  cursor: ${(props) => (props.$isSelect ? 'pointer' : 'default')};
+  background: ${(props) => (props.$choice ? '#007fa8' : '#FFF')};
   color: ${(props) =>
-    props.choice ? '#FFF' : props.isSelect ? '#000' : '#c0c4cc'};
+		props.$choice ? '#FFF' : props.$isSelect ? '#000' : '#c0c4cc'};
   padding: 12px 10px !important;
   border-left: 1px solid #dcdfe6;
   white-space: nowrap;
@@ -56,71 +106,8 @@ const RadioInner = styled.span<{ isSelect: boolean; choice: boolean }>`
   text-align: center;
 `;
 type Props = {
-  tools: TooltipType[];
-  toolId: number;
-  onChange: any;
-  name: string;
+	tools: TooltipType[];
+	toolId: number;
+	onChange: any;
+	name: string;
 };
-
-function Tool({ tools, toolId, onChange, name }: Props) {
-  const listItems = tools?.map((tool, i) => {
-    if (toolId === 0 && i === 0 && tool.isSelect === true) onChange(tool.id);
-    if (toolId === tool.id && tool.isSelect === false) {
-      for (let i = 0; i < tools?.length; i++) {
-        if (tools[i].isSelect === true) {
-          onChange(Number(tools[i].id));
-          break;
-        }
-      }
-    }
-    return (
-      <ToolLabel>
-        {tool.isSelect === true ? (
-          toolId === tool.id ? (
-            <RadioInput
-              type="radio"
-              value={tool.id}
-              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-                onChange(Number(e.target.value));
-              }}
-              disabled=""
-              aria-checked="true"
-            />
-          ) : (
-            <RadioInput
-              type="radio"
-              value={tool.id}
-              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-                onChange(Number(e.target.value));
-              }}
-              disabled=""
-            />
-          )
-        ) : (
-          <RadioInput
-            type="radio"
-            value={tool.id}
-            onClick={() => {}}
-            disabled="disabled"
-          />
-        )}
-        <RadioInner
-          isSelect={tool.isSelect}
-          choice={Number(tool.id) === Number(toolId)}
-        >
-          {tool.name}
-        </RadioInner>
-      </ToolLabel>
-    );
-  });
-  return (
-    <Item key={toolId}>
-      <div>
-        <b>{name}</b>
-      </div>
-      <RadioGroup>{listItems}</RadioGroup>
-    </Item>
-  );
-}
-
-export default Tool;

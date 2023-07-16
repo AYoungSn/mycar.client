@@ -91,7 +91,6 @@ const FlexTrim = styled(FlexUl)`
   margin-bottom: 20px;
 `;
 
-
 function TrimBox({ title, trimName, price }: { title: string; trimName: string; price: number }) {
 	return (
 		<FlexLiItem>

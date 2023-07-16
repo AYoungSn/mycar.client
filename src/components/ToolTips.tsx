@@ -1,57 +1,52 @@
 import Tool from './styled/Tool';
 import { FlexUl } from './styled/Flex';
-import { Tooltips } from '../type/ApiResponseType';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { drivingIdState, engineIdState, gearboxIdState, tooltipState } from '../utils/recoil/carInfo';
 
-type Props = {
-  tooltips: Tooltips;
-  engineId: number;
-  onChangeEngineId: any;
-  gearboxId: number;
-  onChangeGearboxId: any;
-  drivingId: number;
-  onChangeDrivingId: any;
-};
-
-function ToolTips({ tooltips, ...props }: Props) {
-  const engines = tooltips.engines;
-  const gearbox = tooltips.gearbox;
-  const driving = tooltips.driving;
-  return (
-    <section>
-      <FlexUl>
-        {engines?.length > 0 && (
-          <Tool
-            tools={engines}
-            name="엔진"
-            onChange={(id: number) => {
-              props.onChangeEngineId(id);
-            }}
-            toolId={props.engineId}
-          />
-        )}
-        {gearbox?.length > 0 && (
-          <Tool
-            tools={gearbox}
-            name="변속기"
-            onChange={(id: number) => {
-              props.onChangeGearboxId(id);
-            }}
-            toolId={props.gearboxId}
-          />
-        )}
-        {driving?.length > 0 && (
-          <Tool
-            tools={driving}
-            name="구동방식"
-            onChange={(id: number) => {
-              props.onChangeDrivingId(id);
-            }}
-            toolId={props.drivingId}
-          />
-        )}
-      </FlexUl>
-    </section>
-  );
+function ToolTips() {
+	const [engineId, setEngineId] = useRecoilState(engineIdState);
+	const [gearboxId, setGearboxId] = useRecoilState(gearboxIdState);
+	const [drivingId, setDrivingId] = useRecoilState(drivingIdState);
+	const tooltips = useRecoilValue(tooltipState);
+	const engines = tooltips.engines;
+	const gearbox = tooltips.gearbox;
+	const driving = tooltips.driving;
+	return (
+		<section>
+			<FlexUl>
+				{engines?.length > 0 && (
+					<Tool
+						tools={engines}
+						name="엔진"
+						onChange={(id: number) => {
+							setEngineId(id);
+						}}
+						toolId={engineId}
+					/>
+				)}
+				{gearbox?.length > 0 && (
+					<Tool
+						tools={gearbox}
+						name="변속기"
+						onChange={(id: number) => {
+							setGearboxId(id);
+						}}
+						toolId={gearboxId}
+					/>
+				)}
+				{driving?.length > 0 && (
+					<Tool
+						tools={driving}
+						name="구동방식"
+						onChange={(id: number) => {
+							setDrivingId(id);
+						}}
+						toolId={drivingId}
+					/>
+				)}
+			</FlexUl>
+		</section>
+	);
 }
 
 export default ToolTips;

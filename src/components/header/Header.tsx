@@ -8,6 +8,7 @@ import Logo from '../styled/Logo';
 import { CarItem } from '../../type/ApiResponseType';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../utils/recoil/modal';
+import { ModalBackground } from '../styled/Modal';
 
 function Header({ carCode }: { carCode: string }) {
 	return (
@@ -67,7 +68,11 @@ function Menu({ carCode }: { carCode: string }) {
 		}
 		fetchData();
 	}, [data.length, carCode, data]);
-
+	const closeMenuHandler = (e: React.MouseEvent) => {
+		if (e.target instanceof HTMLDivElement && e.target.id === 'modalOutSide') {
+			setIsOpen(false);
+		}
+	}
 	return (
 		<>
 			<MenuBtn
@@ -79,11 +84,17 @@ function Menu({ carCode }: { carCode: string }) {
 				<Triangle $isOpen={isOpen}></Triangle>
 			</MenuBtn>
 			{isOpen && (
-				<Section>
-					{data.map((item: CarItem, id: number) => {
-						return <CarMenuBox key={item.carCode} data={item} />;
-					})}
-				</Section>
+				<div>
+					<ModalBackground
+						style={{ top: "100px" }}
+						id='modalOutSide'
+						onClick={closeMenuHandler} />
+					<Section>
+						{data.map((item: CarItem, id: number) => {
+							return <CarMenuBox key={item.carCode} data={item} />;
+						})}
+					</Section>
+				</div>
 			)}
 			{location.pathname === '/cars/estimation/models/making' &&
 				<SummaryBtn onClick={() => setModal({ modalName: 'SUMMARY' })}>

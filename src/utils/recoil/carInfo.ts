@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
-import { Model } from '../../type/ApiResponseType';
+import { Model, Tooltips } from '../../type/ApiResponseType';
 
 export const priceState = atom<number>({
-  key: 'price',
-  default: 0,
+	key: 'price',
+	default: 0,
 });
 
 export const modelState = atom<Model>({
@@ -19,4 +19,25 @@ export const modelState = atom<Model>({
 		modelId: 0,
 		trimId: 0,
 	}
+})
+
+export const tooltipState = atom<Tooltips>({
+	key: 'tooltips',
+	default: {
+		gearbox: [],
+		engines: [],
+		driving: []
+	}
+})
+export const engineIdState = atom<number>({
+	key: 'engineId',
+	default: 0
+})
+export const gearboxIdState = atom<number>({
+	key: 'gearboxId',
+	default: 0
+})
+export const drivingIdState = atom<number>({
+	key: 'drivingId',
+	default: 0
 })
