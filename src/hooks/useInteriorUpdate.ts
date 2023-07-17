@@ -25,12 +25,15 @@ export function useUpdateInterior(modelId: number) {
 					}
 					break;
 				}
-			}
-			if (interiorList[0] && interior.choiceYn === false) {
-				const enableList = [...interiorList].filter((value) => value.choiceYn === true).sort((a, b) => a.id > b.id ? 1 : -1);
-				setInterior(enableList[0]);
+				if (interiorList[0] && interior.choiceYn === false) {
+					const enableList = [...interiorList].filter((value) => value.choiceYn === true).sort((a, b) => a.id > b.id ? 1 : -1);
+					setInterior(enableList[0]);
+				}
 			}
 		}
+		updateInterior();
+	}, [interiorList]);
+	useEffect(() => {
 		async function checkedOptionList() {
 			const optionCodes = MakeOptionCodeList(detailOpts);
 			const data = (
@@ -44,12 +47,11 @@ export function useUpdateInterior(modelId: number) {
 				allOptionUpdate(data.optionCode, setDetailOpts);
 			}
 		}
-		updateInterior();
 		if (interior.code !== '') {
 			checkedOptionList();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [interiorList]);
+	}, [interior]);
 }
 
 export function useInitInterior(carCode: string, trimCode: string) {
