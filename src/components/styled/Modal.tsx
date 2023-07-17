@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
 
 type ModalContainerType = {
-  width: string;
-  height: string;
+	width: string;
+	height: string;
 };
 
 export const ModalContainer = styled.div<ModalContainerType>`
@@ -56,5 +56,5 @@ export const ConfirmBtn = styled.button`
 	border: 0;
 	background: #002c5f;
 	color: #fff;
-	margin-top: 20px;
+	margin-top: 30px;
 `;

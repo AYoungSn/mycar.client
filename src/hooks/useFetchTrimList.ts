@@ -13,6 +13,7 @@ export default function useFetchTrimList(carCode: string, selectName: string, na
 			}
 		}
 		fetchTrimList();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectName, names]);
 	return (trimList);
 }

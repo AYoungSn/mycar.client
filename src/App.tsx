@@ -7,18 +7,18 @@ import ModalProvider from './components/modal/ModalProvider';
 import Estimate from './pages/estimation/making/estimate/Estimate';
 
 function App() {
-  return (
-    <RecoilRoot>
+	return (
+		<RecoilRoot>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<Home/>}/>
+					<Route path="/" element={<Home />} />
 					<Route path='/cars/estimation/models' element={<TrimModelList />} />
 					<Route path='/cars/estimation/models/making' element={<MakeCar />} />
 					<Route path='/cars/estimation/models/estimate' element={<Estimate />} />
 				</Routes>
 				<ModalProvider />
 			</BrowserRouter>
-    </RecoilRoot>
-  );
+		</RecoilRoot>
+	);
 }
 export default App;

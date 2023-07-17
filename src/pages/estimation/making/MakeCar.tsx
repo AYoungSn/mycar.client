@@ -34,11 +34,13 @@ export default function MakeCar() {
 							<Interior />
 						</div>
 						<Options />
-						<ConfirmBtn onClick={() => {
-							navigate(`/cars/estimation/models/estimate`);
-						}}>
-							내 차 만들기 완료
-						</ConfirmBtn>
+						<div style={{ textAlign: "center" }}>
+							<ConfirmBtn onClick={() => {
+								navigate(`/cars/estimation/models/estimate`);
+							}}>
+								내 차 만들기 완료
+							</ConfirmBtn>
+						</div>
 					</OptionAreaWrap>
 				}
 			</ContentWrap>

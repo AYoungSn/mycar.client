@@ -13,24 +13,24 @@ const Nav = styled.nav`
 `;
 
 function Home() {
-  const [carList, setCarList] = useState<CarItem[]>([]);
-  useEffect(() => {
-    async function fetchData() {
-      const data = (await carsApi.carList).data;
-      setCarList(data);
-    }
-    fetchData();
-  }, []);
-  return (
-    <div>
-      <SimpleHeader />
-      <Nav>
-        {carList?.map((menu) => {
-          return <CarMenuBox data={menu} />;
-        })}
-      </Nav>
-    </div>
-  );
+	const [carList, setCarList] = useState<CarItem[]>([]);
+	useEffect(() => {
+		async function fetchData() {
+			const data = (await carsApi.carList).data;
+			setCarList(data);
+		}
+		fetchData();
+	}, []);
+	return (
+		<div>
+			<SimpleHeader />
+			<Nav>
+				{carList?.map((menu) => {
+					return <CarMenuBox data={menu} />;
+				})}
+			</Nav>
+		</div>
+	);
 }
 
 export default Home;

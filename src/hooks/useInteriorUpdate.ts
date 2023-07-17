@@ -32,6 +32,7 @@ export function useUpdateInterior(modelId: number) {
 			}
 		}
 		updateInterior();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [interiorList]);
 	useEffect(() => {
 		async function checkedOptionList() {

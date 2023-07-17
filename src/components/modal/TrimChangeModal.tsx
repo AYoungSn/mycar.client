@@ -32,10 +32,14 @@ export default function TrimChangeModal({
 		})
 		navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
 	}
-	let addPrice = 0;
-	let delPrice = 0;
-	data.changeOptionInfo?.addOptions.map((item) => addPrice += item.price);
-	data.changeOptionInfo?.delOptions.map((item) => delPrice += item.price);
+	// let addPrice = 0;
+	// let delPrice = 0;
+	const addPrice = data.changeOptionInfo?.addOptions
+		.map((value) => value.price)
+		.reduce((acc, cur) => acc + cur, 0) || 0;
+	const delPrice = data.changeOptionInfo?.delOptions
+		.map((value) => value.price)
+		.reduce((acc, cur) => acc + cur, 0) || 0;
 	return (
 		<Modal>
 			<div>

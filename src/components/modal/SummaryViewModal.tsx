@@ -34,7 +34,7 @@ export default function SummaryViewModal() {
 		}
 	}
 	return <>
-		<ModalBackground style={{ zIndex: 0 }} id='modalOutSide' onClick={closeModalHandler} />
+		<ModalBackground style={{ top: "100px" }} id='modalOutSide' onClick={closeModalHandler} />
 		<MiniModalContainer width="700px" height="">
 			<CloseBtn onClick={closeModal}>X</CloseBtn>
 			<PopDropDown>
@@ -44,14 +44,14 @@ export default function SummaryViewModal() {
 					<Grid style={{ borderTop: "none", padding: "10px 0" }}>
 						<div>모델</div>
 						<Grid style={{ gridTemplateColumns: "auto 140px", borderTop: "none" }}>
-							<TableInner name={model.modelName} price={model.price} />
+							<TableInner key="model" name={model.modelName} price={model.price} />
 						</Grid>
 					</Grid>
 					<Grid style={{ padding: "10px 0" }}>
 						<div>색상</div>
 						<Grid style={{ gridTemplateColumns: "auto 140px", borderTop: "none" }}>
-							<TableInner name={'외장 - ' + exterior.name} price={exterior.price} />
-							<TableInner name={'내장 - ' + interior.name} price={0} />
+							<TableInner key="exterior" name={'외장 - ' + exterior.name} price={exterior.price} />
+							<TableInner key="interior" name={'내장 - ' + interior.name} price={0} />
 						</Grid>
 					</Grid>
 					<Grid style={{ padding: "10px 0" }}>
@@ -61,33 +61,35 @@ export default function SummaryViewModal() {
 								[...detailOpt]
 									.filter(([key, value]) => value === true)
 									.map(([key, value]) => {
-										return (<TableInner name={detailList.get(key)?.name || ''} price={detailList.get(key)?.price || 0} />)
+										return (<TableInner key={key} name={detailList.get(key)?.name || ''} price={detailList.get(key)?.price || 0} />)
 									})
 							}
 							{
 								[...hgaOpt]
 									.filter(([key, value]) => value === true)
 									.map(([key, value]) => {
-										return (<TableInner name={hgaList.get(key)?.name || ''} price={hgaList.get(key)?.price || 0} />)
+										return (<TableInner key={key} name={hgaList.get(key)?.name || ''} price={hgaList.get(key)?.price || 0} />)
 									})
 							}
 							{
 								[...npfOpt]
 									.filter(([key, value]) => value === true)
 									.map(([key, value]) => {
-										return (<TableInner name={npfList.get(key)?.name || ''} price={npfList.get(key)?.price || 0} />)
+										return (<TableInner key={key} name={npfList.get(key)?.name || ''} price={npfList.get(key)?.price || 0} />)
 									})
 							}
 						</Grid>
 					</Grid>
 					<Grid style={{ gridTemplateColumns: "auto auto", borderTop: "2px solid #7c8191" }}>
 						<h3>총 차량 가격</h3>
-						<Price fontSize="20px" style={{ lineHeight: "34px" }}>{PricePrint(price)}</Price>
+						<Price fontSize="20px" style={{ lineHeight: "34px", color: "#007fa8" }}>{PricePrint(price)}</Price>
 					</Grid>
 				</PopDropDown>
-				<ConfirmBtn onClick={goEstimate}>
-					내 차 만들기 완료
-				</ConfirmBtn>
+				<div style={{ textAlign: "center" }}>
+					<ConfirmBtn onClick={goEstimate}>
+						내 차 만들기 완료
+					</ConfirmBtn>
+				</div>
 			</PopDropDown>
 		</MiniModalContainer>
 	</>

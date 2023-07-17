@@ -4,13 +4,13 @@ import { optionsApi } from "./Api";
 import MakeOptionCodeList from "./makeOptionCodeList";
 
 export async function disableColor(
-	detailOpts: Map<string, boolean>, 
-	exterior: ExteriorType, 
-	interior: InteriorType, 
-	modelId: number, 
+	detailOpts: Map<string, boolean>,
+	exterior: ExteriorType,
+	interior: InteriorType,
+	modelId: number,
 	carCode: string,
-	int:InteriorType,
-	ext:ExteriorType,
+	int: InteriorType,
+	ext: ExteriorType,
 	setModal: any) {
 	const optionCodes = MakeOptionCodeList(detailOpts);
 	const data: TrimChangeModalDataType = (

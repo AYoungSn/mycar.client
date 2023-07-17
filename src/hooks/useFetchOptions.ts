@@ -17,26 +17,26 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 		const tmp = new Map(selectListInit);
 		async function fetchData() {
 			const data = (await optionsApi.disableOptions(modelId, optionCodes)).data;
-			data.delOptions.map((item: OptionType) => {
+			data.delOptions.forEach((item: OptionType) => {
 				if (detailOpt.get(item.code)) {
 					optionUpdate(item.code, true, setDetailOpt);
 				}
-				tmp.set(item.code, {...item, choiceYn: false});
+				tmp.set(item.code, { ...item, choiceYn: false });
 			});
 			const addData = (await optionsApi.enableOptions(modelId, optionCodes)).data;
-			addData.addOptions.map((item: OptionType) => {
-				tmp.set(item.code, {...item, choiceYn: true});
+			addData.addOptions.forEach((item: OptionType) => {
+				tmp.set(item.code, { ...item, choiceYn: true });
 			});
 			setSelectListOpts(tmp);
-			const {available, interiorCodes}:{available: boolean, interiorCodes: string[]} = (await optionsApi.checkedInterior(modelId, optionCodes)).data;
+			const { available, interiorCodes }: { available: boolean, interiorCodes: string[] } = (await optionsApi.checkedInterior(modelId, optionCodes)).data;
 			if (available === true) {
 				let exist = false;
-				for(let i = 0; i < interiorCodes.length;i++) {
+				for (let i = 0; i < interiorCodes.length; i++) {
 					if (interiorCodes[i] === interior.code) {
 						exist = true;
 					}
 				}
-				if(exist === false) {
+				if (exist === false) {
 					const changeInterior = interiorList.filter((element, id, array) => {
 						return element.code === interiorCodes[0];
 					})
@@ -45,17 +45,18 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 			}
 			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
 			const hga = new Map();
-			tuixList.hga.map((item: OptionType) => {
-				hga.set(item.code, {...item, choiceYn: true});
+			tuixList.hga.forEach((item: OptionType) => {
+				hga.set(item.code, { ...item, choiceYn: true });
 			})
 			setHgaList(hga);
 			const npf = new Map();
-			tuixList.npf.map((item: OptionType) => {
-				npf.set(item.code, {...item, choiceYn: true});
+			tuixList.npf.forEach((item: OptionType) => {
+				npf.set(item.code, { ...item, choiceYn: true });
 			})
 			setNpfList(npf);
 		}
 		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectOpts]);
 }
 
@@ -66,18 +67,18 @@ export function useFetchTuixList(modelId: number) {
 		const optionCodes = MakeOptionCodeList(npfOpt);
 		async function fetchData() {
 			const npf = new Map();
-			[...npfList].map(([key, value]) => {
-				npf.set(key, {...value, choiceYn: true})
+			[...npfList].forEach(([key, value]) => {
+				npf.set(key, { ...value, choiceYn: true })
 			})
-			if (optionCodes.length > 0){
+			if (optionCodes.length > 0) {
 				const data = (await optionsApi.disableTuix(modelId, optionCodes)).data;
-				data.delOptions.map((item: OptionType) => {
-					npf.set(item.code, {...item, choiceYn: false});
+				data.delOptions.forEach((item: OptionType) => {
+					npf.set(item.code, { ...item, choiceYn: false });
 				});
 			}
 			setNpfList(npf);
 		}
 		fetchData();
-		
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [npfOpt]);
 }
