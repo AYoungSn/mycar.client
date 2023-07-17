@@ -1,4 +1,4 @@
-export default function useMakePath(
+export default function makeToolTipPath(
 	carCode: string | null,
 	engineId: number,
 	gearboxId: number,

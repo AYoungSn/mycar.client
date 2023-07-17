@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useMakePath from './useMakePath';
+import makeToolTipPath from '../utils/makePath';
 import { carsApi } from '../utils/Api';
 import { Trim } from '../type/ApiResponseType';
 
@@ -10,7 +10,7 @@ function useFetchTrims(
 	drivingId: number,
 ) {
 	const [trims, setTrims] = useState<Trim[]>([]);
-	const baseQuery = useMakePath(carCode, engineId, gearboxId, drivingId);
+	const baseQuery = makeToolTipPath(carCode, engineId, gearboxId, drivingId);
 	useEffect(() => {
 		async function fetchTrims() {
 			setTrims((await carsApi.trims(baseQuery)).data.trims);

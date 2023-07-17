@@ -17,9 +17,10 @@ import {
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ExteriorType } from '../../../type/optionType';
 import { modalState } from '../../../utils/recoil/modal';
-import { useExteriorListState, useUpdateInteriorList } from '../../../hooks/useColorUpdate';
+import { useUpdateInteriorList } from '../../../hooks/color/useColorListUpdate';
 import { disableColor } from '../../../utils/OnClickFunc';
 import { ExteriorSort } from '../../../utils/colorSort';
+import { useExteriorState } from '../../../hooks/color/useColorUpdate';
 
 export default function Exterior() {
 	const [searchParams] = useSearchParams();
@@ -32,9 +33,8 @@ export default function Exterior() {
 	const modelId = Number(searchParams.get('modelId') || '0');
 	// modal
 	const setModal = useSetRecoilState(modalState);
-	useExteriorListState();
+	useExteriorState();
 	useUpdateInteriorList(carCode, trimCode);
-
 	return (
 		<section>
 			<OptionTitle>

@@ -1,16 +1,17 @@
 import { styled } from 'styled-components';
 import Modal from './Modal';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { FlexLiItem, FlexUl } from '../styled/Flex';
-import { ConfirmBtn, PopupHeader } from '../styled/Modal';
+import { PopupHeader } from '../styled/Modal';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
 import ChangeOptionList from './options/ChangeOptionList';
 import ChangePrice from './options/ChangePrice';
 import { modalState } from '../../utils/recoil/modal';
-import { detailOptState } from '../../utils/recoil/options';
+import { detailOptState, exteriorState, interiorListState, interiorState } from '../../utils/recoil/options';
 import { optionUpdate } from '../../utils/optionUpdate';
 import PricePrint from '../../utils/PricePrint';
+import BottomGroupBtn from './BottomGroupBtn';
 
 export default function TrimChangeModal({
 	colorName,
@@ -22,18 +23,23 @@ export default function TrimChangeModal({
 	const navigate = useNavigate();
 	const setModal = useSetRecoilState(modalState);
 	const setDetailOpts = useSetRecoilState(detailOptState);
+	const interiorList = useRecoilValue(interiorListState);
+	const setInterior = useSetRecoilState(interiorState);
+	const [exterior, setExterior] = useRecoilState(exteriorState);
 	const trimChange = () => {
+		navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
 		setModal({ modalName: null });
+		const findInterior = interiorList.filter((value) => value.code === data.changeTrimInfo?.interiorCode);
+		setInterior({ ...findInterior[0], choiceYn: true });
+		setExterior(exterior);
 		data.changeOptionInfo?.addOptions.forEach((item) => {
 			optionUpdate(item.code, false, setDetailOpts);
-		})
+		});
 		data.changeOptionInfo?.delOptions.forEach((item) => {
 			optionUpdate(item.code, true, setDetailOpts);
-		})
-		navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
+		});
+		// navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
 	}
-	// let addPrice = 0;
-	// let delPrice = 0;
 	const addPrice = data.changeOptionInfo?.addOptions
 		.map((value) => value.price)
 		.reduce((acc, cur) => acc + cur, 0) || 0;
@@ -68,7 +74,8 @@ export default function TrimChangeModal({
 							data.changeTrimInfo.beforeCarPrice +
 							addPrice -
 							delPrice) || 0} />
-						<ConfirmBtn onClick={trimChange}>확인</ConfirmBtn>
+						<BottomGroupBtn confirmHandler={trimChange} />
+						{/* <ConfirmBtn onClick={trimChange}>확인</ConfirmBtn> */}
 					</TrimWrap>
 				</div>
 			</div>

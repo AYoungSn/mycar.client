@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { MenuBtn, Triangle } from "../styled/Head";
-import { ConfirmBtn, PopupHeader } from "../styled/Modal";
+import { PopupHeader } from "../styled/Modal";
 import Modal from "./Modal";
 import { carsApi, optionsApi } from "../../utils/Api";
 import { modelState } from "../../utils/recoil/carInfo";
@@ -15,6 +15,7 @@ import ChangePrice from "./options/ChangePrice";
 import { OptionType } from "../../type/optionType";
 import { Trim } from "../../type/ApiResponseType";
 import PricePrint from "../../utils/PricePrint";
+import BottomGroupBtn from "./BottomGroupBtn";
 
 export default function ModelChangeModal() {
 	const [dropDown, setDropDown] = useState(false);
@@ -47,10 +48,9 @@ export default function ModelChangeModal() {
 		async function fetchDelOptions() {
 			const data = (await optionsApi.trimChange(model.modelId, selectModel.modelId, optionCodes)).data;
 			setDelOptions(data.delOptions);
-			let price = 0;
-			data.delOptions.forEach((item: OptionType) => {
-				price += item.price;
-			})
+			const price = data.delOptions.map((item: OptionType) => {
+				return item.price;
+			}).reduce((acc: number, cur: number) => (acc || 0) + (cur || 0), 0);
 			setDelPrice(price);
 		}
 		fetchDelOptions();
@@ -69,7 +69,7 @@ export default function ModelChangeModal() {
 			</MenuBtn>
 			{
 				dropDown &&
-				<DropDown carName={model.carName} modelNames={basicName} setName={setSelectName} />
+				<DropDown carName={model.carName} modelNames={basicName} setName={setSelectName} setDropDown={() => setDropDown(false)} />
 			}
 		</div>
 		<TrimBox trimList={trimList} selectModel={selectModel} setModel={setSelectModel} />
@@ -82,11 +82,9 @@ export default function ModelChangeModal() {
 				model.price -
 				delPrice) || 0} />
 		)}
-		<a href={`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`}>
-			<ConfirmBtn>
-				확인
-			</ConfirmBtn>
-		</a>
+		<BottomGroupBtn confirmHandler={() => {
+			window.location.href = `/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`
+		}} />
 	</Modal>)
 }
 
@@ -116,12 +114,17 @@ const BoxBtn = styled.button<{ $active: boolean }>`
 		margin-top: 10px;
 	}
 `;
-function DropDown({ carName, modelNames, setName }: { carName: string, modelNames: string[], setName: any }) {
+function DropDown({ carName, modelNames, setName, setDropDown }: { carName: string, modelNames: string[], setName: any, setDropDown: any }) {
 	return (<MenuWrap>
 		<ul>
 			{modelNames.map((name) => {
 				return (<li key={name}>
-					<button style={{ width: "100%" }} onClick={() => { setName(name) }}>
+					<button style={{ width: "100%" }}
+						onClick={() => {
+							setName(name);
+							setDropDown();
+						}}
+					>
 						{carName} {name}
 					</button>
 				</li>)

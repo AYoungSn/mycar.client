@@ -19,9 +19,10 @@ import {
 import { InteriorType } from '../../../type/optionType';
 import { optionsApi } from '../../../utils/Api';
 import { modalState } from '../../../utils/recoil/modal';
-import { useInitInterior, useUpdateInterior } from '../../../hooks/useInteriorUpdate';
+import { useUpdateInteriorListState } from '../../../hooks/color/useColorUpdate';
 import { disableColor } from '../../../utils/OnClickFunc';
 import { InteriorSort } from '../../../utils/colorSort';
+import { useUpdateExteriorList } from '../../../hooks/color/useColorListUpdate';
 
 export default function Interior() {
 	const [searchParams] = useSearchParams();
@@ -35,8 +36,8 @@ export default function Interior() {
 	const exterior = useRecoilValue(exteriorState);
 	// modal 창을 위한 state
 	const setModal = useSetRecoilState(modalState);
-	useUpdateInterior(modelId);
-	useInitInterior(carCode, trimCode);
+	useUpdateInteriorListState();
+	useUpdateExteriorList(carCode, trimCode, modelId);
 	return (
 		<section>
 			<OptionTitle>

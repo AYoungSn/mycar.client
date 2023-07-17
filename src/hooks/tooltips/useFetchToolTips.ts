@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { carsApi } from '../../utils/Api';
-import useMakePath from '../useMakePath';
+import makeToolTipPath from '../../utils/makePath';
 import { useSetRecoilState } from 'recoil';
 import { tooltipState } from '../../utils/recoil/carInfo';
 
@@ -11,7 +11,7 @@ function useFetchToolTips(
 	drivingId: number
 ) {
 	const setToolTips = useSetRecoilState(tooltipState);
-	const baseQuery = useMakePath(carCode, engineId, gearboxId, drivingId);
+	const baseQuery = makeToolTipPath(carCode, engineId, gearboxId, drivingId);
 	useEffect(() => {
 		async function fetchData() {
 			const data = (await carsApi.tooltips(baseQuery)).data;

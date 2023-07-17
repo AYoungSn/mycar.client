@@ -57,4 +57,8 @@ export const ConfirmBtn = styled.button`
 	background: #002c5f;
 	color: #fff;
 	margin-top: 30px;
+	margin: 5px;
+`;
+export const CanceledBtn = styled(ConfirmBtn)`
+	background-color: #767676;
 `;

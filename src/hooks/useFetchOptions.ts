@@ -28,18 +28,18 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 				tmp.set(item.code, { ...item, choiceYn: true });
 			});
 			setSelectListOpts(tmp);
-			const { available, interiorCodes }: { available: boolean, interiorCodes: string[] } = (await optionsApi.checkedInterior(modelId, optionCodes)).data;
+			const { available, interiorCodes }: { available: boolean, interiorCodes: string[] } =
+				(await optionsApi.checkedInterior(modelId, optionCodes)).data;
 			if (available === true) {
 				let exist = false;
-				for (let i = 0; i < interiorCodes.length; i++) {
-					if (interiorCodes[i] === interior.code) {
-						exist = true;
-					}
-				}
+				interiorCodes.filter((value) => value === interior.code)
+					.forEach(() => {
+						exist = true
+					});
 				if (exist === false) {
 					const changeInterior = interiorList.filter((element, id, array) => {
 						return element.code === interiorCodes[0];
-					})
+					});
 					setInterior(changeInterior[0]);
 				}
 			}

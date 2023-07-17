@@ -60,11 +60,11 @@ function Menu({ carCode }: { carCode: string }) {
 	useEffect(() => {
 		async function fetchData() {
 			setData((await carsApi.carList).data);
-			for (let i = 0; i < data.length; i++) {
-				if (data[i].carCode === carCode) {
-					setCarName(data[i].carName);
+			data.forEach((item) => {
+				if (item.carCode === carCode) {
+					setCarName(item.carName);
 				}
-			}
+			})
 		}
 		fetchData();
 	}, [data.length, carCode, data]);

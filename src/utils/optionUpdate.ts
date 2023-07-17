@@ -15,8 +15,8 @@ export function optionListUpdate(key: string, value: OptionChoiceType, setOption
 
 export function allOptionUpdate(selectedList: string[], setOptions: any) {
 	const result = new Map<string, boolean>();
-	for (let i = 0; i < selectedList.length; i++) {
-		result.set(selectedList[i], true);
-	}
+	selectedList.forEach((item) => {
+		result.set(item, true);
+	});
 	setOptions(result);
 }
