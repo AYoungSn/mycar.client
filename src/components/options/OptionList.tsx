@@ -54,10 +54,10 @@ function OptionItem({
 				}}
 			>
 				<label>
-					<div>
+					<div style={{ fontSize: "16px", margin: "10px" }}>
 						<p>{option.name}</p>
 					</div>
-					<div>
+					<div style={{ fontSize: "14px", color: "#666" }}>
 						<p>{PricePrint(option.price)}</p>
 					</div>
 				</label>

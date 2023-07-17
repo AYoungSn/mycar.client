@@ -38,7 +38,9 @@ export default function SummaryViewModal() {
 		<MiniModalContainer width="700px" height="">
 			<CloseBtn onClick={closeModal}>X</CloseBtn>
 			<PopDropDown>
-				<div style={{ marginBottom: "30px", textAlign: "left" }}>나의 {model.carName}</div>
+				<div style={{ marginBottom: "30px", textAlign: "left", fontSize: "20px", fontWeight: "800" }}>
+					나의 {model.carName}
+				</div>
 				<h3 style={{ fontSize: "16px", textAlign: "center" }}>요약 보기</h3>
 				<PopDropDown style={{ borderTop: "2px solid #7c8191" }}>
 					<Grid style={{ borderTop: "none", padding: "10px 0" }}>
