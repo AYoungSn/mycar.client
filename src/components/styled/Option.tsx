@@ -5,11 +5,13 @@ import { FlexDivItemType } from '../../type/styledType';
 export const OptionHead = styled.h2`
   font-family: 'HyundaiSansHeadKR';
   font-size: 30px;
+	margin-bottom: 30px;
 `;
 
 export const OptionTitle = styled(FlexDiv)`
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   justify-content: space-between;
+	border-bottom: 1px solid #ccc;
 `;
 
 export const OptionName = styled(FlexItem) <FlexDivItemType>`
@@ -20,6 +22,7 @@ export const OptionName = styled(FlexItem) <FlexDivItemType>`
 export const OptionColor = styled(FlexItem)`
   font-size: 14px;
   float: right;
+	color: #666;
 `;
 
 export const ColorBtn = styled.button<{

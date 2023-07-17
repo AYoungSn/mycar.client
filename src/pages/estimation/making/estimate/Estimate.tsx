@@ -91,7 +91,7 @@ function Estimate() {
 export default Estimate;
 
 function ChoiceOptionList({ name, optList, selectOpts }: { name: string, optList: Map<string, OptionChoiceType>, selectOpts: Map<string, boolean> }) {
-	return (<li style={{ borderBottom: "1px solid #e5e5e5", marginBottom: "10px", display: "flex" }}>
+	return (<li key={name} style={{ borderBottom: "1px solid #e5e5e5", marginBottom: "10px", display: "flex" }}>
 		<div style={{ display: "inline-block", width: "82px", marginRight: "10px" }}>
 			{name}
 		</div>
@@ -100,7 +100,7 @@ function ChoiceOptionList({ name, optList, selectOpts }: { name: string, optList
 				[...selectOpts]
 					.filter(([key, value]) => value === true)
 					.map(([key, value]) => {
-						return <FlexLi style={{ justifyContent: "space-between", }}>
+						return <FlexLi key={key} style={{ justifyContent: "space-between", }}>
 							<p style={{ color: "#666" }}>{optList.get(key)?.name}</p>
 							<div style={{ margin: "10px" }}></div>
 							<Price price={optList.get(key)?.price || 0} textAlign="right" />
