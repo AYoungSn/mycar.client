@@ -3,15 +3,6 @@ import { TooltipType } from '../../type/optionType';
 
 function Tool({ tools, toolId, onChange, name }: Props) {
 	const listItems = tools?.map((tool, i) => {
-		if (toolId === 0 && i === 0 && tool.isSelect === true) onChange(tool.id);
-		if (toolId === tool.id && tool.isSelect === false) {
-			for (let i = 0; i < tools?.length; i++) {
-				if (tools[i].isSelect === true) {
-					onChange(Number(tools[i].id));
-					break;
-				}
-			}
-		}
 		return (
 			<ToolLabel key={tool.id}>
 				{tool.isSelect === true ? (

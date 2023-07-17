@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../../components/header/Header';
 import ToolTips from '../../components/ToolTips';
-import useFetchToolTips from '../../hooks/useFetchToolTips';
+import useFetchToolTips from '../../hooks/tooltips/useFetchToolTips';
 import useFetchTrims from '../../hooks/useFetchTrims';
 import TrimBox from '../../components/TrimBox';
 import { FlexDiv } from '../../components/styled/Flex';

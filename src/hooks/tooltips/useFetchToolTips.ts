@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { carsApi } from '../utils/Api';
-import useMakePath from './useMakePath';
+import { carsApi } from '../../utils/Api';
+import useMakePath from '../useMakePath';
 import { useSetRecoilState } from 'recoil';
-import { tooltipState } from '../utils/recoil/carInfo';
+import { tooltipState } from '../../utils/recoil/carInfo';
 
 function useFetchToolTips(
 	carCode: string | null,

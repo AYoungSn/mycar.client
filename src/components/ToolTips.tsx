@@ -1,9 +1,13 @@
+import { useSearchParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Tool from './styled/Tool';
 import { FlexUl } from './styled/Flex';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { drivingIdState, engineIdState, gearboxIdState, tooltipState } from '../utils/recoil/carInfo';
+import useSelectTooltips from '../hooks/tooltips/useSelectTooltips';
 
 function ToolTips() {
+	const [searchParams] = useSearchParams();
+	const carCode = searchParams.get("carCode");
 	const [engineId, setEngineId] = useRecoilState(engineIdState);
 	const [gearboxId, setGearboxId] = useRecoilState(gearboxIdState);
 	const [drivingId, setDrivingId] = useRecoilState(drivingIdState);
@@ -11,6 +15,7 @@ function ToolTips() {
 	const engines = tooltips.engines;
 	const gearbox = tooltips.gearbox;
 	const driving = tooltips.driving;
+	useSelectTooltips(carCode || '');
 	return (
 		<section>
 			<FlexUl>
