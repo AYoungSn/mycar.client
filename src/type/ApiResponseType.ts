@@ -58,6 +58,10 @@ export type ChangeOptionType = {
 	addOptions: OptionType[];
 };
 
+export type ChangeTrimType = {
+	delOptions: OptionType[];
+}
+
 export type ChangeTrimInfoType = {
 	beforeTrimName: string;
 	beforeCarPrice: number;

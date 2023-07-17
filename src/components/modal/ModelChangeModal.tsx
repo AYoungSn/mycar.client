@@ -1,30 +1,29 @@
 import { styled } from "styled-components";
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { MenuBtn, Triangle } from "../styled/Head";
 import { PopupHeader } from "../styled/Modal";
 import Modal from "./Modal";
-import { carsApi, optionsApi } from "../../utils/Api";
 import { modelState } from "../../utils/recoil/carInfo";
 import useFetchTrimList from "../../hooks/useFetchTrimList";
 import { FlexUl } from "../styled/Flex";
 import ChangeOptionList from "./options/ChangeOptionList";
-import MakeOptionCodeList from "../../utils/makeOptionCodeList";
-import { detailOptState } from "../../utils/recoil/options";
 import ChangePrice from "./options/ChangePrice";
-import { OptionType } from "../../type/optionType";
 import { Trim } from "../../type/ApiResponseType";
 import PricePrint from "../../utils/PricePrint";
 import BottomGroupBtn from "./BottomGroupBtn";
+import { useNavigate } from "react-router-dom";
+import useBasicName from "../../hooks/modal/useBasicName";
+import { modalState } from "../../utils/recoil/modal";
+import useFetchDelOptionTrimChange from "../../hooks/modal/useFetchDelOptionTrimChange";
 
 export default function ModelChangeModal() {
+	const navigate = useNavigate();
+	const setModal = useSetRecoilState(modalState);
 	const [dropDown, setDropDown] = useState(false);
 	const [selectName, setSelectName] = useState('');
 	const [basicName, setBasicName] = useState<string[]>([]);
 	const model = useRecoilValue(modelState);
-	const detailOpts = useRecoilValue(detailOptState);
-	const [delOptions, setDelOptions] = useState<OptionType[]>([]);
-	const [delPrice, setDelPrice] = useState(0);
 	const [selectModel, setSelectModel] = useState<Trim>({
 		trimCode: '',
 		trimName: '',
@@ -32,30 +31,8 @@ export default function ModelChangeModal() {
 		price: 0,
 		modelId: 0
 	});
-	useEffect(() => {
-		async function fetchBasicName() {
-			const names = (await carsApi.modelNames(model.carCode)).data;
-			setBasicName(names.models);
-			if (selectName === '') {
-				setSelectName(names.models[0]);
-			}
-		}
-		fetchBasicName();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [model.carCode]);
-	useEffect(() => {
-		const optionCodes = MakeOptionCodeList(detailOpts);
-		async function fetchDelOptions() {
-			const data = (await optionsApi.trimChange(model.modelId, selectModel.modelId, optionCodes)).data;
-			setDelOptions(data.delOptions);
-			const price = data.delOptions.map((item: OptionType) => {
-				return item.price;
-			}).reduce((acc: number, cur: number) => (acc || 0) + (cur || 0), 0);
-			setDelPrice(price);
-		}
-		fetchDelOptions();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectModel, selectName]);
+	useBasicName(setBasicName, selectName, setSelectName);
+	const { delOptions, delPrice } = useFetchDelOptionTrimChange(selectName, selectModel);
 	const trimList = useFetchTrimList(model.carCode, selectName, basicName, setSelectModel);
 	return (<Modal>
 		<PopupHeader>
@@ -83,7 +60,8 @@ export default function ModelChangeModal() {
 				delPrice) || 0} />
 		)}
 		<BottomGroupBtn confirmHandler={() => {
-			window.location.href = `/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`
+			navigate(`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`);
+			setModal({ modalName: null });
 		}} />
 	</Modal>)
 }
