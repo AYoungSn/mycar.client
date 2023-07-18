@@ -28,3 +28,8 @@ REACT_APP_BASE_URL = http://localhost:8080
 ```
 4. npm start
 5. http://localhost:3000 으로 접속
+
+#### 🐳 도커 실행 방법
+1. docker build --tag react:test .
+2. docker run -d -p 80:80 --name react-app react:test
+3. docker 실행 후에는 http://localhost 로 접근
