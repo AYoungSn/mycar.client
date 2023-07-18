@@ -1,20 +1,20 @@
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { MenuBtn, Triangle } from "../styled/Head";
 import { PopupHeader } from "../styled/Modal";
+import { FlexUl } from "../styled/Flex";
 import Modal from "./Modal";
 import { modelState } from "../../utils/recoil/carInfo";
+import { modalState } from "../../utils/recoil/modal";
+import PricePrint from "../../utils/PricePrint";
 import useFetchTrimList from "../../hooks/useFetchTrimList";
-import { FlexUl } from "../styled/Flex";
 import ChangeOptionList from "./options/ChangeOptionList";
 import ChangePrice from "./options/ChangePrice";
 import { Trim } from "../../type/ApiResponseType";
-import PricePrint from "../../utils/PricePrint";
 import BottomGroupBtn from "./BottomGroupBtn";
-import { useNavigate } from "react-router-dom";
 import useBasicName from "../../hooks/modal/useBasicName";
-import { modalState } from "../../utils/recoil/modal";
 import useFetchDelOptionTrimChange from "../../hooks/modal/useFetchDelOptionTrimChange";
 
 export default function ModelChangeModal() {

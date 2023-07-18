@@ -6,7 +6,6 @@ function CarMenuBox({ data }: { data: CarItem }) {
 	return (
 		<a href={`/cars/estimation/models?carCode=${data.carCode}`}>
 			<Button>
-				{/* <input hidden={true} value={data.carId} /> */}
 				<TrimName $ishome={window.location.pathname === '/' ? true : false}>
 					{data.carName}
 				</TrimName>
