@@ -3,12 +3,14 @@ import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { optionsApi } from "../utils/Api";
 import { OptionChoiceType, OptionType } from "../type/optionType";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { detailOptState, hgaOptListState, interiorListState, interiorState, npfOptListState, npfOptState } from "../utils/recoil/options";
+import { detailOptState, hgaOptListState, hgaOptState, interiorListState, interiorState, npfOptListState, npfOptState } from "../utils/recoil/options";
 import { optionUpdate } from "../utils/optionUpdate";
 
 export function useFetchSelectList(modelId: number, selectOpts: Map<string, boolean>, setSelectListOpts: any, selectListInit: Map<string, OptionChoiceType>) {
 	const [detailOpt, setDetailOpt] = useRecoilState(detailOptState);
+	const [hgaOpt, setHgaOpt] = useRecoilState(hgaOptState);
 	const setHgaList = useSetRecoilState(hgaOptListState);
+	const [npfOpt, setNpfOpt] = useRecoilState(npfOptState);
 	const setNpfList = useSetRecoilState(npfOptListState);
 	const [interior, setInterior] = useRecoilState(interiorState);
 	const interiorList = useRecoilValue(interiorListState);
@@ -49,11 +51,25 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 				hga.set(item.code, { ...item, choiceYn: true });
 			})
 			setHgaList(hga);
+			const updateHga = new Map();
+			hgaOpt.forEach((value, key) => {
+				if (hga.has(key)) {
+					updateHga.set(key, value);
+				}
+			});
+			setHgaOpt(updateHga);
 			const npf = new Map();
 			tuixList.npf.forEach((item: OptionType) => {
 				npf.set(item.code, { ...item, choiceYn: true });
 			})
 			setNpfList(npf);
+			const updateNpf = new Map();
+			npfOpt.forEach((value, key) => {
+				if (npf.has(key)) {
+					updateNpf.set(key, value);
+				}
+			})
+			setNpfOpt(updateNpf);
 		}
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
