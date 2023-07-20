@@ -6,7 +6,6 @@ import ChangeOptionList from "./options/ChangeOptionList";
 import { detailOptListState, detailOptState } from "../../utils/recoil/options";
 import ChangePrice from "./options/ChangePrice";
 import { optionUpdate } from "../../utils/optionUpdate";
-import { modalState } from "../../utils/recoil/modal";
 import BottomGroupBtn from "./BottomGroupBtn";
 
 export default function OptionChangeModal({
@@ -35,7 +34,6 @@ export default function OptionChangeModal({
 	}
 	const detailOptionList = useRecoilValue(detailOptListState);
 	const setDetailOpts = useSetRecoilState(detailOptState);
-	const setModal = useSetRecoilState(modalState);
 	return (<Modal>
 		<div>
 			<PopupHeader>
@@ -46,7 +44,6 @@ export default function OptionChangeModal({
 			<ChangePrice changePrice={changePrice} />
 			<BottomGroupBtn confirmHandler={() => {
 				onChangeOptions(changeOptionData, setDetailOpts);
-				setModal({ modalName: null });
 			}} />
 		</div>
 	</Modal>)

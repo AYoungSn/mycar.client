@@ -64,7 +64,12 @@ export default function Exterior() {
 								height={'85px'}
 								style={{ backgroundImage: `url(${ext.imgUri})` }}
 								$active={String(ext.id === exterior.id ? true : false)}
-								onClick={() => disableColor(detailOpts, exterior, interior, modelId, carCode, interior, ext, setModal)}
+								onClick={() => disableColor(
+									detailOpts,
+									exterior, interior,
+									modelId, carCode,
+									interior, ext,
+									setModal)}
 							/>
 							<DisabledBtn />
 						</ExteriorItem>

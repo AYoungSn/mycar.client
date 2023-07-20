@@ -6,7 +6,10 @@ export default function BottomGroupBtn({ confirmHandler }: { confirmHandler: any
 	const setModal = useSetRecoilState(modalState);
 	return (<div>
 		<CanceledBtn onClick={() => setModal({ modalName: null })}>취소</CanceledBtn>
-		<ConfirmBtn onClick={() => confirmHandler()}>
+		<ConfirmBtn onClick={() => {
+			confirmHandler();
+			setModal({ modalName: null });
+		}}>
 			확인
 		</ConfirmBtn>
 	</div>

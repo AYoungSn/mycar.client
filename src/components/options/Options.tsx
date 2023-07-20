@@ -30,6 +30,7 @@ export default function Options() {
 	const [searchParams] = useSearchParams();
 	const modelId = Number(searchParams.get('modelId'));
 	const setModal = useSetRecoilState(modalState);
+	const tuixOptionCode = MakeOptionCodeList(hgaOpts) + MakeOptionCodeList(npfOpts);
 	useFetchSelectList(modelId, detailOpts, setDetailListOpts, detailListInit);
 	useFetchTuixList(modelId);
 	return (
@@ -43,7 +44,18 @@ export default function Options() {
 					disableOnChange={(e: React.MouseEvent<HTMLButtonElement>, key: string) => {
 						disableOnChange(key, modelId, detailOpts, setModal);
 					}}
-					onChange={(e: React.MouseEvent<HTMLButtonElement>, key: string) => {
+					onChange={async (e: React.MouseEvent<HTMLButtonElement>, key: string) => {
+						if (detailOpts.get(key) === true) {
+							const data = (await optionsApi.tuixCheck(modelId, key, tuixOptionCode)).data;
+							if (data.hga.length + data.npf.length > 0) {
+								setModal({
+									modalName: 'DEL-TUIX',
+									delOptions: data,
+									detailOption: key
+								})
+								return;
+							}
+						}
 						optionUpdate(key, detailOpts.get(key) || false, setDetailOpts);
 					}}
 				/>

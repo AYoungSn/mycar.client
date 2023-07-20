@@ -7,7 +7,6 @@ import { PopupHeader } from "../styled/Modal";
 import { FlexUl } from "../styled/Flex";
 import Modal from "./Modal";
 import { modelState } from "../../utils/recoil/carInfo";
-import { modalState } from "../../utils/recoil/modal";
 import PricePrint from "../../utils/PricePrint";
 import useFetchTrimList from "../../hooks/useFetchTrimList";
 import ChangeOptionList from "./options/ChangeOptionList";
@@ -16,10 +15,12 @@ import { Trim } from "../../type/ApiResponseType";
 import BottomGroupBtn from "./BottomGroupBtn";
 import useBasicName from "../../hooks/modal/useBasicName";
 import useFetchDelOptionTrimChange from "../../hooks/modal/useFetchDelOptionTrimChange";
+import { detailOptState } from "../../utils/recoil/options";
+import { optionUpdate } from "../../utils/optionUpdate";
 
 export default function ModelChangeModal() {
 	const navigate = useNavigate();
-	const setModal = useSetRecoilState(modalState);
+	const setDetailOpts = useSetRecoilState(detailOptState);
 	const [dropDown, setDropDown] = useState(false);
 	const [selectName, setSelectName] = useState('');
 	const [basicName, setBasicName] = useState<string[]>([]);
@@ -61,7 +62,9 @@ export default function ModelChangeModal() {
 		)}
 		<BottomGroupBtn confirmHandler={() => {
 			navigate(`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`);
-			setModal({ modalName: null });
+			delOptions.forEach((value) => {
+				optionUpdate(value.code, true, setDetailOpts);
+			})
 		}} />
 	</Modal>)
 }

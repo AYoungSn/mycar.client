@@ -6,6 +6,7 @@ import { styled } from 'styled-components';
 import OptionChangeModal from './OptionChangeModal';
 import SummaryViewModal from './SummaryViewModal';
 import ModelChangeModal from './ModelChangeModal';
+import DelOptionModal from './DelOptionModal';
 
 function ModalProvider() {
 	const {
@@ -14,6 +15,8 @@ function ModalProvider() {
 		trimChangeData,
 		detail,
 		changeOptionData,
+		delOptions,
+		detailOption
 	} = useRecoilValue(modalState);
 	const content = {
 		'CHANGE-INTERIOR': (
@@ -43,7 +46,8 @@ function ModalProvider() {
 		'SUMMARY': (
 			<SummaryViewModal />
 		),
-		'CHANGE-MODEL': (<ModelChangeModal />)
+		'CHANGE-MODEL': (<ModelChangeModal />),
+		'DEL-TUIX': (<DelOptionModal delOptions={delOptions || { hga: [], npf: [] }} detailOption={detailOption || 'null'} />)
 	};
 	return (<>{modalName && <ModalWrap $isOpen={modalName?.length > 0}>{modalName && content[modalName]}</ModalWrap>}</>);
 }

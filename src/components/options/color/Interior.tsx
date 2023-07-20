@@ -68,7 +68,12 @@ export default function Interior() {
 									height='75px'
 									style={{ backgroundImage: `url(${item.imgUri})` }}
 									$active={String(item.id === interior.id)}
-									onClick={() => disableColor(detailOpts, exterior, interior, modelId, carCode, item, exterior, setModal)}
+									onClick={() => disableColor(
+										detailOpts,
+										exterior, interior,
+										modelId, carCode,
+										item, exterior,
+										setModal)}
 								/>
 								<DisabledBtn />
 							</InteriorItem>

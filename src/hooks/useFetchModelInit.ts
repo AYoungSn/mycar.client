@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { carsApi } from '../utils/Api';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { priceState } from '../utils/recoil/carInfo';
 import {
 	exteriorListState,
@@ -31,16 +31,13 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 	const setHgaOpts = useSetRecoilState(hgaOptState);
 	const setNpfOpts = useSetRecoilState(npfOptState);
 	const setPrice = useSetRecoilState(priceState);
-	const exteriorList = useRecoilValue(exteriorListState);
 
 	useEffect(() => {
 		async function fetchData() {
 			const data: ModelInfo = (await carsApi.init(modelId)).data;
 			setModel(data.model);
 			setPrice(data.model.price);
-			if (exteriorList.length === 0) {
-				setExteriorList(data.exterior);
-			}
+			setExteriorList(data.exterior);
 			setInteriorList(data.interior);
 			setDetailListInit(new Map());
 			setDetailListOpt(new Map());
@@ -62,7 +59,9 @@ export default function useFetchModelInit(modelId: number, setModel: any) {
 			})
 			const detail = new Map();
 			detailOpt.forEach((value, key) => {
-				detail.set(key, value);
+				if (value === true) {
+					detail.set(key, value);
+				}
 			})
 			setDetailOpts(detail);
 			setHgaOpts(new Map());

@@ -36,12 +36,12 @@ export function useUpdateExteriorList(carCode: string, trimCode: string, modelId
 				allOptionUpdate(data.optionCode, setDetailOpts);
 			}
 		}
-		if (interior.code !== '' || interior.code !== undefined) {
+		if (interior.code !== '' && interior.code !== undefined) {
 			checkedOptionList();
 		}
 		fetchExteriorList();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [interior]);
+	}, [interior, interior.code]);
 }
 
 export function useUpdateInteriorList(carCode: string, trimCode: string) {
@@ -62,5 +62,5 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 		}
 		fetchInteriorList();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [exterior]);
+	}, [exterior, exterior.code]);
 }

@@ -45,6 +45,10 @@ export type Options = {
 	hga: OptionChoiceType[];
 	npf: OptionChoiceType[];
 };
+export type TuixOptions = {
+	hga: OptionChoiceType[];
+	npf: OptionChoiceType[];
+}
 
 export type ModelInfo = {
 	model: Model;

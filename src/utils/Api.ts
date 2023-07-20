@@ -61,4 +61,6 @@ export const optionsApi = {
 		Api.get(`/cars/options/checked-interior?modelId=${modelId}&optionCode=${optionCode}`),
 	trimChange: (beforeModelId: number, afterModelId: number, optionCode: string) =>
 		Api.get(`/cars/options/trim-change?beforeModelId=${beforeModelId}&afterModelId=${afterModelId}&optionCode=${optionCode}`),
+	tuixCheck: (modelId: number, optionCode: string, tuixOptions: string) =>
+		Api.get(`/cars/options/tuix-check?modelId=${modelId}&optionCode=${optionCode}&tuixCode=${tuixOptions}`),
 };
