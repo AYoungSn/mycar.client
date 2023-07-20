@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import MakeOptionCodeList from "../utils/makeOptionCodeList";
 import { optionsApi } from "../utils/Api";
-import { OptionChoiceType, OptionType } from "../type/optionType";
+import { InteriorType, OptionChoiceType, OptionType } from "../type/optionType";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { detailOptState, hgaOptListState, hgaOptState, interiorListState, interiorState, npfOptListState, npfOptState } from "../utils/recoil/options";
 import { optionUpdate } from "../utils/optionUpdate";
@@ -13,13 +13,13 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 	const [npfOpt, setNpfOpt] = useRecoilState(npfOptState);
 	const setNpfList = useSetRecoilState(npfOptListState);
 	const [interior, setInterior] = useRecoilState(interiorState);
-	const interiorList = useRecoilValue(interiorListState);
+	const [interiorList, setInteriorList] = useRecoilState(interiorListState);
 	useEffect(() => {
 		const optionCodes = MakeOptionCodeList(selectOpts);
 		const tmp = new Map(selectListInit);
 		async function fetchData() {
-			const data = (await optionsApi.disableOptions(modelId, optionCodes)).data;
-			data.delOptions.forEach((item: OptionType) => {
+			const delData = (await optionsApi.disableOptions(modelId, optionCodes)).data;
+			delData.delOptions.forEach((item: OptionType) => {
 				if (detailOpt.get(item.code)) {
 					optionUpdate(item.code, true, setDetailOpt);
 				}
@@ -30,21 +30,7 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 				tmp.set(item.code, { ...item, choiceYn: true });
 			});
 			setSelectListOpts(tmp);
-			const { available, interiorCodes }: { available: boolean, interiorCodes: string[] } =
-				(await optionsApi.checkedInterior(modelId, optionCodes)).data;
-			if (available === true) {
-				let exist = false;
-				interiorCodes.filter((value) => value === interior.code)
-					.forEach(() => {
-						exist = true
-					});
-				if (exist === false) {
-					const changeInterior = interiorList.filter((element, id, array) => {
-						return element.code === interiorCodes[0];
-					});
-					setInterior(changeInterior[0]);
-				}
-			}
+			interiorUpdate(modelId, optionCodes, interior, setInterior, interiorList, setInteriorList);
 			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
 			const hga = new Map();
 			tuixList.hga.forEach((item: OptionType) => {
@@ -97,4 +83,33 @@ export function useFetchTuixList(modelId: number) {
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [npfOpt]);
+}
+
+async function interiorUpdate(modelId: number, optionCodes: string,
+	interior: InteriorType, setInterior: any,
+	interiorList: InteriorType[], setInteriorList: any) {
+	const { available, interiorCodes }: { available: boolean, interiorCodes: string[] } =
+		(await optionsApi.checkedInterior(modelId, optionCodes)).data;
+	if (available === true) {
+		let exist = false;
+		interiorCodes.filter((value) => value === interior.code)
+			.forEach(() => {
+				exist = true
+			});
+		if (exist === false) {
+			const changeInterior = interiorList.filter((element, id, array) => {
+				return element.code === interiorCodes[0];
+			});
+			if (changeInterior[0].choiceYn === false) {
+				const updateInteriorList = interiorList.map((value) => {
+					if (value.code === interiorCodes[0]) {
+						return { ...value, choiceYn: true };
+					}
+					return value;
+				})
+				setInteriorList(updateInteriorList);
+			}
+			setInterior({ ...changeInterior[0], choiceYn: true });
+		}
+	}
 }

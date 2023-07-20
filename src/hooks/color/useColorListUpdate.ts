@@ -46,7 +46,6 @@ export function useUpdateExteriorList(carCode: string, trimCode: string, modelId
 
 export function useUpdateInteriorList(carCode: string, trimCode: string) {
 	const exterior = useRecoilValue(exteriorState);
-	const exteriorList = useRecoilValue(exteriorListState);
 	const setInteriorList = useSetRecoilState(interiorListState);
 	useEffect(() => {
 		async function fetchInteriorList() {
@@ -63,5 +62,5 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 		}
 		fetchInteriorList();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [exterior, exteriorList]);
+	}, [exterior]);
 }
