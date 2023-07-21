@@ -41,7 +41,7 @@ export function useUpdateExteriorList(carCode: string, trimCode: string, modelId
 		}
 		fetchExteriorList();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [interior, interior.code]);
+	}, [interior]);
 }
 
 export function useUpdateInteriorList(carCode: string, trimCode: string) {
@@ -62,5 +62,5 @@ export function useUpdateInteriorList(carCode: string, trimCode: string) {
 		}
 		fetchInteriorList();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [exterior, exterior.code]);
+	}, [exterior]);
 }

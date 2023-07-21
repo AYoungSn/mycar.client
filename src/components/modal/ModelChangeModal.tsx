@@ -15,12 +15,16 @@ import { Trim } from "../../type/ApiResponseType";
 import BottomGroupBtn from "./BottomGroupBtn";
 import useBasicName from "../../hooks/modal/useBasicName";
 import useFetchDelOptionTrimChange from "../../hooks/modal/useFetchDelOptionTrimChange";
-import { detailOptState } from "../../utils/recoil/options";
+import { detailOptState, exteriorListState, interiorListState } from "../../utils/recoil/options";
 import { optionUpdate } from "../../utils/optionUpdate";
+import { optionsApi } from "../../utils/Api";
+import { ExteriorType } from "../../type/optionType";
 
 export default function ModelChangeModal() {
 	const navigate = useNavigate();
 	const setDetailOpts = useSetRecoilState(detailOptState);
+	const setExteriorList = useSetRecoilState(exteriorListState);
+	const setInteriorList = useSetRecoilState(interiorListState);
 	const [dropDown, setDropDown] = useState(false);
 	const [selectName, setSelectName] = useState('');
 	const [basicName, setBasicName] = useState<string[]>([]);
@@ -35,6 +39,18 @@ export default function ModelChangeModal() {
 	useBasicName(setBasicName, selectName, setSelectName);
 	const { delOptions, delPrice } = useFetchDelOptionTrimChange(selectName, selectModel);
 	const trimList = useFetchTrimList(model.carCode, selectName, basicName, setSelectModel);
+	const modelChange = async () => {
+		navigate(`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`);
+		delOptions.forEach((value) => {
+			optionUpdate(value.code, true, setDetailOpts);
+		})
+		// setInterior({ ...findInterior[0], choiceYn: true });
+		const exteriorData = (await optionsApi.enableExteriorList(model.carCode, selectModel.trimCode || '', '')).data;
+		setExteriorList(exteriorData.exterior);
+		const enableExt = exteriorData.exterior.filter((value: ExteriorType) => value.choiceYn === true);
+		const interiorData = (await optionsApi.enableInteriorList(model.carCode, selectModel.trimCode || '', enableExt[0].code)).data;
+		setInteriorList(interiorData.interior);
+	}
 	return (<Modal>
 		<PopupHeader>
 			<h3>변경할 모델을 선택해 주세요.</h3>
@@ -60,12 +76,7 @@ export default function ModelChangeModal() {
 				model.price -
 				delPrice) || 0} />
 		)}
-		<BottomGroupBtn confirmHandler={() => {
-			navigate(`/cars/estimation/models/making?modelId=${selectModel.modelId}&carCode=${model.carCode}&trimCode=${selectModel.trimCode}`);
-			delOptions.forEach((value) => {
-				optionUpdate(value.code, true, setDetailOpts);
-			})
-		}} />
+		<BottomGroupBtn confirmHandler={modelChange} />
 	</Modal>)
 }
 

@@ -12,6 +12,7 @@ export const carsApi = {
 	init: (modelId: number) => Api.get(`/cars/models/${modelId}/details`),
 	modelNames: (carCode: string) => Api.get(`/cars/${carCode}/models`),
 	trimList: (carCode: string, modelName: string) => Api.get(`/cars/${carCode}/trims?modelBasicName=${modelName}`),
+	modelInfo: (modelId: number) => Api.get(`/cars/models/${modelId}`),
 };
 
 export const optionsApi = {

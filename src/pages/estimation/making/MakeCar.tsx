@@ -14,6 +14,7 @@ import { OptionHead } from '../../../components/styled/Option';
 import Exterior from '../../../components/options/color/Exterior';
 import Interior from '../../../components/options/color/Interior';
 import { ConfirmBtn } from '../../../components/styled/Modal';
+import useFetchModelInfo from '../../../hooks/useFetchModelInfo';
 
 export default function MakeCar() {
 	const [searchParams] = useSearchParams();
@@ -21,6 +22,7 @@ export default function MakeCar() {
 	const [model, setModel] = useRecoilState<Model>(modelState);
 	const detailList = useRecoilValue(detailOptListState);
 	useFetchModelInit(Number(searchParams.get('modelId')), setModel);
+	useFetchModelInfo(Number(searchParams.get('modelId')));
 	return (
 		<div>
 			<Header carCode={searchParams.get('carCode') || ''}></Header>

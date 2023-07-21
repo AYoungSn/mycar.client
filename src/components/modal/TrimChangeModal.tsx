@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import Modal from './Modal';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { FlexLiItem, FlexUl } from '../styled/Flex';
 import { PopupHeader } from '../styled/Modal';
 import { TrimChangeModalDataType } from '../../type/ApiResponseType';
@@ -23,25 +23,23 @@ export default function TrimChangeModal({
 }) {
 	const navigate = useNavigate();
 	const setDetailOpts = useSetRecoilState(detailOptState);
-	const interiorList = useRecoilValue(interiorListState);
 	const setInterior = useSetRecoilState(interiorState);
-	const [exterior, setExterior] = useRecoilState(exteriorState);
+	const setExterior = useSetRecoilState(exteriorState);
 	const [exteriorList, setExteriorList] = useRecoilState(exteriorListState);
-	const setInteriorList = useSetRecoilState(interiorListState);
+	const [interiorList, setInteriorList] = useRecoilState(interiorListState);
 	const [searchParams] = useSearchParams();
 	const carCode = searchParams.get('carCode') || '';
-	const trimCode = searchParams.get('trimCode') || '';
 	const trimChange = async () => {
 		navigate(`/cars/estimation/models/making?modelId=${data.changeTrimInfo?.changeModelId}&carCode=${data.changeTrimInfo?.changeCarCode}&trimCode=${data.changeTrimInfo?.changeTrimCode}`);
 		const findInterior = interiorList.filter((value) => value.code === data.changeTrimInfo?.interiorCode);
 		const findExterior = exteriorList.filter((value) => value.name === data.changeTrimInfo?.colorName);
 		if (findInterior.length > 0) {
 			setInterior({ ...findInterior[0], choiceYn: true });
-			// const exteriorData = (await optionsApi.enableExteriorList(carCode, trimCode, findInterior[0].code)).data;
-			// setExteriorList(exteriorData.exterior);
-			// const enableExt = exteriorData.exterior.filter((value: ExteriorType) => value.choiceYn === true);
-			// const interiorData = (await optionsApi.enableInteriorList(carCode, trimCode, enableExt[0].code)).data;
-			// setInteriorList(interiorData.interior);
+			const exteriorData = (await optionsApi.enableExteriorList(carCode, data.changeTrimInfo?.changeTrimCode || '', findInterior[0].code)).data;
+			setExteriorList(exteriorData.exterior);
+			const enableExt = exteriorData.exterior.filter((value: ExteriorType) => value.choiceYn === true);
+			const interiorData = (await optionsApi.enableInteriorList(carCode, data.changeTrimInfo?.changeTrimCode || '', enableExt[0].code)).data;
+			setInteriorList(interiorData.interior);
 		}
 		else if (findExterior.length > 0) {
 			setExterior({ ...findExterior[0], choiceYn: true });

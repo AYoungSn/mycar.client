@@ -14,7 +14,7 @@ export function useUpdateInteriorListState() {
 			// 새로운 interiorList 목록에서 선택 가능한 것을 찾아 선택 update
 			for (let i = 0; i < interiorList.length; i++) {
 				if (
-					interiorList[i].id === interior.id &&
+					interiorList[i].code === interior.code &&
 					interiorList[i].choiceYn === false
 				) {
 					for (let j = 0; j < interiorList.length; j++) {
@@ -45,7 +45,7 @@ export function useExteriorState() {
 			// 새로운 exteriorList 목록 중 선택 가능한 것을 찾아서 선택 update
 			for (let i = 0; i < exteriorList.length; i++) {
 				if (
-					exteriorList[i].id === exterior.id &&
+					exteriorList[i].code === exterior.code &&
 					exteriorList[i].choiceYn === false
 				) {
 					for (let j = 0; j < exteriorList.length; j++) {

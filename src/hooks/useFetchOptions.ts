@@ -15,7 +15,7 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 	const [interior, setInterior] = useRecoilState(interiorState);
 	const [interiorList, setInteriorList] = useRecoilState(interiorListState);
 	useEffect(() => {
-		const optionCodes = MakeOptionCodeList(selectOpts);
+		const optionCodes = MakeOptionCodeList(detailOpt);
 		const tmp = new Map(selectListInit);
 		async function fetchData() {
 			const delData = (await optionsApi.disableOptions(modelId, optionCodes)).data;
@@ -30,8 +30,16 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 				tmp.set(item.code, { ...item, choiceYn: true });
 			});
 			setSelectListOpts(tmp);
-			interiorUpdate(modelId, optionCodes, interior, setInterior, interiorList, setInteriorList);
-			const tuixList = (await optionsApi.tuixList(modelId, optionCodes)).data;
+			const detailTmp = new Map();
+			[...detailOpt].forEach(([key, value]) => {
+				if (tmp.has(key)) {
+					detailTmp.set(key, value);
+				}
+			})
+			// setDetailOpt(detailTmp);
+			const newOptionCodes = MakeOptionCodeList(detailTmp);
+			interiorUpdate(modelId, newOptionCodes, interior, setInterior, interiorList, setInteriorList);
+			const tuixList = (await optionsApi.tuixList(modelId, newOptionCodes)).data;
 			const hga = new Map();
 			tuixList.hga.forEach((item: OptionType) => {
 				hga.set(item.code, { ...item, choiceYn: true });
@@ -59,7 +67,7 @@ export function useFetchSelectList(modelId: number, selectOpts: Map<string, bool
 		}
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectOpts]);
+	}, [detailOpt, modelId]);
 }
 
 export function useFetchTuixList(modelId: number) {
@@ -82,7 +90,7 @@ export function useFetchTuixList(modelId: number) {
 		}
 		fetchData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [npfOpt]);
+	}, [npfOpt, modelId]);
 }
 
 async function interiorUpdate(modelId: number, optionCodes: string,
