@@ -35,10 +35,18 @@ export default function TrimChangeModal({
 		const findExterior = exteriorList.filter((value) => value.name === data.changeTrimInfo?.colorName);
 		if (findInterior.length > 0) {
 			setInterior({ ...findInterior[0], choiceYn: true });
-			const exteriorData = (await optionsApi.enableExteriorList(carCode, data.changeTrimInfo?.changeTrimCode || '', findInterior[0].code)).data;
+			const exteriorData = (await optionsApi
+				.enableExteriorList(
+					carCode,
+					data.changeTrimInfo?.changeTrimCode || '',
+					findInterior[0].code)).data;
 			setExteriorList(exteriorData.exterior);
 			const enableExt = exteriorData.exterior.filter((value: ExteriorType) => value.choiceYn === true);
-			const interiorData = (await optionsApi.enableInteriorList(carCode, data.changeTrimInfo?.changeTrimCode || '', enableExt[0].code)).data;
+			const interiorData = (await optionsApi
+				.enableInteriorList(
+					carCode,
+					data.changeTrimInfo?.changeTrimCode || '',
+					enableExt[0].code)).data;
 			setInteriorList(interiorData.interior);
 		}
 		else if (findExterior.length > 0) {

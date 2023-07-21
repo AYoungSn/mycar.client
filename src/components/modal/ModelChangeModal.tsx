@@ -15,7 +15,7 @@ import { Trim } from "../../type/ApiResponseType";
 import BottomGroupBtn from "./BottomGroupBtn";
 import useBasicName from "../../hooks/modal/useBasicName";
 import useFetchDelOptionTrimChange from "../../hooks/modal/useFetchDelOptionTrimChange";
-import { detailOptState, exteriorListState, interiorListState } from "../../utils/recoil/options";
+import { detailOptState, interiorListState } from "../../utils/recoil/options";
 import { optionUpdate } from "../../utils/optionUpdate";
 import { optionsApi } from "../../utils/Api";
 import { ExteriorType } from "../../type/optionType";
@@ -23,7 +23,6 @@ import { ExteriorType } from "../../type/optionType";
 export default function ModelChangeModal() {
 	const navigate = useNavigate();
 	const setDetailOpts = useSetRecoilState(detailOptState);
-	const setExteriorList = useSetRecoilState(exteriorListState);
 	const setInteriorList = useSetRecoilState(interiorListState);
 	const [dropDown, setDropDown] = useState(false);
 	const [selectName, setSelectName] = useState('');
@@ -45,11 +44,23 @@ export default function ModelChangeModal() {
 			optionUpdate(value.code, true, setDetailOpts);
 		})
 		// setInterior({ ...findInterior[0], choiceYn: true });
-		const exteriorData = (await optionsApi.enableExteriorList(model.carCode, selectModel.trimCode || '', '')).data;
-		setExteriorList(exteriorData.exterior);
-		const enableExt = exteriorData.exterior.filter((value: ExteriorType) => value.choiceYn === true);
-		const interiorData = (await optionsApi.enableInteriorList(model.carCode, selectModel.trimCode || '', enableExt[0].code)).data;
-		setInteriorList(interiorData.interior);
+		const exteriorData: ExteriorType[] = (await optionsApi
+			.enableExteriorList(
+				model.carCode,
+				selectModel.trimCode || '',
+				'')).data.exterior;
+		// setExteriorList(exteriorData.exterior);
+		const enableExt = exteriorData.filter((value: ExteriorType) => value.choiceYn === true);
+		console.log('exterior', exteriorData, enableExt)
+		if (enableExt.length > 0) {
+			const interiorData = (await optionsApi
+				.enableInteriorList(
+					model.carCode,
+					selectModel.trimCode || '',
+					enableExt[0].code)).data;
+			setInteriorList(interiorData.interior);
+		}
+
 	}
 	return (<Modal>
 		<PopupHeader>

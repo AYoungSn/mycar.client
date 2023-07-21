@@ -54,6 +54,7 @@ const ContentWrap = styled(FlexDiv)`
   position: relative;
   height: 100%;
   width: auto;
+	min-width: 1000px;
   margin: 0 auto;
   overflow-x: hidden;
   justify-content: space-between;
